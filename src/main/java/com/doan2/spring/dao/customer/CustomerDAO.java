@@ -10,4 +10,6 @@ public interface CustomerDAO {
     boolean checkIfExists(String phone);
 
     int getLatestId();
+
+    Boolean checkExistedEmail(String email, int idCus);
 }

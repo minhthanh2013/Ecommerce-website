@@ -9,12 +9,12 @@ import java.sql.Date;
 @Table(name="Order_Table")
 public class Order {
     @Column(name="idCus")
-    private String idCus;
+    private int idCus;
     @Id
     @Column(name="idOrder")
-    private String idOrder;
+    private int idOrder;
     @Column(name="idSup")
-    private String idSup;
+    private int idSup;
     @Column(name="date")
     private Date date;
     @Column(name="status")
@@ -29,7 +29,7 @@ public class Order {
     public Order() {
     }
 
-    public Order(String idCus, String idOrder, String idSup, Date date, int status, String tranMethod, String deliveryAddress, int totalMoney) {
+    public Order(int idCus, int idOrder, int idSup, Date date, int status, String tranMethod, String deliveryAddress, int totalMoney) {
         this.idCus = idCus;
         this.idOrder = idOrder;
         this.idSup = idSup;
@@ -40,27 +40,27 @@ public class Order {
         this.totalMoney = totalMoney;
     }
 
-    public String getIdCus() {
+    public int getIdCus() {
         return idCus;
     }
 
-    public void setIdCus(String idCus) {
+    public void setIdCus(int idCus) {
         this.idCus = idCus;
     }
 
-    public String getIdOrder() {
+    public int getIdOrder() {
         return idOrder;
     }
 
-    public void setIdOrder(String idOrder) {
+    public void setIdOrder(int idOrder) {
         this.idOrder = idOrder;
     }
 
-    public String getIdSup() {
+    public int getIdSup() {
         return idSup;
     }
 
-    public void setIdSup(String idSup) {
+    public void setIdSup(int idSup) {
         this.idSup = idSup;
     }
 

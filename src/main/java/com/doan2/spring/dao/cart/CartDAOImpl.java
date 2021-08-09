@@ -71,6 +71,34 @@ public class CartDAOImpl implements CartDAO {
 		theQuery.executeUpdate();		
 	}
 
+	@Override
+	public List<Cart> getCartsByCustomerOrderId(int cusId, int orderId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+
+		// create a query  ... sort by last name
+		Query<Cart> theQuery =
+				currentSession.createQuery("from Cart where idCus="+cusId+" and idOrder="+orderId,
+						Cart.class);
+
+		// execute query and get result list
+		List<Cart> carts = theQuery.getResultList();
+
+		// return the results
+		return carts;
+	}
+
+	@Override
+	public List<Cart> getListCartNotCheckOut(int idCus) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<Cart> theQuery =
+				currentSession.createQuery("from Cart where idCus ="+idCus+" and idOrder IS NULL",
+						Cart.class);
+
+		// execute query and get result list
+		List<Cart> carts = theQuery.getResultList();
+		return carts;
+	}
+
 }
 
 

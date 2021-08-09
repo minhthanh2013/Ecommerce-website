@@ -46,7 +46,7 @@
 
                         <!--====== Main Logo ======-->
 
-                        <a class="main-logo" href="/">
+                        <a class="main-logo" href="${pageContext.request.contextPath}/">
 
                             <img src="${pageContext.request.contextPath}/resources/images/logo/logo-1.png" alt=""></a>
                         <!--====== End - Main Logo ======-->
@@ -75,10 +75,10 @@
                                 <ul class="breadcrumb__list">
                                     <li class="has-separator">
 
-                                        <a href="/">Home</a></li>
+                                        <a href="${pageContext.request.contextPath}/">Home</a></li>
                                     <li class="is-marked">
 
-                                        <a href="/admin/">Admin Dashboard</a></li>
+                                        <a href="${pageContext.request.contextPath}/admin/">Admin Dashboard</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -106,23 +106,23 @@
                                             <ul class="dash__f-list">
                                                 <li>
 
-                                                    <a href="/admin/" class="dash-active">Admin Dashboard</a></li>
+                                                    <a href="${pageContext.request.contextPath}/admin/" class="dash-active">Admin Dashboard</a></li>
                                                 <li>
 
-                                                    <a  href="/admin/users">Users</a></li>
+                                                    <a  href="${pageContext.request.contextPath}/admin/users">Users</a></li>
                                                 <li>
 
-                                                    <a href="/admin/suppliers" >Suppliers</a></li>
+                                                    <a href="${pageContext.request.contextPath}/admin/suppliers" >Suppliers</a></li>
                                                 <li>
 
-                                                    <a href="/admin/partners" >Partners</a></li>
+                                                    <a href="${pageContext.request.contextPath}/admin/partners" >Partners</a></li>
                                                 <li>
 
-                                                    <a href="/admin/track-shop-order">Track Shop Order</a></li>
+                                                    <a href="${pageContext.request.contextPath}/admin/track-shop-order">Track Shop Order</a></li>
                                                 
                                                 <li>
 
-                                                    <a href="/admin/shipping-company">Shipping</a></li>
+                                                    <a href="${pageContext.request.contextPath}/admin/shipping-company">Shipping</a></li>
                                                 
                                             </ul>
                                         </div>
@@ -139,36 +139,20 @@
                                                 <div class="col-lg-4 u-s-m-b-30">
                                                     <div class="dash__box dash__box--bg-grey dash__box--shadow-2 u-h-100">
                                                         <div class="dash__pad-3">
-                                                            <h2 class="dash__h2 u-s-m-b-8">Doanh thu tháng này</h2>
-                                                    
-
-                                                            <span class="dash__text">1.000.000VNĐ</span>
-                                                            
+                                                            <h2 class="dash__h2 u-s-m-b-8">This month's revenue</h2>
+                                                            <span class="dash__text">${revenue_this_month} VNĐ</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4 u-s-m-b-30">
                                                     <div class="dash__box dash__box--bg-grey dash__box--shadow-2 u-h-100">
                                                         <div class="dash__pad-3">
-                                                            <h2 class="dash__h2 u-s-m-b-8">Tổng doanh thu</h2>
-                                                    
-
-                                                            <span class="dash__text">100.000.000VNĐ</span>
-                                                            
+                                                            <h2 class="dash__h2 u-s-m-b-8">Total revenue</h2>
+                                                            <span class="dash__text">${revenue_total} VNĐ</span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-4 u-s-m-b-30">
-                                                    <div class="dash__box dash__box--bg-grey dash__box--shadow-2 u-h-100">
-                                                        <div class="dash__pad-3">
-                                                            <h2 class="dash__h2 u-s-m-b-8">Doanh thu tháng này</h2>
-                                                    
 
-                                                            <span class="dash__text">1.000.000VNĐ</span>
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 
                                             </div>
                                         </div>
@@ -179,15 +163,16 @@
                                             <table class="dash__table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Id đơn hàng</th>
-                                                        <th>Ngày tạo đơn</th>
-                                                        <th>Sản phẩm</th>
-                                                        <th>Đơn vị vận chuyển</th>
-                                                        <th>Đối tác giao dịch</th>
-                                                        <th>Tổng tiền</th>
+                                                        <th>Id Order</th>
+                                                        <th>Date</th>
+                                                        <th>Product</th>
+                                                        <th>Shipping Company</th>
+                                                        <th>Partner</th>
+                                                        <th>Total</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+
                                                     <tr>
                                                         <td>3054231326</td>
                                                         <td>26/13/2016</td>
@@ -204,10 +189,11 @@
                                                                 <span>$126.00</span>
                                                                 <div class="dash__link dash__link--brand">
 
-                                                                    <a href="dash-manage-order.html">MANAGE</a></div>
+                                                                    <a href="${pageContext.request.contextPath}/dashboard/manage_order">MANAGE</a></div>
                                                             </div>
                                                         </td>
-                                                    
+                                                    </tr>
+
                                                 </tbody>
                                             </table>
                                         </div>
@@ -276,7 +262,7 @@
                                                     <a href="cart.html">Cart</a></li>
                                                 <li>
 
-                                                    <a href="dashboard.html">Account</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/">Account</a></li>
                                                 <li>
 
                                                     <a href="shop-side-version-2.html">Manufacturer</a></li>
@@ -304,10 +290,10 @@
                                                     <a href="contact.html">Contact Us</a></li>
                                                 <li>
 
-                                                    <a href="index.html">Sitemap</a></li>
+                                                    <a href="${pageContext.request.contextPath}/">Sitemap</a></li>
                                                 <li>
 
-                                                    <a href="dash-my-order.html">Delivery</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/my_order">Delivery</a></li>
                                                 <li>
 
                                                     <a href="shop-side-version-2.html">Store</a></li>
@@ -362,7 +348,7 @@
 
                                     <span>Copyright © 2018</span>
 
-                                    <a href="/">Reshop</a>
+                                    <a href="${pageContext.request.contextPath}/">Reshop</a>
 
                                     <span>All Right Reserved</span></div>
                                 <div class="lower-footer__payment">
@@ -396,7 +382,7 @@
 
                                 <span class="gl-modal-text">I have read and understood</span>
 
-                                <a class="d_modal__link" href="dashboard.html">Ludus Privacy Policy</a>
+                                <a class="d_modal__link" href="${pageContext.request.contextPath}/dashboard/">Ludus Privacy Policy</a>
                             </div>
                             <div class="gl-modal-btn-group">
 

@@ -50,4 +50,28 @@ public class OrderDAOImpl implements OrderDAO {
         Session currentSession = sessionFactory.getCurrentSession();
         currentSession.delete(theId);
     }
+
+    @Override
+    public List<Order> getOrderByCustomerId(int cusId) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        Query<Order> theQuery =
+                currentSession.createQuery("from Order where idCus ="+cusId,
+                        Order.class);
+        //Query<Order> query = currentSession.createSQLQuery("select * from ORDER where idCus ="+cusId);
+        List<Order> orders = theQuery.getResultList();
+
+        // return the results
+        return orders;
+    }
+
+    @Override
+    public void saveListOrders(List<Order> orderList) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        for (int i = 0; i < orderList.size(); i++) {
+            currentSession.saveOrUpdate(orderList.get(i));
+        }
+
+    }
+
+
 }

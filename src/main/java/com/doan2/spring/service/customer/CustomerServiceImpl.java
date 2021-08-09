@@ -39,4 +39,10 @@ public class CustomerServiceImpl implements CustomerService{
     public int getLatestId() {
         return customerDAO.getLatestId();
     }
+
+    @Override
+    @Transactional
+    public Boolean checkExistedEmail(String email, int idCus) {
+        return customerDAO.checkExistedEmail(email, idCus);
+    }
 }

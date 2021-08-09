@@ -1,4 +1,5 @@
 <%@ page import="com.doan2.spring.entity.Product" %>
+<%@ page import="com.doan2.spring.entity.CungCap" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -30,21 +31,8 @@
 <body class="config">
 <%
     Product product = (Product) request.getAttribute("product");
-
+    CungCap cungCap = (CungCap) request.getAttribute("cungcap");
 %>
-
-    <table>
-
-
-
-        <tr>
-            <td><%=product.getName()%></td>
-            <td><%=product.getIdProduct()%></td>
-            <td><%=product.getDescription()%></td>
-            <td><%=product.getPrice()%></td>
-        </tr>
-
-    </table>
 
     <div class="preloader is-active">
         <div class="preloader__wrap">
@@ -109,21 +97,25 @@
                                                 <a href="${pageContext.request.contextPath}/dashboard/"><i class="fas fa-user-circle u-s-m-r-6"></i>
 
                                                     <span>Account</span></a></li>
+
+
+                                            <security:authorize access="isAnonymous()">
+                                                <li>
+                                                    <a href="${pageContext.request.contextPath}/register"><i class="fas fa-user-plus u-s-m-r-6"></i><span>Signup</span></a>
+                                                </li>
+                                            </security:authorize>
+                                            <security:authorize access="isAnonymous()">
                                             <li>
 
-                                                <a href="${pageContext.request.contextPath}/register"><i class="fas fa-user-plus u-s-m-r-6"></i>
-
-                                                    <span>Signup</span></a></li>
+                                                <a href="${pageContext.request.contextPath}/login"><i class="fas fa-lock u-s-m-r-6"></i><span>Signin</span></a>
+                                            </li>
+                                            </security:authorize>
+                                            <security:authorize access="isAuthenticated()">
                                             <li>
 
-                                                <a href="${pageContext.request.contextPath}/login"><i class="fas fa-lock u-s-m-r-6"></i>
-
-                                                    <span>Signin</span></a></li>
-                                            <li>
-
-                                                <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i>
-
-                                                    <span>Signout</span></a></li>
+                                                <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i><span>Signout</span></a>
+                                            </li>
+                                            </security:authorize>
                                         </ul>
                                         <!--====== End - Dropdown ======-->
                                     </li>
@@ -1252,117 +1244,37 @@
 
                                             <!--====== Mini Product Container ======-->
                                             <div class="mini-product-container gl-scroll u-s-m-b-15">
+                                                <security:authorize access="isAnonymous()">
+                                                    <a href="${pageContext.request.contextPath}/login"><i class="fas fa-lock u-s-m-r-6"></i><span>Signin</span></a>
+                                                </security:authorize>
+                                                <security:authorize access="isAuthenticated()">
+                                                <c:forEach var="cart_product" items="${cart_product_list}">
+                                                    <div class="card-mini-product">
+                                                        <div class="mini-product">
+                                                            <div class="mini-product__image-wrapper">
 
-                                                <!--====== Card for mini cart ======-->
-                                                <div class="card-mini-product">
-                                                    <div class="mini-product">
-                                                        <div class="mini-product__image-wrapper">
+                                                                <a class="mini-product__link" href="product-detail.html">
 
-                                                            <a class="mini-product__link" href="product-detail.html">
-
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/electronic/product3.jpg" alt=""></a></div>
-                                                        <div class="mini-product__info-wrapper">
-
-                                                            <span class="mini-product__category">
-
-                                                                <a href="shop-side-version-2.html">Electronics</a></span>
-
-                                                            <span class="mini-product__name">
-
-                                                                <a href="product-detail.html">Yellow Wireless Headphone</a></span>
-
-                                                            <span class="mini-product__quantity">1 x</span>
-
-                                                            <span class="mini-product__price">$8</span></div>
-                                                    </div>
-
-                                                    <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                                </div>
-                                                <!--====== End - Card for mini cart ======-->
-
-
-                                                <!--====== Card for mini cart ======-->
-                                                <div class="card-mini-product">
-                                                    <div class="mini-product">
-                                                        <div class="mini-product__image-wrapper">
-
-                                                            <a class="mini-product__link" href="product-detail.html">
-
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/electronic/product18.jpg" alt=""></a></div>
-                                                        <div class="mini-product__info-wrapper">
+                                                                    <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/electronic/product3.jpg" alt=""></a></div>
+                                                            <div class="mini-product__info-wrapper">
 
                                                             <span class="mini-product__category">
 
                                                                 <a href="shop-side-version-2.html">Electronics</a></span>
 
-                                                            <span class="mini-product__name">
+                                                                <span class="mini-product__name">
 
-                                                                <a href="product-detail.html">Nikon DSLR Camera 4k</a></span>
+                                                                <a href="product-detail.html">${cart_product.name}</a></span>
 
-                                                            <span class="mini-product__quantity">1 x</span>
+                                                                <span class="mini-product__quantity">${cart_product.amount} x</span>
 
-                                                            <span class="mini-product__price">$8</span></div>
+                                                                <span class="mini-product__price">${cart_product.total_money} VNĐ</span></div>
+                                                        </div>
+
+                                                        <a class="mini-product__delete-link far fa-trash-alt"></a>
                                                     </div>
-
-                                                    <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                                </div>
-                                                <!--====== End - Card for mini cart ======-->
-
-
-                                                <!--====== Card for mini cart ======-->
-                                                <div class="card-mini-product">
-                                                    <div class="mini-product">
-                                                        <div class="mini-product__image-wrapper">
-
-                                                            <a class="mini-product__link" href="product-detail.html">
-
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/women/product8.jpg" alt=""></a></div>
-                                                        <div class="mini-product__info-wrapper">
-
-                                                            <span class="mini-product__category">
-
-                                                                <a href="shop-side-version-2.html">Women Clothing</a></span>
-
-                                                            <span class="mini-product__name">
-
-                                                                <a href="product-detail.html">New Dress D Nice Elegant</a></span>
-
-                                                            <span class="mini-product__quantity">1 x</span>
-
-                                                            <span class="mini-product__price">$8</span></div>
-                                                    </div>
-
-                                                    <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                                </div>
-                                                <!--====== End - Card for mini cart ======-->
-
-
-                                                <!--====== Card for mini cart ======-->
-                                                <div class="card-mini-product">
-                                                    <div class="mini-product">
-                                                        <div class="mini-product__image-wrapper">
-
-                                                            <a class="mini-product__link" href="product-detail.html">
-
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/men/product8.jpg" alt=""></a></div>
-                                                        <div class="mini-product__info-wrapper">
-
-                                                            <span class="mini-product__category">
-
-                                                                <a href="shop-side-version-2.html">Men Clothing</a></span>
-
-                                                            <span class="mini-product__name">
-
-                                                                <a href="product-detail.html">New Fashion D Nice Elegant</a></span>
-
-                                                            <span class="mini-product__quantity">1 x</span>
-
-                                                            <span class="mini-product__price">$8</span></div>
-                                                    </div>
-
-                                                    <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                                </div>
-                                                <!--====== End - Card for mini cart ======-->
+                                                </c:forEach>
+                                                </security:authorize>
                                             </div>
                                             <!--====== End - Mini Product Container ======-->
 
@@ -1373,7 +1285,7 @@
 
                                                     <span class="subtotal-text">SUBTOTAL</span>
 
-                                                    <span class="subtotal-value">$16</span></div>
+                                                    <span class="subtotal-value">${cart_product_total} VNĐ</span></div>
                                                 <div class="mini-action">
 
                                                     <a class="mini-link btn--e-brand-b-2" href="checkout.html">PROCEED TO CHECKOUT</a>
@@ -1481,13 +1393,13 @@
                             <div class="pd-detail">
                                 <div>
 
-                                    <span class="pd-detail__name">Nikon Camera 4k Lens Zoom Pro</span></div>
+                                    <span class="pd-detail__name"><%=product.getName()%></span></div>
                                 <div>
                                     <div class="pd-detail__inline">
 
-                                        <span class="pd-detail__price">$6.99</span>
+                                        <span class="pd-detail__price"><%=product.getPrice()%> VNĐ</span>
 
-                                        <span class="pd-detail__discount">(76% OFF)</span><del class="pd-detail__del">$28.97</del></div>
+                                        <span class="pd-detail__discount">(20% OFF)</span><del class="pd-detail__del"><%=product.getPrice() / 0.8 + product.getPrice() % 0.8 %> VNĐ</del></div>
                                 </div>
                                 <div class="u-s-m-b-15">
                                     <div class="pd-detail__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
@@ -1499,13 +1411,13 @@
                                 <div class="u-s-m-b-15">
                                     <div class="pd-detail__inline">
 
-                                        <span class="pd-detail__stock">200 in stock</span>
+                                        <span class="pd-detail__stock"><%=cungCap.getInventory()%> in stock</span>
 
                                         <span class="pd-detail__left">Only 2 left</span></div>
                                 </div>
                                 <div class="u-s-m-b-15">
 
-                                    <span class="pd-detail__preview-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></div>
+                                    <span class="pd-detail__preview-desc"><%=product.getDescription()%>.</span></div>
                                 <div class="u-s-m-b-15">
                                     <div class="pd-detail__inline">
 
@@ -1680,7 +1592,7 @@
                                     <div class="tab-pane" id="pd-desc">
                                         <div class="pd-tab__desc">
                                             <div class="u-s-m-b-15">
-                                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                                <p><%=product.getDescription()%></p>
                                             </div>
                                             <div class="u-s-m-b-30"><iframe src="https://www.youtube.com/embed/qKqSBm07KZk" allowfullscreen></iframe></div>
                                             <div class="u-s-m-b-30">
@@ -1805,7 +1717,7 @@
                                                             <div class="review-o__rating gl-rating-style u-s-m-b-8"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
 
                                                                 <span>(4)</span></div>
-                                                            <p class="review-o__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                                            <p class="review-o__text"><%=product.getDescription()%>.</p>
                                                         </div>
                                                         <div class="review-o u-s-m-b-15">
                                                             <div class="review-o__info u-s-m-b-8">
@@ -1816,7 +1728,7 @@
                                                             <div class="review-o__rating gl-rating-style u-s-m-b-8"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
 
                                                                 <span>(4)</span></div>
-                                                            <p class="review-o__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                                            <p class="review-o__text"><%=product.getDescription()%>.</p>
                                                         </div>
                                                         <div class="review-o u-s-m-b-15">
                                                             <div class="review-o__info u-s-m-b-8">
@@ -1827,7 +1739,7 @@
                                                             <div class="review-o__rating gl-rating-style u-s-m-b-8"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
 
                                                                 <span>(4)</span></div>
-                                                            <p class="review-o__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                                            <p class="review-o__text"><%=product.getDescription()%>.</p>
                                                         </div>
                                                     </div>
                                                 </form>
@@ -2561,9 +2473,9 @@
                                     <div>
                                         <div class="pd-detail__inline">
 
-                                            <span class="pd-detail__price">$6.99</span>
+                                            <span class="pd-detail__price"><%=product.getPrice()%> VNĐ</span>
 
-                                            <span class="pd-detail__discount">(76% OFF)</span><del class="pd-detail__del">$28.97</del></div>
+                                            <span class="pd-detail__discount">(20% OFF)</span><del class="pd-detail__del"><%=product.getPrice() / 0.8 + product.getPrice() % 0.8 %> VNĐ</del></div>
                                     </div>
                                     <div class="u-s-m-b-15">
                                         <div class="pd-detail__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
@@ -2575,13 +2487,13 @@
                                     <div class="u-s-m-b-15">
                                         <div class="pd-detail__inline">
 
-                                            <span class="pd-detail__stock">200 in stock</span>
+                                            <span class="pd-detail__stock"><%=cungCap.getInventory() %> in stock</span>
 
                                             <span class="pd-detail__left">Only 2 left</span></div>
                                     </div>
                                     <div class="u-s-m-b-15">
 
-                                        <span class="pd-detail__preview-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span></div>
+                                        <span class="pd-detail__preview-desc"><%=product.getDescription()%></span></div>
                                     <div class="u-s-m-b-15">
                                         <div class="pd-detail__inline">
 

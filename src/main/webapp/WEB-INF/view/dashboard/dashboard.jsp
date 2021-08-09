@@ -97,16 +97,17 @@
                                                 System.out.println(temp);
                                             %>
 
-
+                                            <form:form action="${pageContext.request.contextPath}/logout"
+                                                       method="post" id="sign-out-form">
                                             <li>
-                                                <form:form action="${pageContext.request.contextPath}/logout"
-                                                           method="post" id="sign-out-form">
-                                                    <a id="sign-out-btt"><i class="fas fa-lock-open u-s-m-r-6"></i>
+
+                                                    <a id="sign-out-btt" href="#"><i class="fas fa-lock-open u-s-m-r-6 sign-out-btt-1"></i>
                                                         <span>Signout</span></a>
 <%--                                                    <input type="submit" value="Logout" /><i class="fas fa-lock-open u-s-m-r-6"></i>--%>
 <%--                                                    <span>Signout</span></a></li>--%>
-                                                </form:form>
+
                                             </li>
+                                            </form:form>
 
 
 
@@ -994,7 +995,7 @@
                                             </li>
                                             <li class="has-dropdown has-dropdown--ul-left-100">
 
-                                                <a href="dashboard.jsp">Dashboard<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
+                                                <a href="${pageContext.request.contextPath}/dashboard/">Dashboard<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
 
                                                 <!--====== Dropdown ======-->
 
@@ -1002,7 +1003,7 @@
                                                 <ul style="width:200px">
                                                     <li class="has-dropdown has-dropdown--ul-left-100">
 
-                                                        <a href="dashboard.jsp">Manage My Account<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/">Manage My Account<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
 
                                                         <!--====== Dropdown ======-->
 
@@ -1010,51 +1011,47 @@
                                                         <ul style="width:180px">
                                                             <li>
 
-                                                                <a href="dash-edit-profile.jsp">Edit Profile</a></li>
+                                                                <a href="${pageContext.request.contextPath}/dashboard/edit_profile">Edit Profile</a></li>
                                                             <li>
 
-                                                                <a href="dash-address-book.jsp">Edit Address Book</a></li>
+                                                                <a href="${pageContext.request.contextPath}/dashboard/edit_address">Edit Address Book</a></li>
                                                             <li>
 
-                                                                <a href="dash-manage-order.jsp">Manage Order</a></li>
+                                                                <a href="${pageContext.request.contextPath}/dashboard/manage_order  ">Manage Order</a></li>
                                                         </ul>
                                                         <!--====== End - Dropdown ======-->
                                                     </li>
                                                     <li>
 
-                                                        <a href="dash-my-profile.jsp">My Profile</a></li>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/my_profile">My Profile</a></li>
                                                     <li class="has-dropdown has-dropdown--ul-left-100">
 
-                                                        <a href="dash-address-book.jsp">Address Book<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/book_address">Address Book<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
 
                                                         <!--====== Dropdown ======-->
 
                                                         <span class="js-menu-toggle"></span>
                                                         <ul style="width:180px">
+
+
                                                             <li>
 
-                                                                <a href="dash-address-make-default.jsp">Address Make Default</a></li>
-                                                            <li>
-
-                                                                <a href="dash-address-add.jsp">Add New Address</a></li>
-                                                            <li>
-
-                                                                <a href="dash-address-edit.jsp">Edit Address Book</a></li>
+                                                                <a href="${pageContext.request.contextPath}/dashboard/edit_address">Edit Address Book</a></li>
                                                         </ul>
                                                         <!--====== End - Dropdown ======-->
                                                     </li>
                                                     <li>
 
-                                                        <a href="dash-track-order.jsp">Track Order</a></li>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/track_order">Track Order</a></li>
                                                     <li>
 
-                                                        <a href="dash-my-order.jsp">My Orders</a></li>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/my_order">My Orders</a></li>
                                                     <li>
 
-                                                        <a href="dash-payment-option.jsp">My Payment Options</a></li>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/payment_option">My Payment Options</a></li>
                                                     <li>
 
-                                                        <a href="dash-cancellation.jsp">My Returns & Cancellations</a></li>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/cancellation">My Returns & Cancellations</a></li>
                                                 </ul>
                                                 <!--====== End - Dropdown ======-->
                                             </li>
@@ -1240,6 +1237,7 @@
                                             <div class="mini-product-container gl-scroll u-s-m-b-15">
 
                                                 <!--====== Card for mini cart ======-->
+                                                <c:forEach var="cart_product" items="${cart_product_list}">
                                                 <div class="card-mini-product">
                                                     <div class="mini-product">
                                                         <div class="mini-product__image-wrapper">
@@ -1255,99 +1253,21 @@
 
                                                             <span class="mini-product__name">
 
-                                                                <a href="product-detail.html">Yellow Wireless Headphone</a></span>
+                                                                <a href="product-detail.html">${cart_product.name}</a></span>
 
-                                                            <span class="mini-product__quantity">1 x</span>
+                                                            <span class="mini-product__quantity">${cart_product.amount} x</span>
 
-                                                            <span class="mini-product__price">$8</span></div>
+                                                            <span class="mini-product__price">${cart_product.total_money} VNĐ</span></div>
                                                     </div>
 
                                                     <a class="mini-product__delete-link far fa-trash-alt"></a>
                                                 </div>
+                                                </c:forEach>
                                                 <!--====== End - Card for mini cart ======-->
 
 
                                                 <!--====== Card for mini cart ======-->
-                                                <div class="card-mini-product">
-                                                    <div class="mini-product">
-                                                        <div class="mini-product__image-wrapper">
 
-                                                            <a class="mini-product__link" href="product-detail.html">
-
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/electronic/product18.jpg" alt=""></a></div>
-                                                        <div class="mini-product__info-wrapper">
-
-                                                            <span class="mini-product__category">
-
-                                                                <a href="shop-side-version-2.html">Electronics</a></span>
-
-                                                            <span class="mini-product__name">
-
-                                                                <a href="product-detail.html">Nikon DSLR Camera 4k</a></span>
-
-                                                            <span class="mini-product__quantity">1 x</span>
-
-                                                            <span class="mini-product__price">$8</span></div>
-                                                    </div>
-
-                                                    <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                                </div>
-                                                <!--====== End - Card for mini cart ======-->
-
-
-                                                <!--====== Card for mini cart ======-->
-                                                <div class="card-mini-product">
-                                                    <div class="mini-product">
-                                                        <div class="mini-product__image-wrapper">
-
-                                                            <a class="mini-product__link" href="product-detail.html">
-
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/women/product8.jpg" alt=""></a></div>
-                                                        <div class="mini-product__info-wrapper">
-
-                                                            <span class="mini-product__category">
-
-                                                                <a href="shop-side-version-2.html">Women Clothing</a></span>
-
-                                                            <span class="mini-product__name">
-
-                                                                <a href="product-detail.html">New Dress D Nice Elegant</a></span>
-
-                                                            <span class="mini-product__quantity">1 x</span>
-
-                                                            <span class="mini-product__price">$8</span></div>
-                                                    </div>
-
-                                                    <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                                </div>
-                                                <!--====== End - Card for mini cart ======-->
-
-
-                                                <!--====== Card for mini cart ======-->
-                                                <div class="card-mini-product">
-                                                    <div class="mini-product">
-                                                        <div class="mini-product__image-wrapper">
-
-                                                            <a class="mini-product__link" href="product-detail.html">
-
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/men/product8.jpg" alt=""></a></div>
-                                                        <div class="mini-product__info-wrapper">
-
-                                                            <span class="mini-product__category">
-
-                                                                <a href="shop-side-version-2.html">Men Clothing</a></span>
-
-                                                            <span class="mini-product__name">
-
-                                                                <a href="product-detail.html">New Fashion D Nice Elegant</a></span>
-
-                                                            <span class="mini-product__quantity">1 x</span>
-
-                                                            <span class="mini-product__price">$8</span></div>
-                                                    </div>
-
-                                                    <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                                </div>
                                                 <!--====== End - Card for mini cart ======-->
                                             </div>
                                             <!--====== End - Mini Product Container ======-->
@@ -1359,7 +1279,7 @@
 
                                                     <span class="subtotal-text">SUBTOTAL</span>
 
-                                                    <span class="subtotal-value">$16</span></div>
+                                                    <span class="subtotal-value">${cart_product_total} VNĐ</span></div>
                                                 <div class="mini-action">
 
                                                     <a class="mini-link btn--e-brand-b-2" href="checkout.html">PROCEED TO CHECKOUT</a>
@@ -1399,10 +1319,10 @@
                                 <ul class="breadcrumb__list">
                                     <li class="has-separator">
 
-                                        <a href="index.html">Home</a></li>
+                                        <a href="${pageContext.request.contextPath}/">Home</a></li>
                                     <li class="is-marked">
 
-                                        <a href="dashboard.jsp">My Account</a></li>
+                                        <a href="${pageContext.request.contextPath}/dashboard/">My Account</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1427,30 +1347,30 @@
                                         <div class="dash__pad-1">
 
 
-                                            <span class="dash__text u-s-m-b-16">Hello, <security:authentication property="principal.username"/>
+                                            <span class="dash__text u-s-m-b-16">Hello, ${user_full_name}
                                             </span>
                                             <ul class="dash__f-list">
                                                 <li>
 
-                                                    <a class="dash-active" href="dashboard.jsp">Manage My Account</a></li>
+                                                    <a class="dash-active" href="${pageContext.request.contextPath}/dashboard/">Manage My Account</a></li>
                                                 <li>
 
-                                                    <a href="dash-my-profile.jsp">My Profile</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/my_profile">My Profile</a></li>
                                                 <li>
 
-                                                    <a href="dash-address-book.jsp">Address Book</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/book_address">Address Book</a></li>
                                                 <li>
 
-                                                    <a href="dash-track-order.jsp">Track Order</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/track_order">Track Order</a></li>
                                                 <li>
 
-                                                    <a href="dash-my-order.jsp">My Orders</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/my_order">My Orders</a></li>
                                                 <li>
 
-                                                    <a href="dash-payment-option.jsp">My Payment Options</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/payment_option">My Payment Options</a></li>
                                                 <li>
 
-                                                    <a href="dash-cancellation.jsp">My Returns & Cancellations</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/cancellation">My Returns & Cancellations</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -1502,11 +1422,11 @@
                                                             <h2 class="dash__h2 u-s-m-b-8">PERSONAL PROFILE</h2>
                                                             <div class="dash__link dash__link--secondary u-s-m-b-8">
 
-                                                                <a href="dash-edit-profile.jsp">Edit</a></div>
+                                                                <a href="${pageContext.request.contextPath}/dashboard/edit_profile">Edit</a></div>
 
-                                                            <span class="dash__text">John Doe</span>
+                                                            <span class="dash__text">${user_full_name}</span>
 
-                                                            <span class="dash__text">johndoe@domain.com</span>
+                                                            <span class="dash__text">${user_email}</span>
                                                             <div class="dash__link dash__link--secondary u-s-m-t-8">
 
                                                                 <a data-modal="modal" data-modal-id="#dash-newsletter">Subscribe Newsletter</a></div>
@@ -1521,11 +1441,11 @@
                                                             <span class="dash__text-2 u-s-m-b-8">Default Shipping Address</span>
                                                             <div class="dash__link dash__link--secondary u-s-m-b-8">
 
-                                                                <a href="dash-address-book.jsp">Edit</a></div>
+                                                                <a href="${pageContext.request.contextPath}/dashboard/book_address">Edit</a></div>
 
-                                                            <span class="dash__text">4247 Ashford Drive Virginia - VA-20006 - USA</span>
+                                                            <span class="dash__text">${user_address}</span>
 
-                                                            <span class="dash__text">(+0) 900901904</span>
+                                                            <span class="dash__text">${user_phone}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1536,9 +1456,9 @@
 
                                                             <span class="dash__text-2 u-s-m-b-8">Default Billing Address</span>
 
-                                                            <span class="dash__text">4247 Ashford Drive Virginia - VA-20006 - USA</span>
+                                                            <span class="dash__text">${user_address}</span>
 
-                                                            <span class="dash__text">(+0) 900901904</span>
+                                                            <span class="dash__text">${user_phone}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1558,9 +1478,10 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                <c:forEach var="order" items="${order_list}">
                                                     <tr>
-                                                        <td>3054231326</td>
-                                                        <td>26/13/2016</td>
+                                                        <td>${order.idOrder}</td>
+                                                        <td>${order.date}</td>
                                                         <td>
                                                             <div class="dash__table-img-wrap">
 
@@ -1569,67 +1490,16 @@
                                                         <td>
                                                             <div class="dash__table-total">
 
-                                                                <span>$126.00</span>
+                                                                <span>${order.totalMoney} VNĐ</span>
                                                                 <div class="dash__link dash__link--brand">
 
-                                                                    <a href="dash-manage-order.jsp">MANAGE</a></div>
+                                                                    <a href="${pageContext.request.contextPath}/dashboard/manage_order?idOrder=${order.idOrder}">MANAGE</a></div>
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td>3054231326</td>
-                                                        <td>26/13/2016</td>
-                                                        <td>
-                                                            <div class="dash__table-img-wrap">
+                                                </c:forEach>
 
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/electronic/product14.jpg" alt=""></div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="dash__table-total">
 
-                                                                <span>$126.00</span>
-                                                                <div class="dash__link dash__link--brand">
-
-                                                                    <a href="dash-manage-order.jsp">MANAGE</a></div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3054231326</td>
-                                                        <td>26/13/2016</td>
-                                                        <td>
-                                                            <div class="dash__table-img-wrap">
-
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/men/product8.jpg" alt=""></div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="dash__table-total">
-
-                                                                <span>$126.00</span>
-                                                                <div class="dash__link dash__link--brand">
-
-                                                                    <a href="dash-manage-order.jsp">MANAGE</a></div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3054231326</td>
-                                                        <td>26/13/2016</td>
-                                                        <td>
-                                                            <div class="dash__table-img-wrap">
-
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/women/product10.jpg" alt=""></div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="dash__table-total">
-
-                                                                <span>$126.00</span>
-                                                                <div class="dash__link dash__link--brand">
-
-                                                                    <a href="dash-manage-order.jsp">MANAGE</a></div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -1695,16 +1565,16 @@
                                             <ul>
                                                 <li>
 
-                                                    <a href="cart.html">Cart</a></li>
+                                                    <a href="${pageContext.request.contextPath}/cart/">Cart</a></li>
                                                 <li>
 
-                                                    <a href="dashboard.jsp">Account</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/">Account</a></li>
                                                 <li>
 
                                                     <a href="shop-side-version-2.html">Manufacturer</a></li>
                                                 <li>
 
-                                                    <a href="dash-payment-option.jsp">Finance</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/payment_option">Finance</a></li>
                                                 <li>
 
                                                     <a href="shop-side-version-2.html">Shop</a></li>
@@ -1729,7 +1599,7 @@
                                                     <a href="index.html">Sitemap</a></li>
                                                 <li>
 
-                                                    <a href="dash-my-order.jsp">Delivery</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/my_order">Delivery</a></li>
                                                 <li>
 
                                                     <a href="shop-side-version-2.html">Store</a></li>
@@ -1818,7 +1688,7 @@
 
                                 <span class="gl-modal-text">I have read and understood</span>
 
-                                <a class="d_modal__link" href="dashboard.jsp">Ludus Privacy Policy</a>
+                                <a class="d_modal__link" href="${pageContext.request.contextPath}/dashboard/">Ludus Privacy Policy</a>
                             </div>
                             <div class="gl-modal-btn-group">
 

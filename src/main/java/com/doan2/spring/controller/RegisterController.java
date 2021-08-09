@@ -2,7 +2,7 @@ package com.doan2.spring.controller;
 
 import com.doan2.spring.dao.userinfo.UserInfoDAO;
 import com.doan2.spring.entity.Customer;
-import com.doan2.spring.entity.CustomerUser;
+import com.doan2.spring.entity.supportentity.CustomerUser;
 import com.doan2.spring.entity.UserInfo;
 import com.doan2.spring.service.customer.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -82,24 +82,15 @@
                                         <ul style="width:120px">
                                             <li>
 
-                                                <a href="dashboard.jsp"><i class="fas fa-user-circle u-s-m-r-6"></i>
+                                                <a href="${pageContext.request.contextPath}/dashboard/"><i class="fas fa-user-circle u-s-m-r-6"></i>
 
                                                     <span>Account</span></a></li>
-                                            <li>
+                                            <security:authorize access="isAuthenticated()">
+                                                <li>
 
-                                                <a href="signup.html"><i class="fas fa-user-plus u-s-m-r-6"></i>
-
-                                                    <span>Signup</span></a></li>
-                                            <li>
-
-                                                <a href="signin.html"><i class="fas fa-lock u-s-m-r-6"></i>
-
-                                                    <span>Signin</span></a></li>
-                                            <li>
-
-                                                <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i>
-
-                                                    <span>Signout</span></a></li>
+                                                    <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i><span>Signout</span></a>
+                                                </li>
+                                            </security:authorize>
                                         </ul>
                                         <!--====== End - Dropdown ======-->
                                     </li>
@@ -984,7 +975,7 @@
                                             </li>
                                             <li class="has-dropdown has-dropdown--ul-left-100">
 
-                                                <a href="dashboard.jsp">Dashboard<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
+                                                <a href="${pageContext.request.contextPath}/dashboard/">Dashboard<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
 
                                                 <!--====== Dropdown ======-->
 
@@ -992,7 +983,7 @@
                                                 <ul style="width:200px">
                                                     <li class="has-dropdown has-dropdown--ul-left-100">
 
-                                                        <a href="dashboard.jsp">Manage My Account<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/">Manage My Account<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
 
                                                         <!--====== Dropdown ======-->
 
@@ -1000,51 +991,47 @@
                                                         <ul style="width:180px">
                                                             <li>
 
-                                                                <a href="dash-edit-profile.jsp">Edit Profile</a></li>
+                                                                <a href="${pageContext.request.contextPath}/dashboard/edit_profile">Edit Profile</a></li>
                                                             <li>
 
-                                                                <a href="dash-address-book.jsp">Edit Address Book</a></li>
+                                                                <a href="${pageContext.request.contextPath}/dashboard/book_address">Edit Address Book</a></li>
                                                             <li>
 
-                                                                <a href="dash-manage-order.jsp">Manage Order</a></li>
+                                                                <a href="${pageContext.request.contextPath}/dashboard/manage_order">Manage Order</a></li>
                                                         </ul>
                                                         <!--====== End - Dropdown ======-->
                                                     </li>
                                                     <li>
 
-                                                        <a href="dash-my-profile.jsp">My Profile</a></li>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/my_profile">My Profile</a></li>
                                                     <li class="has-dropdown has-dropdown--ul-left-100">
 
-                                                        <a href="dash-address-book.jsp">Address Book<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/book_address">Address Book<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
 
                                                         <!--====== Dropdown ======-->
 
                                                         <span class="js-menu-toggle"></span>
                                                         <ul style="width:180px">
+
+
                                                             <li>
 
-                                                                <a href="dash-address-make-default.jsp">Address Make Default</a></li>
-                                                            <li>
-
-                                                                <a href="dash-address-add.jsp">Add New Address</a></li>
-                                                            <li>
-
-                                                                <a href="dash-address-edit.jsp">Edit Address Book</a></li>
+                                                                <a href="${pageContext.request.contextPath}/dashboard/edit_address">Edit Address Book</a></li>
                                                         </ul>
                                                         <!--====== End - Dropdown ======-->
                                                     </li>
                                                     <li>
 
-                                                        <a href="dash-track-order.jsp">Track Order</a></li>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/track_order">Track Order</a></li>
                                                     <li>
 
-                                                        <a href="dash-my-order.jsp">My Orders</a></li>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/my_order">My Orders</a></li>
                                                     <li>
 
-                                                        <a href="dash-payment-option.jsp">My Payment Options</a></li>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/payment_option">My Payment Options</a></li>
                                                     <li>
 
-                                                        <a href="dash-cancellation.jsp">My Returns & Cancellations</a></li>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/cancellation">My Returns & Cancellations</a></li>
                                                 </ul>
                                                 <!--====== End - Dropdown ======-->
                                             </li>
@@ -1392,7 +1379,7 @@
                                         <a href="index.html">Home</a></li>
                                     <li class="is-marked">
 
-                                        <a href="dash-cancellation.jsp">My Account</a></li>
+                                        <a href="${pageContext.request.contextPath}/dashboard/cancellation">My Account</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1420,25 +1407,25 @@
                                             <ul class="dash__f-list">
                                                 <li>
 
-                                                    <a href="dashboard.jsp">Manage My Account</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/">Manage My Account</a></li>
                                                 <li>
 
-                                                    <a href="dash-my-profile.jsp">My Profile</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/my_profile">My Profile</a></li>
                                                 <li>
 
-                                                    <a href="dash-address-book.jsp">Address Book</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/book_address">Address Book</a></li>
                                                 <li>
 
-                                                    <a href="dash-track-order.jsp">Track Order</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/track_order">Track Order</a></li>
                                                 <li>
 
-                                                    <a href="dash-my-order.jsp">My Orders</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/my_order">My Orders</a></li>
                                                 <li>
 
-                                                    <a href="dash-payment-option.jsp">My Payment Options</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/payment_option">My Payment Options</a></li>
                                                 <li>
 
-                                                    <a class="dash-active" href="dash-cancellation.jsp">My Returns & Cancellations</a></li>
+                                                    <a class="dash-active" href="${pageContext.request.contextPath}/dashboard/cancellation">My Returns & Cancellations</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -1549,13 +1536,13 @@
                                                     <a href="cart.html">Cart</a></li>
                                                 <li>
 
-                                                    <a href="dashboard.jsp">Account</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/">Account</a></li>
                                                 <li>
 
                                                     <a href="shop-side-version-2.html">Manufacturer</a></li>
                                                 <li>
 
-                                                    <a href="dash-payment-option.jsp">Finance</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/payment_option">Finance</a></li>
                                                 <li>
 
                                                     <a href="shop-side-version-2.html">Shop</a></li>
@@ -1580,7 +1567,7 @@
                                                     <a href="index.html">Sitemap</a></li>
                                                 <li>
 
-                                                    <a href="dash-my-order.jsp">Delivery</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/my_order">Delivery</a></li>
                                                 <li>
 
                                                     <a href="shop-side-version-2.html">Store</a></li>

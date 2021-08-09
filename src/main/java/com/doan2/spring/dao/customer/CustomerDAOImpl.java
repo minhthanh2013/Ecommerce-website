@@ -1,6 +1,7 @@
 package com.doan2.spring.dao.customer;
 
 import com.doan2.spring.entity.Customer;
+import com.doan2.spring.entity.Order;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -14,7 +15,7 @@ public class CustomerDAOImpl implements CustomerDAO{
     @Override
     public void saveCustomer(Customer customer) {
         Session currentSession = sessionFactory.getCurrentSession();
-        currentSession.save(customer);
+        currentSession.saveOrUpdate(customer);
     }
 
     @Override
@@ -61,5 +62,13 @@ public class CustomerDAOImpl implements CustomerDAO{
         Query query = currentSession.createQuery("SELECT max(u.id) FROM Customer u ");
 
         return (int) query.getSingleResult();
+    }
+    @Override
+    public Boolean checkExistedEmail(String email, int userId) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        Query<Order> theQuery =
+                currentSession.createSQLQuery("select email from Customer where idCus !="+userId+" and email ='"+email+"'");
+        if (theQuery.getResultList().size() == 0) return false;
+        return true;
     }
 }

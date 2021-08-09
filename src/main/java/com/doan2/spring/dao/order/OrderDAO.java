@@ -13,4 +13,9 @@ public interface OrderDAO {
     Order getOrder(int theId);
 
     void deleteOrder(int theId);
+
+    List<Order> getOrderByCustomerId(int id);
+
+
+    void saveListOrders(List<Order> orderList);
 }

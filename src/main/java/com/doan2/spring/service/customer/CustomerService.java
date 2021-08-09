@@ -8,4 +8,5 @@ public interface CustomerService {
     Customer getCustomerByPhone(String phone);
     boolean checkIfExists(String phone);
     int getLatestId();
+    Boolean checkExistedEmail(String email, int idCus);
 }

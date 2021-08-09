@@ -1,10 +1,8 @@
 package com.doan2.spring.rest;
 
 import com.doan2.spring.entity.Cart;
-import com.doan2.spring.service.CartService;
+import com.doan2.spring.service.cart.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

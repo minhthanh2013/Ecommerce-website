@@ -1,3 +1,8 @@
+<%@ page import="java.security.Security" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -43,7 +48,7 @@
 
                         <!--====== Main Logo ======-->
 
-                        <a class="main-logo" href="index.html">
+                        <a class="main-logo" href="${pageContext.request.contextPath}/">
 
                             <img src="${pageContext.request.contextPath}/resources/images/logo/logo-1.png" alt=""></a>
                         <!--====== End - Main Logo ======-->
@@ -82,24 +87,16 @@
                                         <ul style="width:120px">
                                             <li>
 
-                                                <a href="dashboard.jsp"><i class="fas fa-user-circle u-s-m-r-6"></i>
+                                                <a href="${pageContext.request.contextPath}/dashboard/"><i class="fas fa-user-circle u-s-m-r-6"></i>
 
                                                     <span>Account</span></a></li>
-                                            <li>
 
-                                                <a href="signup.html"><i class="fas fa-user-plus u-s-m-r-6"></i>
+                                            <security:authorize access="isAuthenticated()">
+                                                <li>
 
-                                                    <span>Signup</span></a></li>
-                                            <li>
-
-                                                <a href="signin.html"><i class="fas fa-lock u-s-m-r-6"></i>
-
-                                                    <span>Signin</span></a></li>
-                                            <li>
-
-                                                <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i>
-
-                                                    <span>Signout</span></a></li>
+                                                    <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i><span>Signout</span></a>
+                                                </li>
+                                            </security:authorize>
                                         </ul>
                                         <!--====== End - Dropdown ======-->
                                     </li>
@@ -448,7 +445,7 @@
 
                                                                 <a class="u-d-block" href="shop-side-version-2.html">
 
-                                                                    <img class="u-img-fluid u-d-block" src="images/banners/banner-mega-0.jpg" alt=""></a></div>
+                                                                    <img class="u-img-fluid u-d-block" src="${pageContext.request.contextPath}/images/banners/banner-mega-0.jpg" alt=""></a></div>
                                                         </div>
                                                     </div>
                                                     <!--====== End - Mega Menu Row ======-->
@@ -984,7 +981,7 @@
                                             </li>
                                             <li class="has-dropdown has-dropdown--ul-left-100">
 
-                                                <a href="dashboard.jsp">Dashboard<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
+                                                <a href="${pageContext.request.contextPath}/dashboard/">Dashboard<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
 
                                                 <!--====== Dropdown ======-->
 
@@ -992,7 +989,7 @@
                                                 <ul style="width:200px">
                                                     <li class="has-dropdown has-dropdown--ul-left-100">
 
-                                                        <a href="dashboard.jsp">Manage My Account<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/">Manage My Account<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
 
                                                         <!--====== Dropdown ======-->
 
@@ -1000,22 +997,22 @@
                                                         <ul style="width:180px">
                                                             <li>
 
-                                                                <a href="dash-edit-profile.jsp">Edit Profile</a></li>
+                                                                <a href="${pageContext.request.contextPath}/dashboard/edit_profile">Edit Profile</a></li>
                                                             <li>
 
-                                                                <a href="dash-address-book.jsp">Edit Address Book</a></li>
+                                                                <a href="${pageContext.request.contextPath}/dashboard/book_address">Edit Address Book</a></li>
                                                             <li>
 
-                                                                <a href="dash-manage-order.jsp">Manage Order</a></li>
+                                                                <a href="${pageContext.request.contextPath}/dashboard/manage_order">Manage Order</a></li>
                                                         </ul>
                                                         <!--====== End - Dropdown ======-->
                                                     </li>
                                                     <li>
 
-                                                        <a href="dash-my-profile.jsp">My Profile</a></li>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/my_profile">My Profile</a></li>
                                                     <li class="has-dropdown has-dropdown--ul-left-100">
 
-                                                        <a href="dash-address-book.jsp">Address Book<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/book_address">Address Book<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
 
                                                         <!--====== Dropdown ======-->
 
@@ -1023,28 +1020,22 @@
                                                         <ul style="width:180px">
                                                             <li>
 
-                                                                <a href="dash-address-make-default.jsp">Address Make Default</a></li>
-                                                            <li>
-
-                                                                <a href="dash-address-add.jsp">Add New Address</a></li>
-                                                            <li>
-
-                                                                <a href="dash-address-edit.jsp">Edit Address Book</a></li>
+                                                                <a href="${pageContext.request.contextPath}/dashboard/edit_address">Edit Address Book</a></li>
                                                         </ul>
                                                         <!--====== End - Dropdown ======-->
                                                     </li>
                                                     <li>
 
-                                                        <a href="dash-track-order.jsp">Track Order</a></li>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/track_order">Track Order</a></li>
                                                     <li>
 
-                                                        <a href="dash-my-order.jsp">My Orders</a></li>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/my_order">My Orders</a></li>
                                                     <li>
 
-                                                        <a href="dash-payment-option.jsp">My Payment Options</a></li>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/payment_option">My Payment Options</a></li>
                                                     <li>
 
-                                                        <a href="dash-cancellation.jsp">My Returns & Cancellations</a></li>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/cancellation">My Returns & Cancellations</a></li>
                                                 </ul>
                                                 <!--====== End - Dropdown ======-->
                                             </li>
@@ -1228,117 +1219,32 @@
 
                                             <!--====== Mini Product Container ======-->
                                             <div class="mini-product-container gl-scroll u-s-m-b-15">
+                                                <c:forEach var="cart_product" items="${cart_product_list}">
+                                                    <div class="card-mini-product">
+                                                        <div class="mini-product">
+                                                            <div class="mini-product__image-wrapper">
 
-                                                <!--====== Card for mini cart ======-->
-                                                <div class="card-mini-product">
-                                                    <div class="mini-product">
-                                                        <div class="mini-product__image-wrapper">
+                                                                <a class="mini-product__link" href="product-detail.html">
 
-                                                            <a class="mini-product__link" href="product-detail.html">
-
-                                                                <img class="u-img-fluid" src="images/product/electronic/product3.jpg" alt=""></a></div>
-                                                        <div class="mini-product__info-wrapper">
-
-                                                            <span class="mini-product__category">
-
-                                                                <a href="shop-side-version-2.html">Electronics</a></span>
-
-                                                            <span class="mini-product__name">
-
-                                                                <a href="product-detail.html">Yellow Wireless Headphone</a></span>
-
-                                                            <span class="mini-product__quantity">1 x</span>
-
-                                                            <span class="mini-product__price">$8</span></div>
-                                                    </div>
-
-                                                    <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                                </div>
-                                                <!--====== End - Card for mini cart ======-->
-
-
-                                                <!--====== Card for mini cart ======-->
-                                                <div class="card-mini-product">
-                                                    <div class="mini-product">
-                                                        <div class="mini-product__image-wrapper">
-
-                                                            <a class="mini-product__link" href="product-detail.html">
-
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/electronic/product18.jpg" alt=""></a></div>
-                                                        <div class="mini-product__info-wrapper">
+                                                                    <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/electronic/product3.jpg" alt=""></a></div>
+                                                            <div class="mini-product__info-wrapper">
 
                                                             <span class="mini-product__category">
 
                                                                 <a href="shop-side-version-2.html">Electronics</a></span>
 
-                                                            <span class="mini-product__name">
+                                                                <span class="mini-product__name">
 
-                                                                <a href="product-detail.html">Nikon DSLR Camera 4k</a></span>
+                                                                <a href="product-detail.html">${cart_product.name}</a></span>
 
-                                                            <span class="mini-product__quantity">1 x</span>
+                                                                <span class="mini-product__quantity">${cart_product.amount} x</span>
 
-                                                            <span class="mini-product__price">$8</span></div>
+                                                                <span class="mini-product__price">${cart_product.total_money} VNĐ</span></div>
+                                                        </div>
+
+                                                        <a class="mini-product__delete-link far fa-trash-alt"></a>
                                                     </div>
-
-                                                    <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                                </div>
-                                                <!--====== End - Card for mini cart ======-->
-
-
-                                                <!--====== Card for mini cart ======-->
-                                                <div class="card-mini-product">
-                                                    <div class="mini-product">
-                                                        <div class="mini-product__image-wrapper">
-
-                                                            <a class="mini-product__link" href="product-detail.html">
-
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/women/product8.jpg" alt=""></a></div>
-                                                        <div class="mini-product__info-wrapper">
-
-                                                            <span class="mini-product__category">
-
-                                                                <a href="shop-side-version-2.html">Women Clothing</a></span>
-
-                                                            <span class="mini-product__name">
-
-                                                                <a href="product-detail.html">New Dress D Nice Elegant</a></span>
-
-                                                            <span class="mini-product__quantity">1 x</span>
-
-                                                            <span class="mini-product__price">$8</span></div>
-                                                    </div>
-
-                                                    <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                                </div>
-                                                <!--====== End - Card for mini cart ======-->
-
-
-                                                <!--====== Card for mini cart ======-->
-                                                <div class="card-mini-product">
-                                                    <div class="mini-product">
-                                                        <div class="mini-product__image-wrapper">
-
-                                                            <a class="mini-product__link" href="product-detail.html">
-
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/men/product8.jpg" alt=""></a></div>
-                                                        <div class="mini-product__info-wrapper">
-
-                                                            <span class="mini-product__category">
-
-                                                                <a href="shop-side-version-2.html">Men Clothing</a></span>
-
-                                                            <span class="mini-product__name">
-
-                                                                <a href="product-detail.html">New Fashion D Nice Elegant</a></span>
-
-                                                            <span class="mini-product__quantity">1 x</span>
-
-                                                            <span class="mini-product__price">$8</span></div>
-                                                    </div>
-
-                                                    <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                                </div>
-                                                <!--====== End - Card for mini cart ======-->
+                                                </c:forEach>
                                             </div>
                                             <!--====== End - Mini Product Container ======-->
 
@@ -1349,7 +1255,7 @@
 
                                                     <span class="subtotal-text">SUBTOTAL</span>
 
-                                                    <span class="subtotal-value">$16</span></div>
+                                                    <span class="subtotal-value">${cart_product_total} VNĐ</span></div>
                                                 <div class="mini-action">
 
                                                     <a class="mini-link btn--e-brand-b-2" href="checkout.html">PROCEED TO CHECKOUT</a>
@@ -1392,7 +1298,7 @@
                                         <a href="index.html">Home</a></li>
                                     <li class="is-marked">
 
-                                        <a href="dash-address-edit.jsp">My Account</a></li>
+                                        <a href="${pageContext.request.contextPath}/dashboard/edit_address">Edit Address</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1416,29 +1322,29 @@
                                     <div class="dash__box dash__box--bg-white dash__box--shadow u-s-m-b-30">
                                         <div class="dash__pad-1">
 
-                                            <span class="dash__text u-s-m-b-16">Hello, John Doe</span>
+                                            <span class="dash__text u-s-m-b-16">Hello, ${user_full_name}</span>
                                             <ul class="dash__f-list">
                                                 <li>
 
-                                                    <a href="dashboard.jsp">Manage My Account</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/">Manage My Account</a></li>
                                                 <li>
 
-                                                    <a href="dash-my-profile.jsp">My Profile</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/my_profile">My Profile</a></li>
                                                 <li>
 
-                                                    <a class="dash-active" href="dash-address-book.jsp">Address Book</a></li>
+                                                    <a class="dash-active" href="${pageContext.request.contextPath}/dashboard/book_address">Address Book</a></li>
                                                 <li>
 
-                                                    <a href="dash-track-order.jsp">Track Order</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/track_order">Track Order</a></li>
                                                 <li>
 
-                                                    <a href="dash-my-order.jsp">My Orders</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/my_order">My Orders</a></li>
                                                 <li>
 
-                                                    <a href="dash-payment-option.jsp">My Payment Options</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/payment_option">My Payment Options</a></li>
                                                 <li>
 
-                                                    <a href="dash-cancellation.jsp">My Returns & Cancellations</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/cancellation">My Returns & Cancellations</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -1483,72 +1389,104 @@
                                             <h1 class="dash__h1 u-s-m-b-14">Edit Address</h1>
 
                                             <span class="dash__text u-s-m-b-30">We need an address where we could deliver products.</span>
-                                            <form class="dash-address-manipulation">
+                                            <c:if test="${param.error == true}">
+                                                <div class="alert alert-danger col-xs-offset-1 col-xs-10">
+                                                    Edit address fail!
+                                                </div>
+                                            </c:if>
+                                            <c:if test="${param.error == false}">
+                                                <div class="alert alert-danger col-xs-offset-1 col-xs-10">
+                                                    Edit address success!
+                                                </div>
+                                            </c:if>
+                                            <form:form class="dash-address-manipulation" modelAttribute="userEditAddress" action="${pageContext.request.contextPath}/dashboard/processEditAddress">
                                                 <div class="gl-inline">
                                                     <div class="u-s-m-b-30">
 
                                                         <label class="gl-label" for="address-fname">FIRST NAME *</label>
 
-                                                        <input class="input-text input-text--primary-style" type="text" id="address-fname" placeholder="John Doe"></div>
+                                                        <form:input class="input-text input-text--primary-style" type="text" id="address-fname" placeholder="" path="firstName" disabled="disabled"/></div>
                                                     <div class="u-s-m-b-30">
 
                                                         <label class="gl-label" for="address-lname">LAST NAME *</label>
 
-                                                        <input class="input-text input-text--primary-style" type="text" id="address-lname" placeholder="Doe"></div>
+                                                        <form:input class="input-text input-text--primary-style" type="text" id="address-lname" placeholder="" path="lastName" disabled="disabled"/></div>
                                                 </div>
                                                 <div class="gl-inline">
                                                     <div class="u-s-m-b-30">
 
                                                         <label class="gl-label" for="address-phone">PHONE *</label>
 
-                                                        <input class="input-text input-text--primary-style" type="text" id="address-phone" placeholder="(+0) 900901904"></div>
+                                                        <form:input class="input-text input-text--primary-style" type="text" id="address-phone" placeholder="" path="phone" disabled="disabled"/></div>
                                                     <div class="u-s-m-b-30">
 
                                                         <label class="gl-label" for="address-street">STREET ADDRESS *</label>
 
-                                                        <input class="input-text input-text--primary-style" type="text" id="address-street" placeholder="4247 Ashford Drive Virginia"></div>
+                                                        <form:input class="input-text input-text--primary-style" type="text" id="address-street" placeholder="4247 Ashford Drive Virginia" path="address"/></div>
                                                 </div>
                                                 <div class="gl-inline">
                                                     <div class="u-s-m-b-30">
 
                                                         <!--====== Select Box ======-->
 
-                                                        <label class="gl-label" for="address-country">COUNTRY *</label><select class="select-box select-box--primary-style" id="address-country">
+                                                        <label class="gl-label" for="address-country">COUNTRY *</label><form:select class="select-box select-box--primary-style" id="address-country" path="country">
                                                             <option selected value="">Choose Country</option>
-                                                            <option value="uae">United Arab Emirate (UAE)</option>
-                                                            <option value="uk">United Kingdom (UK)</option>
-                                                            <option value="us">United States (US)</option>
-                                                        </select>
+                                                            <option value="Viet Nam">Viet Nam (VN)</option>
+                                                        </form:select>
                                                         <!--====== End - Select Box ======-->
                                                     </div>
                                                     <div class="u-s-m-b-30">
 
                                                         <!--====== Select Box ======-->
 
-                                                        <label class="gl-label" for="address-state">STATE/PROVINCE *</label><select class="select-box select-box--primary-style" id="address-state">
+                                                        <label class="gl-label" for="address-state">STATE/PROVINCE *</label>
+                                                        <form:select class="select-box select-box--primary-style" id="address-state" path="province">
                                                             <option selected value="">Choose State/Province</option>
-                                                            <option value="al">Alabama</option>
-                                                            <option value="al">Alaska</option>
-                                                            <option value="ny">New York</option>
-                                                        </select>
+                                                            <option value="hcm">Ho Chi Minh</option>
+
+                                                        </form:select>
+
+
+
                                                         <!--====== End - Select Box ======-->
                                                     </div>
                                                 </div>
                                                 <div class="gl-inline">
                                                     <div class="u-s-m-b-30">
 
-                                                        <label class="gl-label" for="address-city">TOWN/CITY *</label>
+                                                        <label class="gl-label" for="address-city">DISTRICT *</label>
 
-                                                        <input class="input-text input-text--primary-style" type="text" id="address-city"></div>
-                                                    <div class="u-s-m-b-30">
-
-                                                        <label class="gl-label" for="address-street">ZIP/POSTAL CODE *</label>
-
-                                                        <input class="input-text input-text--primary-style" type="text" id="address-postal" placeholder="20006"></div>
+                                                    <form:select class="select-box select-box--primary-style" id="address-city" path="district">
+                                                        <option selected value="">Choose District</option>
+                                                        <option value="1">District 1</option>
+                                                        <option value="2">District 2</option>
+                                                        <option value="3">District 3</option>
+                                                        <option value="4">District 4</option>
+                                                        <option value="5">District 5</option>
+                                                        <option value="6">District 6</option>
+                                                        <option value="7">District 7</option>
+                                                        <option value="8">District 8</option>
+                                                        <option value="9">District 9</option>
+                                                        <option value="10">District 10</option>
+                                                        <option value="11">District 11</option>
+                                                        <option value="12">District 12</option>
+                                                        <option value="13">Binh Tan District</option>
+                                                        <option value="14">Binh Thanh District</option>
+                                                        <option value="15">Go Vap District</option>
+                                                        <option value="16">Phu Nhuan District</option>
+                                                        <option value="17">Tan Binh District</option>
+                                                        <option value="18">Tan Phu District</option>
+                                                        <option value="19">Thu Duc District</option>
+                                                        <option value="20">Binh Chanh District</option>
+                                                        <option value="21">Can Gio District</option>
+                                                        <option value="22">Cu Chi District</option>
+                                                        <option value="23">Hoc Mon District</option>
+                                                        <option value="24">Nha Be District</option>
+                                                    </form:select>
                                                 </div>
 
                                                 <button class="btn btn--e-brand-b-2" type="submit">SAVE</button>
-                                            </form>
+                                            </form:form>
                                         </div>
                                     </div>
                                 </div>
@@ -1615,13 +1553,13 @@
                                                     <a href="cart.html">Cart</a></li>
                                                 <li>
 
-                                                    <a href="dashboard.jsp">Account</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/">Account</a></li>
                                                 <li>
 
                                                     <a href="shop-side-version-2.html">Manufacturer</a></li>
                                                 <li>
 
-                                                    <a href="dash-payment-option.jsp">Finance</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/payment_option">Finance</a></li>
                                                 <li>
 
                                                     <a href="shop-side-version-2.html">Shop</a></li>
@@ -1646,7 +1584,7 @@
                                                     <a href="index.html">Sitemap</a></li>
                                                 <li>
 
-                                                    <a href="dash-my-order.jsp">Delivery</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/my_order">Delivery</a></li>
                                                 <li>
 
                                                     <a href="shop-side-version-2.html">Store</a></li>
@@ -1721,20 +1659,14 @@
             </div>
         </footer>
     </div>
+    </div>
     <!--====== End - Main App ======-->
 
 
     <!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
-    <script>
-        window.ga = function() {
-            ga.q.push(arguments)
-        };
-        ga.q = [];
-        ga.l = +new Date;
-        ga('create', 'UA-XXXXX-Y', 'auto');
-        ga('send', 'pageview')
-    </script>
-    <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+
+
+
 
     <!--====== Vendor Js ======-->
     <script src="${pageContext.request.contextPath}/resources/js/vendor.js"></script>

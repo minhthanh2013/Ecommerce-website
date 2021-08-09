@@ -25,6 +25,8 @@ public class Cart {
     @Column(name = "idCus")
     private int idCus;
 
+
+
     public int getIdCus() {
         return idCus;
     }
@@ -92,5 +94,18 @@ public class Cart {
 
     public void setTotal_money(int total_money) {
         this.total_money = total_money;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "id=" + id +
+                ", idProduct=" + idProduct +
+                ", idOrder=" + idOrder +
+                ", price=" + price +
+                ", amount=" + amount +
+                ", total_money=" + total_money +
+                ", idCus=" + idCus +
+                '}';
     }
 }
