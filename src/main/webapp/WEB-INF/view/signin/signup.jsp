@@ -46,7 +46,7 @@
 
                         <!--====== Main Logo ======-->
 
-                        <a class="main-logo" href="index.html">
+                        <a class="main-logo" href="${pageContext.request.contextPath}/">
 
                             <img src="${pageContext.request.contextPath}/resources/images/logo/logo-1.png" alt=""></a>
                         <!--====== End - Main Logo ======-->
@@ -246,14 +246,14 @@
                                                             <span class="js-menu-toggle"></span></li>
                                                         <li>
 
-                                                            <a href="index.html"><i class="fas fa-football-ball u-s-m-r-6"></i>
+                                                            <a href="${pageContext.request.contextPath}/"><i class="fas fa-football-ball u-s-m-r-6"></i>
 
                                                                 <span>Sports & Game</span></a>
 
                                                             <span class="js-menu-toggle"></span></li>
                                                         <li>
 
-                                                            <a href="index.html"><i class="fas fa-heartbeat u-s-m-r-6"></i>
+                                                            <a href="${pageContext.request.contextPath}/"><i class="fas fa-heartbeat u-s-m-r-6"></i>
 
                                                                 <span>Beauty & Health</span></a>
 
@@ -975,10 +975,10 @@
                                                 <ul style="width:200px">
                                                     <li>
 
-                                                        <a href="signin.jsp">Signin / Already Registered</a></li>
+                                                        <a href="${pageContext.request.contextPath}/login">Signin / Already Registered</a></li>
                                                     <li>
 
-                                                        <a href="signup.jsp">Signup / Register</a></li>
+                                                        <a href="${pageContext.request.contextPath}/register/">Signup / Register</a></li>
                                                     <li>
 
                                                         <a href="lost-password.html">Lost Password</a></li>
@@ -1392,10 +1392,10 @@
                                 <ul class="breadcrumb__list">
                                     <li class="has-separator">
 
-                                        <a href="index.html">Home</a></li>
+                                        <a href="${pageContext.request.contextPath}/">Home</a></li>
                                     <li class="is-marked">
 
-                                        <a href="signup.jsp">Signup</a></li>
+                                        <a href="${pageContext.request.contextPath}/register/">Signup</a></li>
                                 </ul>
                             </div>
                         </div>

@@ -6382,7 +6382,7 @@ input::-ms-clear {
 #pd-o-thumbnail .slick-slide:not(.slick-current) {
   opacity: .4; }
 
-#js-product-detail-modal-thumbnail .slick-slide:not(.slick-current) {
+.js-product-detail-modal-thumbnail .slick-slide:not(.slick-current) {
   opacity: .4; }
 
 .pt-prev, .pt-next {
@@ -6414,6 +6414,6 @@ input::-ms-clear {
 #pd-o-thumbnail:hover .pt-prev, #pd-o-thumbnail:hover .pt-next {
   opacity: .8; }
 
-#js-product-detail-modal-thumbnail:hover .pt-prev, #js-product-detail-modal-thumbnail:hover .pt-next {
+.js-product-detail-modal-thumbnail:hover .pt-prev, .js-product-detail-modal-thumbnail:hover .pt-next {
   opacity: .8; }
 

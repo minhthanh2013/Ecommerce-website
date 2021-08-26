@@ -17,4 +17,12 @@ public interface CartDAO {
     List<Cart> getCartsByCustomerOrderId(int cusId, int orderId);
 
     List<Cart> getListCartNotCheckOut(int idCus);
+
+	void deleteAll(List<Cart> cartList);
+	void updateListCart(List<Cart> cartList);
+	Cart getListCartByIdProduct(int idProduct);
+
+    List<Integer> getLatestIdCart();
+
+    List<Cart> getLastTwoCarts();
 }

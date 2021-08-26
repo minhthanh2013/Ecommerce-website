@@ -75,10 +75,8 @@
                                 <ul class="breadcrumb__list">
                                     <li class="has-separator">
 
-                                        <a href="admin-dashboard.jsp">Admin</a></li>
-                                    <li class="is-marked">
+                                        <a href="${pageContext.request.contextPath}/admin/">Admin</a></li>
 
-                                        <a href="admin-track-shop-order.jsp">Track shop order</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -102,55 +100,188 @@
                                     <div class="dash__box dash__box--bg-white dash__box--shadow u-s-m-b-30">
                                         <div class="dash__pad-1">
 
-                                            <span class="dash__text u-s-m-b-16">Hello, --name--</span>
+                                            <span class="dash__text u-s-m-b-16">Hello, ${user_full_name}</span>
                                             <ul class="dash__f-list">
                                                 <li>
 
-                                                    <a href="admin-dashboard.jsp">Admin Dashboard</a></li>
+                                                    <a  href="${pageContext.request.contextPath}/admin/">Admin Dashboard</a></li>
                                                 <li>
 
-                                                    <a href="admin-users.jsp">Users</a></li>
+                                                    <a href="${pageContext.request.contextPath}/admin/users">Users</a></li>
                                                 <li>
 
-                                                    <a href="admin-suppliers.jsp">Suppliers</a></li>
+                                                    <a href="${pageContext.request.contextPath}/admin/suppliers">Suppliers</a></li>
                                                 <li>
 
-                                                    <a href="admin-partners.jsp" >Partners</a></li>
+                                                    <a href="${pageContext.request.contextPath}/admin/partners">Partners</a></li>
                                                 <li>
 
-                                                    <a href="admin-track-shop-order.jsp" class="dash-active">Track Shop Order</a></li>
+                                                    <a href="${pageContext.request.contextPath}/admin/manage_order" class="dash-active">Manage Order</a></li>
                                                 <li>
 
-                                                        <a href="admin-shipping-company.jsp" >Shipping</a></li>
-                                                
+                                                    <a href="${pageContext.request.contextPath}/admin/shipping_company">Shipping</a></li>
+
                                             </ul>
                                         </div>
                                     </div>
-                                   
+                                    <div class="dash__box dash__box--bg-white dash__box--shadow dash__box--w">
+                                        <div class="dash__pad-1">
+                                            <ul class="dash__w-list">
+                                                <li>
+                                                    <div class="dash__w-wrap">
+
+                                                        <span class="dash__w-icon dash__w-icon-style-1"><i class="fas fa-cart-arrow-down"></i></span>
+
+                                                        <span class="dash__w-text">4</span>
+
+                                                        <span class="dash__w-name">Orders Placed</span></div>
+                                                </li>
+                                                <li>
+                                                    <div class="dash__w-wrap">
+
+                                                        <span class="dash__w-icon dash__w-icon-style-2"><i class="fas fa-times"></i></span>
+
+                                                        <span class="dash__w-text">0</span>
+
+                                                        <span class="dash__w-name">Cancel Orders</span></div>
+                                                </li>
+                                                <li>
+                                                    <div class="dash__w-wrap">
+
+                                                        <span class="dash__w-icon dash__w-icon-style-3"><i class="far fa-heart"></i></span>
+
+                                                        <span class="dash__w-text">0</span>
+
+                                                        <span class="dash__w-name">Wishlist</span></div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                     <!--====== End - Dashboard Features ======-->
                                 </div>
                                 <div class="col-lg-9 col-md-12">
-                                    <div class="dash__box dash__box--shadow dash__box--radius dash__box--bg-white">
+                                    <h1 class="dash__h1 u-s-m-b-30">Supplier Ongoing Orders</h1>
+                                    <div class="dash__box dash__box--shadow dash__box--radius dash__box--bg-white u-s-m-b-30">
                                         <div class="dash__pad-2">
-                                            <h1 class="dash__h1 u-s-m-b-14">Track shop Orders</h1>
-
-                                            <span class="dash__text u-s-m-b-30">To track shop orders please enter your Shop ID in the box below and press the "Track" button. This was given to you on your receipt and in the confirmation email you should have received.</span>
-                                            <form class="dash-track-order">
-                                                <div class="gl-inline">
-                                                    <div class="u-s-m-b-30">
-
-                                                        <label class="gl-label" for="shop-id">Shop ID *</label>
-
-                                                        <input class="input-text input-text--primary-style" type="text" id="shop-id" placeholder="Enter your shop id"></div>
-                                                    <div class="u-s-m-b-30">
-
-                                                        <label class="gl-label" for="track-email">Email *</label>
-
-                                                        <input class="input-text input-text--primary-style" type="text" id="track-email" placeholder="Email of shop owner"></div>
+                                            <div class="dash-l-r">
+                                                <div>
+                                                    <div class="manage-o__text-2 u-c-secondary">${supplier_name}</div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="dash__box dash__box--shadow dash__box--radius dash__box--bg-white u-s-m-b-30">
+                                        <div class="dash__pad-2">
+                                            <div class="manage-o">
+                                                <div class="manage-o__header u-s-m-b-30">
+                                                    <div class="manage-o__icon"><i class="fas fa-box u-s-m-r-5"></i>
 
-                                                <button class="btn btn--e-brand-b-2" type="submit">TRACK</button>
-                                            </form>
+                                                        <span class="manage-o__text">Package 1</span></div>
+                                                </div>
+                                                <div class="dash-l-r">
+                                                    <div class="manage-o__icon"><i class="fas fa-truck u-s-m-r-5"></i>
+                                                        <span class="manage-o__text">Standard</span></div>
+                                                </div>
+                                                <div class="manage-o__timeline">
+                                                    <div class="timeline-row">
+                                                        <div class="col-lg-4 u-s-m-b-30">
+                                                            <div class="timeline-step">
+                                                                <div class="timeline-l-i timeline-l-i--finish">
+
+                                                                    <span class="timeline-circle"></span></div>
+
+                                                                <span class="timeline-text">Processing</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 u-s-m-b-30">
+                                                            <div class="timeline-step">
+                                                                <div class="timeline-l-i timeline-l-i--finish">
+
+                                                                    <span class="timeline-circle"></span></div>
+
+                                                                <span class="timeline-text">Shipped</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4 u-s-m-b-30">
+                                                            <div class="timeline-step">
+                                                                <div class="timeline-l-i">
+
+                                                                    <span class="timeline-circle"></span></div>
+
+                                                                <span class="timeline-text">Delivered</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <c:forEach var="order" items="${orderList}">
+                                                    <div class="manage-o__description">
+
+                                                        <div class="description__container">
+
+                                                            <div class="description__img-wrap">
+
+
+                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/electronic/product3.jpg" alt=""></div>
+
+                                                            <div class="description-title">${order.idOrder}</div>
+
+
+
+                                                        </div>
+
+                                                        <div class="description__info-wrap">
+
+                                                            <div>
+
+                                                            <span class="manage-o__text-2 u-c-silver">Date:
+
+                                                                <span class="manage-o__text-2 u-c-secondary">${order.date}</span></span>
+                                                            </div>
+                                                            <div>
+
+                                                            <span class="manage-o__text-2 u-c-silver">Total:
+
+                                                                <span class="manage-o__text-2 u-c-secondary">${order.totalMoney} VNĐ</span></span>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </c:forEach>
+                                                <div class="col-lg-4 u-s-m-b-30">
+                                                    <h2 class="dash__h2 u-s-p-xy-20">PAGE</h2>
+                                                    <span class="tablenav-pages" style="align-self: center;">
+                                                    <c:forEach var="pageVal" items="${pageValList}">
+                                                        <c:choose>
+                                                            <c:when test="${param.page == pageVal}">
+                                                                <a href="${pageContext.request.contextPath}/admin/manage_order?idSup=${id_sup}&page=${pageVal}" class="dash-active">${pageVal + 1}</a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <a href="${pageContext.request.contextPath}/admin/manage_order?idSup=${id_sup}&page=${pageVal}" >${pageVal + 1}</a>
+                                                            </c:otherwise>
+                                                        </c:choose>
+
+                                                    </c:forEach>
+                                                </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="dash__box dash__box--bg-white dash__box--shadow u-h-100">
+                                                <div class="dash__pad-3">
+                                                    <h2 class="dash__h2 u-s-m-b-8">Total Summary</h2>
+                                                    <div class="dash-l-r u-s-m-b-8">
+                                                        <div class="manage-o__text-2 u-c-secondary">Total</div>
+                                                        <div class="manage-o__text-2 u-c-secondary">${order_total_money} VNĐ</div>
+                                                    </div>
+
+
+                                                    <span class="dash__text-2">Paid by Cash on Delivery</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

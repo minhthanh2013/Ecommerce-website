@@ -61,7 +61,7 @@ public class CustomerDAOImpl implements CustomerDAO{
         Session currentSession = sessionFactory.getCurrentSession();
         Query query = currentSession.createQuery("SELECT max(u.id) FROM Customer u ");
 
-        return (int) query.getSingleResult();
+        return (int) query.setMaxResults(1).getResultList().get(0);
     }
     @Override
     public Boolean checkExistedEmail(String email, int userId) {

@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -86,21 +89,18 @@
                                                 <a href="${pageContext.request.contextPath}/dashboard"><i class="fas fa-user-circle u-s-m-r-6"></i>
 
                                                     <span>Account</span></a></li>
-                                            <li>
 
-                                                <a href="${pageContext.request.contextPath}/register"><i class="fas fa-user-plus u-s-m-r-6"></i>
+                                            <form:form action="${pageContext.request.contextPath}/logout"
+                                                       method="post" id="sign-out-form">
+                                                <li>
 
-                                                    <span>Signup</span></a></li>
-                                            <li>
+                                                    <a id="sign-out-btt" href="#"><i class="fas fa-lock-open u-s-m-r-6 sign-out-btt-1"></i>
+                                                        <span>Signout</span></a>
+                                                        <%--                                                    <input type="submit" value="Logout" /><i class="fas fa-lock-open u-s-m-r-6"></i>--%>
+                                                        <%--                                                    <span>Signout</span></a></li>--%>
 
-                                                <a href="${pageContext.request.contextPath}/login"><i class="fas fa-lock u-s-m-r-6"></i>
-
-                                                    <span>Signin</span></a></li>
-                                            <li>
-
-                                                <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i>
-
-                                                    <span>Signout</span></a></li>
+                                                </li>
+                                            </form:form>
                                         </ul>
                                         <!--====== End - Dropdown ======-->
                                     </li>
@@ -208,7 +208,7 @@
 
                                 <!--====== List ======-->
                                 <ul class="ah-list ah-list--design2 ah-list--link-color-secondary">
-                                    <li><a href="${pageContext.request.contextPath}/shopkeeper/edit_profile">DASHBOARD</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/shopkeeper/">DASHBOARD</a></li>
                                     <li><a href="#">PRODUCT</a></li>
                                     <li><a href="#">CATEGORY</a></li>
                                     <li><a href="#">PROMOTION</a></li>
@@ -251,7 +251,7 @@
                                         <a href="${pageContext.request.contextPath}/shopkeeper">Home</a></li>
                                     <li class="is-marked">
 
-                                        <a href="${pageContext.request.contextPath}/shopkeeper/edit_profile">My Store</a></li>
+                                        <a href="${pageContext.request.contextPath}/shopkeeper/">My Store</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -275,21 +275,18 @@
                                     <div class="dash__box dash__box--bg-white dash__box--shadow u-s-m-b-30">
                                         <div class="dash__pad-1">
 
-                                            <span class="dash__text u-s-m-b-16">ABC STORE</span>
+                                            <span class="dash__text u-s-m-b-16">${supplier_name}</span>
                                             <ul class="dash__f-list">
                                                 <li>
-                                                    <a class="dash-active" href="${pageContext.request.contextPath}/shopkeeper/edit_profile">My Store Profile</a></li>
+                                                    <a class="dash-active" href="${pageContext.request.contextPath}/shopkeeper/">My Store Profile</a></li>
                                                 <li>
                                                     <a href="${pageContext.request.contextPath}/shopkeeper/add_product">Add product</a></li>
-                                                <li>
-                                                    <a href="${pageContext.request.contextPath}/shopkeeper/add_promotion">Add promotion</a></li>
+
                                                 <li>
                                                     <a href="${pageContext.request.contextPath}/shopkeeper/update_price">Update price</a></li>
                                                 <li>
                                                     <a href="${pageContext.request.contextPath}/shopkeeper/order">Orders</a></li>
-                                                <li>
 
-                                                    <a href="${pageContext.request.contextPath}/shopkeeper/sales_diary">Sales diary</a></li>
                                                 <li>
                                                     <a href="${pageContext.request.contextPath}/shopkeeper/sales_statistics">Sales statistics</a></li>
                                             </ul>
@@ -307,13 +304,25 @@
 
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <form class="dash-edit-p">
+                                                    <c:if test="${error.param != null}">
+                                                        <div>
+                                                            <p style="color: red">${error}</p>
+                                                        </div>
+                                                    </c:if>
+                                                    <c:if test="${success.param != null}">
+                                                        <div>
+                                                            <p style="color: green">${success}</p>
+                                                        </div>
+                                                    </c:if>
+                                                    <form:form action="${pageContext.request.contextPath}/shopkeeper/" class="dash-edit-p" modelAttribute="supplierAttribute" method="post">
+                                                        <form:hidden path="idSup" value="${supplier_idSup}"/>
+                                                        <form:hidden path="bankAccount" value="${supplier_bankAccount}"/>
                                                         <div class="gl-inline">
                                                             <div class="u-s-m-b-30">
 
                                                                 <label class="gl-label" for="reg-sname">STORE NAME *</label>
 
-                                                                <input class="input-text input-text--primary-style" type="text" id="reg-sname" placeholder="ABC STORE"></div>
+                                                                <form:input class="input-text input-text--primary-style" type="text" id="reg-sname" placeholder="${supplier_name}" path="nameSup"/></div>
                                                             <div class="u-s-m-b-30">
 
                                                                 <label class="gl-label" for="reg-sdescription">DESCRIPTION *</label>
@@ -326,12 +335,12 @@
 
                                                                 <label class="gl-label" for="reg-saddress">ADDRESS</label>
 
-                                                                <input class="input-text input-text--primary-style" type="text" id="reg-saddress" placeholder="123 TRAN HUNG DAO, WARD 1, DISTRICT 5, HCMC"></div>
+                                                                <form:input class="input-text input-text--primary-style" type="text" id="reg-saddress" placeholder="${supplier_address}" path="address"/></div>
                                                             <div class="u-s-m-b-30">
 
                                                                 <label class="gl-label" for="reg-sphone">PHONE</label>
 
-                                                                <input class="input-text input-text--primary-style" type="text" id="reg-sphone" placeholder="1900 1900"></div>
+                                                                <form:input class="input-text input-text--primary-style" type="text" id="reg-sphone" placeholder="${supplier_phone}" path="phone"/></div>
                                                         </div>
 
                                                         <div class="gl-inline">
@@ -339,7 +348,7 @@
 
                                                                 <label class="gl-label" for="reg-semail">EMAIL</label>
 
-                                                                <input class="input-text input-text--primary-style" type="text" id="reg-semail" placeholder="abcstore@gmail.com"></div>
+                                                                <form:input class="input-text input-text--primary-style" type="text" id="reg-semail" placeholder="${supplier_email}" path="email"/></div>
                                                                 <div class="u-s-m-b-30">
                                                                     <label class="gl-label" for="reg-sbankaccount">BANK ACCOUNT</label>
     
@@ -368,7 +377,7 @@
                                                         </div>
 
                                                         <button class="btn btn--e-brand-b-2" type="submit">SAVE</button>
-                                                    </form>
+                                                    </form:form>
                                                 </div>
                                             </div>
                                         </div>
@@ -432,7 +441,7 @@
                                             <ul>
                                                 <li>
 
-                                                    <a href="cart.html">Cart</a></li>
+                                                    <a href="${pageContext.request.contextPath}/cart/">Cart</a></li>
                                                 <li>
 
                                                     <a href="${pageContext.request.contextPath}/dashboard/">Account</a></li>
@@ -441,7 +450,7 @@
                                                     <a href="shop-side-version-2.html">Manufacturer</a></li>
                                                 <li>
 
-                                                    <a href="dash-payment-option.html">Finance</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/payment_option">Finance</a></li>
                                                 <li>
 
                                                     <a href="shop-side-version-2.html">Shop</a></li>
@@ -466,7 +475,7 @@
                                                     <a href="${pageContext.request.contextPath}/">Sitemap</a></li>
                                                 <li>
 
-                                                    <a href="dash-my-order.html">Delivery</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/my_order">Delivery</a></li>
                                                 <li>
 
                                                     <a href="shop-side-version-2.html">Store</a></li>
@@ -555,7 +564,7 @@
 
                                 <span class="gl-modal-text">I have read and understood</span>
 
-                                <a class="d_modal__link" href="${pageContext.request.contextPath}/dashboard/edit_profile">Ludus Privacy Policy</a>
+                                <a class="d_modal__link" href="${pageContext.request.contextPath}/dashboard/">Ludus Privacy Policy</a>
                             </div>
                             <div class="gl-modal-btn-group">
 
@@ -574,6 +583,16 @@
     <!--====== End - Main App ======-->
 
 
+    <script>
+        document.getElementById("sign-out-btt").onclick = function() {
+            <%HttpSession session1 = request.getSession();
+            session1.removeAttribute("url_prior_login");
+            %>
+
+
+            document.getElementById("sign-out-form").submit();
+        }
+    </script>
     <!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
     <script>
         window.ga = function() {

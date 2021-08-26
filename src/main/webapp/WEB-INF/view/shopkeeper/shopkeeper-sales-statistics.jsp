@@ -1,3 +1,10 @@
+<%@ page import="java.security.Security" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.time.LocalDate" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -86,21 +93,18 @@
                                                 <a href="${pageContext.request.contextPath}/dashboard"><i class="fas fa-user-circle u-s-m-r-6"></i>
 
                                                     <span>Account</span></a></li>
-                                            <li>
 
-                                                <a href="${pageContext.request.contextPath}/register/"><i class="fas fa-user-plus u-s-m-r-6"></i>
+                                            <form:form action="${pageContext.request.contextPath}/logout"
+                                                       method="post" id="sign-out-form">
+                                                <li>
 
-                                                    <span>Signup</span></a></li>
-                                            <li>
+                                                    <a id="sign-out-btt" href="#"><i class="fas fa-lock-open u-s-m-r-6 sign-out-btt-1"></i>
+                                                        <span>Signout</span></a>
+                                                        <%--                                                    <input type="submit" value="Logout" /><i class="fas fa-lock-open u-s-m-r-6"></i>--%>
+                                                        <%--                                                    <span>Signout</span></a></li>--%>
 
-                                                <a href="${pageContext.request.contextPath}/login"><i class="fas fa-lock u-s-m-r-6"></i>
-
-                                                    <span>Signin</span></a></li>
-                                            <li>
-
-                                                <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i>
-
-                                                    <span>Signout</span></a></li>
+                                                </li>
+                                            </form:form>
                                         </ul>
                                         <!--====== End - Dropdown ======-->
                                     </li>
@@ -208,7 +212,7 @@
 
                                 <!--====== List ======-->
                                 <ul class="ah-list ah-list--design2 ah-list--link-color-secondary">
-                                    <li><a href="${pageContext.request.contextPath}/shopkeeper/edit_profile">DASHBOARD</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/shopkeeper/">DASHBOARD</a></li>
                                     <li><a href="#">PRODUCT</a></li>
                                     <li><a href="#">CATEGORY</a></li>
                                     <li><a href="#">PROMOTION</a></li>
@@ -251,7 +255,7 @@
                                         <a href="${pageContext.request.contextPath}/">Home</a></li>
                                     <li class="has-separator">
 
-                                        <a href="${pageContext.request.contextPath}/shopkeeper/edit_profile">My Store</a></li>
+                                        <a href="${pageContext.request.contextPath}/shopkeeper/">My Store</a></li>
                                     <li class="is-marked">
                                         
                                         <a href="${pageContext.request.contextPath}/shopkeeper/sales_statistics">Sales statistics</a></li>
@@ -278,26 +282,22 @@
                                     <div class="dash__box dash__box--bg-white dash__box--shadow u-s-m-b-30">
                                         <div class="dash__pad-1">
 
-                                            <span class="dash__text u-s-m-b-16">ABC STORE</span>
+                                            <span class="dash__text u-s-m-b-16">${supplier_name}</span>
                                             <ul class="dash__f-list">
                                                 <li>
 
-                                                    <a  href="${pageContext.request.contextPath}/shopkeeper/edit_profile">My Store Profile</a></li>
+                                                    <a  href="${pageContext.request.contextPath}/shopkeeper/">My Store Profile</a></li>
                                                 <li>
 
                                                     <a  href="${pageContext.request.contextPath}/shopkeeper/add_product">Add product</a></li>
-                                                <li>
 
-                                                    <a href="${pageContext.request.contextPath}/shopkeeper/add_promotion">Add promotion</a></li>
                                                 <li>
 
                                                     <a href="${pageContext.request.contextPath}/shopkeeper/update_price">Update price</a></li>
                                                 <li>
 
                                                     <a href="${pageContext.request.contextPath}/shopkeeper/order">Orders</a></li>
-                                                <li>
 
-                                                    <a href="${pageContext.request.contextPath}/shopkeeper/sales_diary">Sales diary</a></li>
                                                 <li>
 
                                                     <a class="dash-active" href="${pageContext.request.contextPath}/shopkeeper/sales_statistics">Sales statistics</a></li>
@@ -313,16 +313,22 @@
                                             <h1 class="dash__h1 u-s-m-b-14">Sales statistics</h1>
                                             <span class="dash__text u-s-m-b-30">Please choose type of sales statistics!</span>
                                            
-                                            <form class="dash-edit-p">
+                                            <form:form class="dash-edit-p" action="${pageContext.request.contextPath}/shopkeeper/sales_statistics_chart" method="get">
                                                 <div class="gl-inline">
                                                     <div class="u-s-m-b-30">
 
-                                                        <label class="gl-label" for="reg-sales-statistics">View by</label><select class="select-box select-box--primary-style u-w-100" id="category">
-                                                            <option selected>Select</option>
-                                                            <option value="sales-statistics-day">Day</option>
-                                                            <option value="sales-statistics-month">Month</option>
-                                                            <option value="sales-statistics-year">Year</option>
-                                                        </select></div>
+                                                        <label class="gl-label" for="reg-sales-statistics">View by</label>
+                                                        <%
+                                                            Calendar c = Calendar.getInstance();
+                                                            c.setTime(c.getTime());
+                                                        %>
+                                                        <select class="select-box select-box--primary-style u-w-100"  name="date_select" id="date_select" onchange="myFunction(this)">
+                                                            <option selected value="<%= c.get(Calendar.DAY_OF_MONTH)%>" >Day</option>
+                                                            <option  value="<%= c.get(Calendar.MONTH)+1%>"  >Month</option>
+                                                            <option  value="<%= c.get(Calendar.YEAR)%>"  >Year</option>
+                                                        </select>
+                                                        <input type="hidden" name="date_select_type" id="date_select_type">
+                                                    </div>
                                                     <div class="u-s-m-b-30"></div>
                                                 </div>
 
@@ -330,58 +336,20 @@
                                                 <div class="gl-inline">
                                                     <div class="u-s-m-b-30">
                                                         <span class="gl-label">From</span>
-                                                        <div class="gl-dob"><select class="select-box select-box--primary-style">
-                                                            <option selected>Day</option>
-                                                                <option value="day-01">01</option>
-                                                                <option value="day-02">02</option>
-                                                                <option value="day-03">03</option>
-                                                                <option value="day-04">04</option>
-                                                            </select>
-                                                            <select class="select-box select-box--primary-style">
-                                                                <option selected>Month</option>
-                                                                <option value="month-01">01</option>
-                                                                <option value="month-02">02</option>
-                                                                <option value="month-03">03</option>
-                                                                <option value="month-04">04</option>
-                                                            </select>
-                                                            <select class="select-box select-box--primary-style">
-                                                                <option selected>Year</option>
-                                                                <option value="2018">2018</option>
-                                                                <option value="2019">2019</option>
-                                                                <option value="2020">2020</option>
-                                                                <option value="2021">2021</option>
-                                                            </select>
+                                                        <div class="gl-dob">
+                                                            <input type="date"  name="date_from">
                                                         </div>
                                                     </div>
                                                     <div class="u-s-m-b-30">
                                                         <span class="gl-label">To</span>
-                                                        <div class="gl-dob"><select class="select-box select-box--primary-style">
-                                                            <option selected>Day</option>
-                                                                <option value="day-01">01</option>
-                                                                <option value="day-02">02</option>
-                                                                <option value="day-03">03</option>
-                                                                <option value="day-04">04</option>
-                                                            </select>
-                                                            <select class="select-box select-box--primary-style">
-                                                                <option selected>Month</option>
-                                                                <option value="month-01">01</option>
-                                                                <option value="month-02">02</option>
-                                                                <option value="month-03">03</option>
-                                                                <option value="month-04">04</option>
-                                                            </select>
-                                                            <select class="select-box select-box--primary-style">
-                                                                <option selected>Year</option>
-                                                                <option value="2018">2018</option>
-                                                                <option value="2019">2019</option>
-                                                                <option value="2020">2020</option>
-                                                                <option value="2021">2021</option>
-                                                            </select>
+                                                        <div class="gl-dob">
+                                                            <input type="date" name="date_to"/>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 
-                                                <button class="btn btn--e-brand-b-2" type="submit"><a href="${pageContext.request.contextPath}/shopkeeper/sales_statistics_chart">NEXT</a></button>
-                                            </form>              
+                                                <button class="btn btn--e-brand-b-2" type="submit">NEXT</button>
+                                            </form:form>
                                         </div>
                                     </div>
                                 </div>
@@ -443,7 +411,7 @@
                                             <ul>
                                                 <li>
 
-                                                    <a href="cart.html">Cart</a></li>
+                                                    <a href="${pageContext.request.contextPath}/cart/">Cart</a></li>
                                                 <li>
 
                                                     <a href="${pageContext.request.contextPath}/dashboard">Account</a></li>
@@ -582,8 +550,35 @@
         <!--====== Unsubscribe or Subscribe Newsletter ======-->
         <!--====== End - Modal Section ======-->
     </div>
-    <!--====== End - Main App ======-->
+    <script>
+        document.getElementById("sign-out-btt").onclick = function() {
+            <%HttpSession session1 = request.getSession();
+            session1.removeAttribute("url_prior_login");
+            %>
 
+
+            document.getElementById("sign-out-form").submit();
+        }
+    </script>
+    <!--====== End - Main App ======-->
+    <script>
+        function myFunction(selectObject){
+
+            // let tempOptions = document.getElementsByClassName("date_select_type")
+            let type = document.getElementById("date_select_type")
+            console.log(type.value)
+            console.log(selectObject.value)
+            console.log(selectObject)
+            if (selectObject.selectedIndex === 0){
+                type.value = 'day'
+            } else if (selectObject.selectedIndex === 1){
+                type.value = 'month'
+            } else{
+                type.value = 'year'
+            }
+            console.log(type)
+        }
+    </script>
 
     <!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
     <script>

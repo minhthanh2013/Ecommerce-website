@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -87,21 +90,18 @@
                                                 <a href="${pageContext.request.contextPath}/dashboard/"><i class="fas fa-user-circle u-s-m-r-6"></i>
 
                                                     <span>Account</span></a></li>
-                                            <li>
 
-                                                <a href="${pageContext.request.contextPath}/register/"><i class="fas fa-user-plus u-s-m-r-6"></i>
+                                            <form:form action="${pageContext.request.contextPath}/logout"
+                                                       method="post" id="sign-out-form">
+                                                <li>
 
-                                                    <span>Signup</span></a></li>
-                                            <li>
+                                                    <a id="sign-out-btt" href="#"><i class="fas fa-lock-open u-s-m-r-6 sign-out-btt-1"></i>
+                                                        <span>Signout</span></a>
+                                                        <%--                                                    <input type="submit" value="Logout" /><i class="fas fa-lock-open u-s-m-r-6"></i>--%>
+                                                        <%--                                                    <span>Signout</span></a></li>--%>
 
-                                                <a href="${pageContext.request.contextPath}/login"><i class="fas fa-lock u-s-m-r-6"></i>
-
-                                                    <span>Signin</span></a></li>
-                                            <li>
-
-                                                <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i>
-
-                                                    <span>Signout</span></a></li>
+                                                </li>
+                                            </form:form>
                                         </ul>
                                         <!--====== End - Dropdown ======-->
                                     </li>
@@ -279,26 +279,21 @@
                                     <div class="dash__box dash__box--bg-white dash__box--shadow u-s-m-b-30">
                                         <div class="dash__pad-1">
 
-                                            <span class="dash__text u-s-m-b-16">ABC STORE</span>
+                                            <span class="dash__text u-s-m-b-16">${supplier_name}</span>
                                             <ul class="dash__f-list">
                                                 <li>
 
-                                                    <a href="${pageContext.request.contextPath}/shopkeeper/edit_profile">My Store Profile</a></li>
+                                                    <a href="${pageContext.request.contextPath}/shopkeeper/">My Store Profile</a></li>
                                                 <li>
 
                                                     <a href="${pageContext.request.contextPath}/shopkeeper/add_product">Add product</a></li>
-                                                <li>
-
-                                                    <a href="${pageContext.request.contextPath}/shopkeeper/add_promotion">Add promotion</a></li>
                                                 <li>
 
                                                     <a href="${pageContext.request.contextPath}/shopkeeper/update_price">Update price</a></li>
                                                 <li>
 
                                                     <a class="dash-active" href="${pageContext.request.contextPath}/shopkeeper/order">Orders</a></li>
-                                                <li>
 
-                                                    <a href="${pageContext.request.contextPath}/shopkeeper/sales_diary">Sales diary</a></li>
                                                 <li>
 
                                                     <a  href="${pageContext.request.contextPath}/shopkeeper/sales_statistics">Sales statistics</a></li>
@@ -334,35 +329,47 @@
                                                     </table>
                                                 </div>
                                                 <br>    
-                                                <div class="gl-inline">
+                                                <div>
                                                     <table align="center" id="shopkeeper-order-table" style="border-collapse:collapse; border: 2px double gainsboro; width:100%">
-                                                        <tr align="center" style="border-bottom: 2px double gainsboro;">
+                                                        <thead align="center" style="border-bottom: 2px double gainsboro;">
                                                             <th>ID Order</th>
-                                                            <th>Product</th>
+
                                                             <th>Total money</th>
                                                             <th>Payment</th>
                                                             <th>Status</th>
                                                             <th>Delivery</th>
-                                                            <th>Doing</th>
-                                                        </tr>
-                                                        <tr align="center" style="border-bottom: 2px double gainsboro;">
-                                                            <td>0001102</td>
-                                                            <td>Aquafina<br>Sting<br>Pepsi</td>
-                                                            <td>152000 đ</td>
-                                                            <td>Cash</td>
-                                                            <td>To Ship</td>
-                                                            <td>NowShip</td>
-                                                            <td><button>To Receive</button></td>
-                                                        </tr>
-                                                        <tr align="center" style="border-bottom: 2px double gainsboro;">
-                                                            <td>0001105</td>
-                                                            <td>Apple<br>Banana<br>Coconut</td>
-                                                            <td>512000 đ</td>
-                                                            <td>ATM</td>
-                                                            <td>To Receive</td>
-                                                            <td>NowShip</td>
-                                                            <td><button>Completed</button></td>
-                                                        </tr>
+                                                            <th>Action</th>
+                                                        </thead>
+                                                        <tbody>
+                                                        <c:forEach var="order" items="${orderProductShopkeeperList}" varStatus="loop">
+                                                            <tr align="center" style="border-bottom: 2px double gainsboro;">
+                                                                <td>${order.idOrder}</td>
+
+                                                                <td>${order.vnTotalMoney}</td>
+                                                                <td>${order.paymentOption}</td>
+                                                                <td>${order.status}</td>
+                                                                <td>${order.shippingCompany.nameSCompany}</td>
+                                                                <form:form action="${pageContext.request.contextPath}/shopkeeper/order" method="post">
+
+                                                                    <input value="${order.idOrder}" type="hidden" name="idOrder"/>
+                                                                <c:if test="${order.status == 'confirming'}">
+                                                                    <input value="shipping" type="hidden" name="status"/>
+                                                                    <td><button class="action-btt" type="submit">shipping</button></td>
+                                                                </c:if>
+                                                                <c:if test="${order.status == 'shipping'}">
+
+                                                                    <input value="complete" type="hidden" name="status"/>
+                                                                    <td><button class="action-btt" type="submit">complete</button></td>
+                                                                </c:if>
+                                                                <c:if test="${order.status == 'complete'}">
+                                                                    <td><button class="action-btt" type="button" disabled>complete</button></td>
+                                                                </c:if>
+
+                                                                </form:form>
+                                                            </tr>
+                                                        </c:forEach>
+                                                        </tbody>
+
                                                     </table>
                                                 </div>        
                                                 
@@ -428,7 +435,7 @@
                                             <ul>
                                                 <li>
 
-                                                    <a href="cart.html">Cart</a></li>
+                                                    <a href="${pageContext.request.contextPath}/cart/">Cart</a></li>
                                                 <li>
 
                                                     <a href="${pageContext.request.contextPath}/dashboard/">Account</a></li>
@@ -551,7 +558,7 @@
 
                                 <span class="gl-modal-text">I have read and understood</span>
 
-                                <a class="d_modal__link" href="${pageContext.request.contextPath}/dashboard/edit_profile">Ludus Privacy Policy</a>
+                                <a class="d_modal__link" href="${pageContext.request.contextPath}/dashboard/">Ludus Privacy Policy</a>
                             </div>
                             <div class="gl-modal-btn-group">
 
@@ -569,6 +576,16 @@
     </div>
     <!--====== End - Main App ======-->
 
+    <script>
+        document.getElementById("sign-out-btt").onclick = function() {
+            <%HttpSession session1 = request.getSession();
+            session1.removeAttribute("url_prior_login");
+            %>
+
+
+            document.getElementById("sign-out-form").submit();
+        }
+    </script>
 
     <!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
     <script>

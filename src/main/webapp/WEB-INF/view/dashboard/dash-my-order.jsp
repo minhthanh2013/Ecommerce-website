@@ -90,12 +90,17 @@
                                                 <a href="${pageContext.request.contextPath}/dashboard/"><i class="fas fa-user-circle u-s-m-r-6"></i>
 
                                                     <span>Account</span></a></li>
-                                            <security:authorize access="isAuthenticated()">
+                                            <form:form action="${pageContext.request.contextPath}/logout"
+                                                       method="post" id="sign-out-form">
                                                 <li>
 
-                                                    <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i><span>Signout</span></a>
+                                                    <a id="sign-out-btt" href="#"><i class="fas fa-lock-open u-s-m-r-6 sign-out-btt-1"></i>
+                                                        <span>Signout</span></a>
+                                                        <%--                                                    <input type="submit" value="Logout" /><i class="fas fa-lock-open u-s-m-r-6"></i>--%>
+                                                        <%--                                                    <span>Signout</span></a></li>--%>
+
                                                 </li>
-                                            </security:authorize>
+                                            </form:form>
                                         </ul>
                                         <!--====== End - Dropdown ======-->
                                     </li>
@@ -1125,13 +1130,13 @@
                                             </li>
                                             <li>
 
-                                                <a href="cart.html">Cart</a></li>
+                                                <a href="${pageContext.request.contextPath}/cart/">Cart</a></li>
                                             <li>
 
                                                 <a href="wishlist.html">Wishlist</a></li>
                                             <li>
 
-                                                <a href="checkout.html">Checkout</a></li>
+                                                <a href="${pageContext.request.contextPath}/checkout/">Checkout</a></li>
                                             <li>
 
                                                 <a href="faq.html">FAQ</a></li>
@@ -1192,7 +1197,7 @@
 
                             <button class="btn btn--icon toggle-button fas fa-shopping-bag toggle-button-shop" type="button"></button>
 
-                            <span class="total-item-round">2</span>
+                            <span class="total-item-round">${total_amount}</span>
 
                             <!--====== Menu ======-->
                             <div class="ah-lg-mode">
@@ -1211,7 +1216,7 @@
 
                                         <a class="mini-cart-shop-link"><i class="fas fa-shopping-bag"></i>
 
-                                            <span class="total-item-round">2</span></a>
+                                            <span class="total-item-round">${total_amount}</span></a>
 
                                         <!--====== Dropdown ======-->
 
@@ -1241,7 +1246,7 @@
 
                                                                 <span class="mini-product__quantity">${cart_product.amount} x</span>
 
-                                                                <span class="mini-product__price">${cart_product.total_money} VNĐ</span></div>
+                                                                <span class="mini-product__price">${cart_product.vnTotalMoney}</span></div>
                                                         </div>
 
                                                         <a class="mini-product__delete-link far fa-trash-alt"></a>
@@ -1257,12 +1262,12 @@
 
                                                     <span class="subtotal-text">SUBTOTAL</span>
 
-                                                    <span class="subtotal-value">${cart_product_total} VNĐ</span></div>
+                                                    <span class="subtotal-value">${cart_product_total}</span></div>
                                                 <div class="mini-action">
 
-                                                    <a class="mini-link btn--e-brand-b-2" href="checkout.html">PROCEED TO CHECKOUT</a>
+                                                    <a class="mini-link btn--e-brand-b-2" href="${pageContext.request.contextPath}/checkout/">PROCEED TO CHECKOUT</a>
 
-                                                    <a class="mini-link btn--e-transparent-secondary-b-2" href="cart.html">VIEW CART</a></div>
+                                                    <a class="mini-link btn--e-transparent-secondary-b-2" href="${pageContext.request.contextPath}/cart/">VIEW CART</a></div>
                                             </div>
                                             <!--====== End - Mini Product Statistics ======-->
                                         </div>
@@ -1394,13 +1399,46 @@
                                             <form class="m-order u-s-m-b-30">
                                                 <div class="m-order__select-wrapper">
 
-                                                    <label class="u-s-m-r-8" for="my-order-sort">Show:</label><select class="select-box select-box--primary-style" id="my-order-sort">
-                                                        <option selected>Last 5 orders</option>
-                                                        <option>Last 15 days</option>
-                                                        <option>Last 30 days</option>
-                                                        <option>Last 6 months</option>
-                                                        <option>Orders placed in 2018</option>
-                                                        <option>All Orders</option>
+                                                    <label class="u-s-m-r-8" for="my-order-sort">Show:</label><select class="select-box select-box--primary-style" id="my-order-sort" onchange="changeItem(this);">
+
+
+                                                    <c:if test="${param.option =='5' }">
+                                                        <option selected  value="5">Last 5 orders</option>
+                                                    </c:if>
+                                                    <c:if test="${param.option != '5'}">
+                                                        <option  value="5">Last 5 orders</option>
+                                                    </c:if>
+                                                    <c:if test="${param.option =='15' }">
+                                                        <option selected value="15">Last 15 days</option>
+                                                    </c:if>
+                                                    <c:if test="${param.option != '15'}">
+                                                        <option value="15">Last 15 days</option>
+                                                    </c:if>
+                                                    <c:if test="${param.option =='30' }">
+                                                        <option selected value="30">Last 30 days</option>
+                                                    </c:if>
+                                                    <c:if test="${param.option != '30'}">
+                                                        <option value="30">Last 30 days</option>
+                                                    </c:if>
+                                                    <c:if test="${param.option =='6' }">
+                                                        <option selected value="6">Last 6 months</option>
+                                                    </c:if>
+                                                    <c:if test="${param.option != '6'}">
+                                                        <option value="6">Last 6 months</option>
+                                                    </c:if>
+                                                    <c:if test="${param.option =='2020' }">
+                                                        <option selected value="2020">Orders placed in 2020</option>
+                                                    </c:if>
+                                                    <c:if test="${param.option != '2020'}">
+                                                        <option value="2020">Orders placed in 2020</option>
+                                                    </c:if>
+                                                    <c:if test="${param.option == null || param.option == 'all'}">
+                                                        <option selected value="all">All Orders</option>
+                                                    </c:if>
+                                                    <c:if test="${param.option != null && param.option != 'all'}">
+                                                        <option value="all">All Orders</option>
+                                                    </c:if>
+
                                                     </select></div>
                                             </form>
                                             <div class="m-order__list">
@@ -1414,7 +1452,6 @@
                                                                 </div>
                                                                 <div>
                                                                     <div class="dash__link dash__link--brand">
-
                                                                         <a href="${pageContext.request.contextPath}/dashboard/manage_order?idOrder=${order.idOrder}">MANAGE</a></div>
                                                                 </div>
                                                             </div>
@@ -1444,7 +1481,22 @@
                                                         </div>
                                                     </div>
                                                 </c:forEach>
+                                                <ul class="shop-p__pagination">
+                                                    <c:forEach var="page1" items="${productListSize}">
+                                                        <c:if test="${param.page == page1}">
+                                                            <li class="is-active">
+                                                                <a href="${pageContext.request.contextPath}/dashboard/my_order?page=${page1}&option=${param.option}">${page1+1}</a>
+                                                            </li>
+                                                        </c:if>
+                                                        <c:if test="${param.page != page1}">
+                                                            <li>
+                                                                <a href="${pageContext.request.contextPath}/dashboard/my_order?page=${page1}&option=${param.option}">${page1+1}</a>
+                                                            </li>
+                                                        </c:if>
+                                                    </c:forEach>
 
+
+                                                </ul>
 
                                             </div>
                                         </div>
@@ -1510,7 +1562,7 @@
                                             <ul>
                                                 <li>
 
-                                                    <a href="cart.html">Cart</a></li>
+                                                    <a href="${pageContext.request.contextPath}/cart/">Cart</a></li>
                                                 <li>
 
                                                     <a href="${pageContext.request.contextPath}/dashboard/">Account</a></li>
@@ -1622,6 +1674,33 @@
     <!--====== End - Main App ======-->
 
 
+    <script>
+        function changeItem(e){
+            if (e.value === "5"){
+                location.href = "${pageContext.request.contextPath}/dashboard/my_order?option=5&page=0"
+            } else if (e.value === "6" ){
+                location.href = "${pageContext.request.contextPath}/dashboard/my_order?option=6&page=0"
+            } else if (e.value === "15"){
+                location.href = "${pageContext.request.contextPath}/dashboard/my_order?option=15&page=0"
+            }else if (e.value === "30"){
+                location.href = "${pageContext.request.contextPath}/dashboard/my_order?option=30&page=0"
+            }else if (e.value === "2020"){
+                location.href = "${pageContext.request.contextPath}/dashboard/my_order?option=2020&page=0"
+            } else {
+                location.href = "${pageContext.request.contextPath}/dashboard/my_order?option=all&page=0"
+            }
+
+
+        }
+        document.getElementById("sign-out-btt").onclick = function() {
+            <%HttpSession session1 = request.getSession();
+            session1.removeAttribute("url_prior_login");
+            %>
+
+
+            document.getElementById("sign-out-form").submit();
+        }
+    </script>
     <!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
     <script>
         window.ga = function() {

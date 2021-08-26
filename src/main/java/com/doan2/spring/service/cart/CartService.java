@@ -13,6 +13,12 @@ public interface CartService {
 	Cart getCart(int theId);
 
 	 void deleteCart(int theId);
+	 void deleteAll(List<Cart>cartList);
 	List<Cart> getCartsByCustomerOrderId(int cusId, int orderId);
 	List<Cart> getListCartNotCheckOut(int idCus);
+
+    void updateListCart(List<Cart> cartList);
+	Cart getListCartByIdProduct(int idProduct);
+	List<Integer> getLatestIdCart();
+	List<Cart> getLastTwoCarts();
 }

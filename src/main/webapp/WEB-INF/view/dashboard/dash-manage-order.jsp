@@ -98,12 +98,17 @@
 <%--                                                        <span>Signout</span></a>--%>
 <%--                                                </li>--%>
 <%--                                            </form:form>--%>
-                                            <security:authorize access="isAuthenticated()">
+                                            <form:form action="${pageContext.request.contextPath}/logout"
+                                                       method="post" id="sign-out-form">
                                                 <li>
 
-                                                    <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i><span>Signout</span></a>
+                                                    <a id="sign-out-btt" href="#"><i class="fas fa-lock-open u-s-m-r-6 sign-out-btt-1"></i>
+                                                        <span>Signout</span></a>
+                                                        <%--                                                    <input type="submit" value="Logout" /><i class="fas fa-lock-open u-s-m-r-6"></i>--%>
+                                                        <%--                                                    <span>Signout</span></a></li>--%>
+
                                                 </li>
-                                            </security:authorize>
+                                            </form:form>
                                         </ul>
                                         <!--====== End - Dropdown ======-->
                                     </li>
@@ -1133,7 +1138,7 @@
                                             </li>
                                             <li>
 
-                                                <a href="cart.html">Cart</a></li>
+                                                <a href="${pageContext.request.contextPath}/cart/">Cart</a></li>
                                             <li>
 
                                                 <a href="wishlist.html">Wishlist</a></li>
@@ -1200,7 +1205,7 @@
 
                             <button class="btn btn--icon toggle-button fas fa-shopping-bag toggle-button-shop" type="button"></button>
 
-                            <span class="total-item-round">2</span>
+                            <span class="total-item-round">${total_amount}</span>
 
                             <!--====== Menu ======-->
                             <div class="ah-lg-mode">
@@ -1219,7 +1224,7 @@
 
                                         <a class="mini-cart-shop-link"><i class="fas fa-shopping-bag"></i>
 
-                                            <span class="total-item-round">2</span></a>
+                                            <span class="total-item-round">${total_amount}</span></a>
 
                                         <!--====== Dropdown ======-->
 
@@ -1250,7 +1255,7 @@
 
                                                                 <span class="mini-product__quantity">${cart_product.amount} x</span>
 
-                                                                <span class="mini-product__price">${cart_product.total_money} VNĐ</span></div>
+                                                                <span class="mini-product__price">${cart_product.vnTotalMoney}</span></div>
                                                         </div>
 
                                                         <a class="mini-product__delete-link far fa-trash-alt"></a>
@@ -1267,12 +1272,12 @@
 
                                                     <span class="subtotal-text">SUBTOTAL</span>
 
-                                                    <span class="subtotal-value">${cart_product_total} VNĐ</span></div>
+                                                    <span class="subtotal-value">${cart_product_total}</span></div>
                                                 <div class="mini-action">
 
                                                     <a class="mini-link btn--e-brand-b-2" href="checkout.html">PROCEED TO CHECKOUT</a>
 
-                                                    <a class="mini-link btn--e-transparent-secondary-b-2" href="cart.html">VIEW CART</a></div>
+                                                    <a class="mini-link btn--e-transparent-secondary-b-2" href="${pageContext.request.contextPath}/cart/">VIEW CART</a></div>
                                             </div>
                                             <!--====== End - Mini Product Statistics ======-->
                                         </div>
@@ -1334,11 +1339,11 @@
                                     <div class="dash__box dash__box--bg-white dash__box--shadow u-s-m-b-30">
                                         <div class="dash__pad-1">
 
-                                            <span class="dash__text u-s-m-b-16">Hello, John Doe</span>
+                                            <span class="dash__text u-s-m-b-16">Hello, ${user_full_name}</span>
                                             <ul class="dash__f-list">
                                                 <li>
 
-                                                    <a class="dash-active" href="${pageContext.request.contextPath}/dashboard/">Manage My Account</a></li>
+                                                    <a  href="${pageContext.request.contextPath}/dashboard/">Manage My Account</a></li>
                                                 <li>
 
                                                     <a href="${pageContext.request.contextPath}/dashboard/my_profile">My Profile</a></li>
@@ -1350,7 +1355,7 @@
                                                     <a href="${pageContext.request.contextPath}/dashboard/track_order">Track Order</a></li>
                                                 <li>
 
-                                                    <a href="${pageContext.request.contextPath}/dashboard/my_order">My Orders</a></li>
+                                                    <a class="dash-active" href="${pageContext.request.contextPath}/dashboard/my_order">My Orders</a></li>
                                                 <li>
 
                                                     <a href="${pageContext.request.contextPath}/dashboard/payment_option">My Payment Options</a></li>
@@ -1368,7 +1373,7 @@
 
                                                         <span class="dash__w-icon dash__w-icon-style-1"><i class="fas fa-cart-arrow-down"></i></span>
 
-                                                        <span class="dash__w-text">4</span>
+                                                        <span class="dash__w-text">${orders_placed}</span>
 
                                                         <span class="dash__w-name">Orders Placed</span></div>
                                                 </li>
@@ -1407,7 +1412,7 @@
                                                 <div>
                                                     <div class="manage-o__text-2 u-c-silver">Total:
 
-                                                        <span class="manage-o__text-2 u-c-secondary">${order_total_money} VNĐ</span></div>
+                                                        <span class="manage-o__text-2 u-c-secondary">${order_total_money}</span></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1439,16 +1444,28 @@
                                                         </div>
                                                         <div class="col-lg-4 u-s-m-b-30">
                                                             <div class="timeline-step">
+                                                                <c:if test="${order_status >= 1}">
                                                                 <div class="timeline-l-i timeline-l-i--finish">
+                                                                    </c:if>
+                                                                    <c:if test="${order_status < 1}">
+                                                                    <div class="timeline-l-i">
+                                                                        </c:if>
+<%--                                                                <div class="timeline-l-i timeline-l-i--finish">--%>
 
                                                                     <span class="timeline-circle"></span></div>
 
-                                                                <span class="timeline-text">Shipped</span>
+                                                                <span class="timeline-text">Shipping</span>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-4 u-s-m-b-30">
                                                             <div class="timeline-step">
-                                                                <div class="timeline-l-i">
+                                                                <c:if test="${order_status == 2}">
+                                                                    <div class="timeline-l-i timeline-l-i--finish">
+                                                                </c:if>
+                                                                    <c:if test="${order_status != 2}">
+                                                                    <div class="timeline-l-i">
+                                                                        </c:if>
+
 
                                                                     <span class="timeline-circle"></span></div>
 
@@ -1489,6 +1506,18 @@
                                                         </div>
 
                                                     </div>
+                                                    <c:if test="${product.status <1}">
+                                                        <div class="description__info-wrap">
+
+                                                            <div>
+
+                                                                <div class="table-p__del-wrap">
+                                                                    <button class="far fa-trash-alt table-p__delete-link" href="#" type="button" onclick="delete_item(this);" value="${product.idCart}"></button></div>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </c:if>
 
                                                 </div>
                                                     <br>
@@ -1525,15 +1554,15 @@
                                                     <h2 class="dash__h2 u-s-m-b-8">Total Summary</h2>
                                                     <div class="dash-l-r u-s-m-b-8">
                                                         <div class="manage-o__text-2 u-c-secondary">Subtotal</div>
-                                                        <div class="manage-o__text-2 u-c-secondary">${order_total_money} VNĐ</div>
+                                                        <div class="manage-o__text-2 u-c-secondary">${order_total_money}</div>
                                                     </div>
                                                     <div class="dash-l-r u-s-m-b-8">
                                                         <div class="manage-o__text-2 u-c-secondary">Shipping Fee</div>
-                                                        <div class="manage-o__text-2 u-c-secondary">${shipping_fee} VNĐ</div>
+                                                        <div class="manage-o__text-2 u-c-secondary">${shipping_fee}</div>
                                                     </div>
                                                     <div class="dash-l-r u-s-m-b-8">
                                                         <div class="manage-o__text-2 u-c-secondary">Total</div>
-                                                        <div class="manage-o__text-2 u-c-secondary">${total_order_ship_fee} VNĐ</div>
+                                                        <div class="manage-o__text-2 u-c-secondary">${total_order_ship_fee} </div>
                                                     </div>
 
                                                     <span class="dash__text-2">Paid by Cash on Delivery</span>
@@ -1602,7 +1631,7 @@
                                             <ul>
                                                 <li>
 
-                                                    <a href="cart.html">Cart</a></li>
+                                                    <a href="${pageContext.request.contextPath}/cart/">Cart</a></li>
                                                 <li>
 
                                                     <a href="${pageContext.request.contextPath}/dashboard/">Account</a></li>
@@ -1711,6 +1740,7 @@
             </div>
         </footer>
     </div>
+    </div>
     <!--====== End - Main App ======-->
 
 
@@ -1723,6 +1753,17 @@
 
 
             document.getElementById("sign-out-form").submit();
+        }
+        function delete_item(e){
+            let idCart = e.value
+            console.log(idCart)
+            let url = "http://localhost:8080/doan2_new_war/api/cart/carts/delete-item/"+idCart
+            fetch(url, {
+                method :'GET'
+            }).then(res =>{
+                console.log(res.json())
+
+            }).then(()=> location.reload())
         }
     </script>
     <script>

@@ -1140,7 +1140,7 @@
                                             </li>
                                             <li>
 
-                                                <a href="cart.html">Cart</a></li>
+                                                <a href="${pageContext.request.contextPath}/cart/">Cart</a></li>
                                             <li>
 
                                                 <a href="wishlist.html">Wishlist</a></li>
@@ -1207,7 +1207,7 @@
 
                             <button class="btn btn--icon toggle-button fas fa-shopping-bag toggle-button-shop" type="button"></button>
 
-                            <span class="total-item-round">2</span>
+                            <span class="total-item-round">${total_amount}</span>
 
                             <!--====== Menu ======-->
                             <div class="ah-lg-mode">
@@ -1226,7 +1226,7 @@
 
                                         <a class="mini-cart-shop-link"><i class="fas fa-shopping-bag"></i>
 
-                                            <span class="total-item-round">2</span></a>
+                                            <span class="total-item-round">${total_amount}</span></a>
 
                                         <!--====== Dropdown ======-->
 
@@ -1242,14 +1242,14 @@
                                                     <div class="mini-product">
                                                         <div class="mini-product__image-wrapper">
 
-                                                            <a class="mini-product__link" href="product-detail.html">
+                                                            <a class="mini-product__link" href="${pageContext.request.contextPath}/product/product_detail?id=${cart_product.idProduct}">
 
                                                                 <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/electronic/product3.jpg" alt=""></a></div>
                                                         <div class="mini-product__info-wrapper">
 
                                                             <span class="mini-product__category">
 
-                                                                <a href="shop-side-version-2.html">Electronics</a></span>
+                                                                <a href="shop-side-version-2.html">${cart_product.type}</a></span>
 
                                                             <span class="mini-product__name">
 
@@ -1257,7 +1257,7 @@
 
                                                             <span class="mini-product__quantity">${cart_product.amount} x</span>
 
-                                                            <span class="mini-product__price">${cart_product.total_money} VNĐ</span></div>
+                                                            <span class="mini-product__price">${cart_product.vnTotalMoney} </span></div>
                                                     </div>
 
                                                     <a class="mini-product__delete-link far fa-trash-alt"></a>
@@ -1279,12 +1279,12 @@
 
                                                     <span class="subtotal-text">SUBTOTAL</span>
 
-                                                    <span class="subtotal-value">${cart_product_total} VNĐ</span></div>
+                                                    <span class="subtotal-value">${cart_product_total} </span></div>
                                                 <div class="mini-action">
 
-                                                    <a class="mini-link btn--e-brand-b-2" href="checkout.html">PROCEED TO CHECKOUT</a>
+                                                    <a class="mini-link btn--e-brand-b-2" href="${pageContext.request.contextPath}/checkout/">PROCEED TO CHECKOUT</a>
 
-                                                    <a class="mini-link btn--e-transparent-secondary-b-2" href="cart.html">VIEW CART</a></div>
+                                                    <a class="mini-link btn--e-transparent-secondary-b-2" href="${pageContext.request.contextPath}/cart/">VIEW CART</a></div>
                                             </div>
                                             <!--====== End - Mini Product Statistics ======-->
                                         </div>
@@ -1490,7 +1490,7 @@
                                                         <td>
                                                             <div class="dash__table-total">
 
-                                                                <span>${order.totalMoney} VNĐ</span>
+                                                                <span>${order.totalMoney}đ</span>
                                                                 <div class="dash__link dash__link--brand">
 
                                                                     <a href="${pageContext.request.contextPath}/dashboard/manage_order?idOrder=${order.idOrder}">MANAGE</a></div>

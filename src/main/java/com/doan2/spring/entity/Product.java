@@ -1,9 +1,6 @@
 package com.doan2.spring.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Product")
@@ -76,14 +73,19 @@ public class Product {
         this.description = description;
     }
 
+//    @Override
+//    public String toString() {
+//        return "Product{" +
+//                "idProduct=" + idProduct +
+//                ", name='" + name + '\'' +
+//                ", idType=" + idType +
+//                ", price=" + price +
+//                ", description='" + description + '\'' +
+//                '}';
+//    }
+
     @Override
     public String toString() {
-        return "Product{" +
-                "idProduct=" + idProduct +
-                ", name='" + name + '\'' +
-                ", idType=" + idType +
-                ", price=" + price +
-                ", description='" + description + '\'' +
-                '}';
+        return name;
     }
 }

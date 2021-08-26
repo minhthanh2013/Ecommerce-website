@@ -14,7 +14,7 @@ public class Cart {
     @Column(name = "idProduct")
     private int idProduct;
     @Column(name = "idOrder")
-    private int idOrder;
+    private Integer  idOrder;
     @Column(name = "price")
     private int price;
     @Column(name = "amount")
@@ -64,11 +64,11 @@ public class Cart {
         this.idProduct = idProduct;
     }
 
-    public int getIdOrder() {
+    public Integer  getIdOrder() {
         return idOrder;
     }
 
-    public void setIdOrder(int idOrder) {
+    public void setIdOrder(Integer  idOrder) {
         this.idOrder = idOrder;
     }
 

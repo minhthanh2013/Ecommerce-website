@@ -1,3 +1,9 @@
+<%@ page import="java.security.Security" %>
+<%@ page import="java.util.List" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -86,21 +92,18 @@
                                                 <a href="${pageContext.request.contextPath}/dashboard"><i class="fas fa-user-circle u-s-m-r-6"></i>
 
                                                     <span>Account</span></a></li>
-                                            <li>
 
-                                                <a href="${pageContext.request.contextPath}/register/"><i class="fas fa-user-plus u-s-m-r-6"></i>
+                                            <form:form action="${pageContext.request.contextPath}/logout"
+                                                       method="post" id="sign-out-form">
+                                                <li>
 
-                                                    <span>Signup</span></a></li>
-                                            <li>
+                                                    <a id="sign-out-btt" href="#"><i class="fas fa-lock-open u-s-m-r-6 sign-out-btt-1"></i>
+                                                        <span>Signout</span></a>
+                                                        <%--                                                    <input type="submit" value="Logout" /><i class="fas fa-lock-open u-s-m-r-6"></i>--%>
+                                                        <%--                                                    <span>Signout</span></a></li>--%>
 
-                                                <a href="${pageContext.request.contextPath}/login"><i class="fas fa-lock u-s-m-r-6"></i>
-
-                                                    <span>Signin</span></a></li>
-                                            <li>
-
-                                                <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i>
-
-                                                    <span>Signout</span></a></li>
+                                                </li>
+                                            </form:form>
                                         </ul>
                                         <!--====== End - Dropdown ======-->
                                     </li>
@@ -208,7 +211,7 @@
 
                                 <!--====== List ======-->
                                 <ul class="ah-list ah-list--design2 ah-list--link-color-secondary">
-                                    <li><a href="${pageContext.request.contextPath}/shopkeeper/edit_profile">DASHBOARD</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/shopkeeper/">DASHBOARD</a></li>
                                     <li><a href="#">PRODUCT</a></li>
                                     <li><a href="#">CATEGORY</a></li>
                                     <li><a href="#">PROMOTION</a></li>
@@ -251,7 +254,7 @@
                                         <a href="${pageContext.request.contextPath}/">Home</a></li>
                                     <li class="has-separator">
 
-                                        <a href="${pageContext.request.contextPath}/shopkeeper/edit_profile">My Store</a></li>
+                                        <a href="${pageContext.request.contextPath}/shopkeeper/">My Store</a></li>
                                     <li class="is-marked">
                                         
                                         <a href="${pageContext.request.contextPath}/shopkeeper/sales_statistics">Sales statistics</a></li>
@@ -278,26 +281,22 @@
                                     <div class="dash__box dash__box--bg-white dash__box--shadow u-s-m-b-30">
                                         <div class="dash__pad-1">
 
-                                            <span class="dash__text u-s-m-b-16">ABC STORE</span>
+                                            <span class="dash__text u-s-m-b-16">${supplier_name}</span>
                                             <ul class="dash__f-list">
                                                 <li>
 
-                                                    <a  href="${pageContext.request.contextPath}/shopkeeper/edit_profile">My Store Profile</a></li>
+                                                    <a  href="${pageContext.request.contextPath}/shopkeeper/">My Store Profile</a></li>
                                                 <li>
 
                                                     <a  href="${pageContext.request.contextPath}/shopkeeper/add_product">Add product</a></li>
-                                                <li>
 
-                                                    <a href="${pageContext.request.contextPath}/shopkeeper/add_promotion">Add promotion</a></li>
                                                 <li>
 
                                                     <a href="${pageContext.request.contextPath}/shopkeeper/update_price">Update price</a></li>
                                                 <li>
 
                                                     <a href="${pageContext.request.contextPath}/shopkeeper/order">Orders</a></li>
-                                                <li>
 
-                                                    <a href="${pageContext.request.contextPath}/shopkeeper/sales_diary">Sales diary</a></li>
                                                 <li>
 
                                                     <a class="dash-active" href="${pageContext.request.contextPath}/shopkeeper/sales_statistics">Sales statistics</a></li>
@@ -318,21 +317,22 @@
                                                     <br>
                                                     <table align="center" id="sales-statistics-table" style="border-collapse:collapse; border: 2px double gainsboro;">
                                                         <tr align="center" class="menu-sales-statistics">
-                                                            <th style="padding:10px">Tổng doanh thu</th>
-                                                            <th style="padding:10px">Tháng cao nhất</th>
-                                                            <th style="padding:10px">Tháng thấp nhất</th>
+                                                            <th style="padding:10px">Total Revenue</th>
+                                                            <th style="padding:10px">Highest Month</th>
+                                                            <th style="padding:10px">Lowest Month</th>
                                                         </tr>
                                                         <tr align="center" class="content-sales-statistics">
-                                                            <td style="padding:10px">2665000000 đ</td>
-                                                            <td style="padding:10px">Tháng 12</td>
-                                                            <td style="padding:10px">Tháng 4</td>
+                                                            <td style="padding:10px">${total}</td>
+                                                            <td style="padding:10px">${highest_month}</td>
+                                                            <td style="padding:10px">${lowest_month}</td>
                                                         </tr>
                                                     </table>
                                                 </div>
                                             </div>
                                            
                                             <form class="dash-edit-p">
-                                                <button class="btn btn--e-brand-b-2" type="submit" ><a href="${pageContext.request.contextPath}/shopkeeper/sales_statistics">BACK<a></button>
+                                                <button class="btn btn--e-brand-b-2" type="submit" ><a href="${pageContext.request.contextPath}/shopkeeper/sales_statistics">BACK</a>
+                                                </button>
                                             </form>     
                                         </div>
                                     </div>
@@ -396,7 +396,7 @@
                                             <ul>
                                                 <li>
 
-                                                    <a href="cart.html">Cart</a></li>
+                                                    <a href="${pageContext.request.contextPath}/cart/">Cart</a></li>
                                                 <li>
 
                                                     <a href="${pageContext.request.contextPath}/dashboard">Account</a></li>
@@ -576,6 +576,27 @@
         </div>
     </noscript>
     <script>
+        document.getElementById("sign-out-btt").onclick = function() {
+            <%HttpSession session1 = request.getSession();
+            session1.removeAttribute("url_prior_login");
+            %>
+
+
+            document.getElementById("sign-out-form").submit();
+        }
+    </script>
+    <script>
+        <%
+          String dayData = (String) request.getAttribute("dayData");
+          System.out.println("584 "+dayData);
+          %>
+
+        <%String listDay = (String) request.getAttribute("listDay");
+            System.out.println("588 "+listDay);
+        %>
+        let tmp =<%= listDay%>;
+        let tmp2 = <%=dayData%>;
+        console.log(tmp)
         let myChart = document.getElementById('myChart').getContext('2d');
         // Global Options
         Chart.defaults.global.defaultFontFamily = 'Lato';
@@ -585,11 +606,19 @@
         let massPopChart = new Chart(myChart, {
           type:'bar',
           data:{
-            labels:['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+<%--              <c:if test="${param.listDay != null}">--%>
+              labels: tmp
+              // labels:['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12']
+<%--              </c:if>--%>
+            // labels:['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12']
+
+              ,
             datasets:[{
               label:'Tổng tiền',
               data:
-              [ 180, 185, 220, 170, 200, 250, 260, 235, 275, 190, 200, 300],
+
+              tmp2,
+              // [ 180, 185, 220, 170, 200, 250, 260, 235, 275, 190, 200, 300],
 
               backgroundColor:'tomato',
               borderWidth:1,
@@ -601,7 +630,7 @@
           options:{
             title:{
               display:true,
-              text:'Bảng thống kê doanh thu từng tháng(triệu đồng)',
+              text:'Sale stats(Million VNĐ)',
               fontSize:25
             },
             legend:{

@@ -102,7 +102,7 @@
                                     <div class="dash__box dash__box--bg-white dash__box--shadow u-s-m-b-30">
                                         <div class="dash__pad-1">
 
-                                            <span class="dash__text u-s-m-b-16">Hello, --name--</span>
+                                            <span class="dash__text u-s-m-b-16">Hello, ${user_full_name}</span>
                                             <ul class="dash__f-list">
                                                 <li>
 
@@ -116,13 +116,11 @@
                                                 <li>
 
                                                     <a href="${pageContext.request.contextPath}/admin/partners" >Partners</a></li>
-                                                <li>
 
-                                                    <a href="${pageContext.request.contextPath}/admin/track-shop-order">Track Shop Order</a></li>
                                                 
                                                 <li>
 
-                                                    <a href="${pageContext.request.contextPath}/admin/shipping-company">Shipping</a></li>
+                                                    <a href="${pageContext.request.contextPath}/admin/shipping_company">Shipping</a></li>
                                                 
                                             </ul>
                                         </div>
@@ -172,28 +170,30 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                <c:forEach var="orderTradingShipping" items="${orderTradingShippingList}" >
+
 
                                                     <tr>
-                                                        <td>3054231326</td>
-                                                        <td>26/13/2016</td>
+                                                        <td>${orderTradingShipping.idOrder}</td>
+                                                        <td>${orderTradingShipping.date}</td>
                                                         <td>
                                                             <div class="dash__table-img-wrap">
 
                                                                 <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/electronic/product3.jpg" alt=""></div>
                                                         </td>
-                                                        <td>Giao hàng nhanh</td>
-                                                        <td>Momo</td>
+                                                        <td>${orderTradingShipping.nameSCompany}</td>
+                                                        <td>${orderTradingShipping.namePartner}</td>
                                                         <td>
                                                             <div class="dash__table-total">
 
-                                                                <span>$126.00</span>
+                                                                <span>${orderTradingShipping.totalMoney} VNĐ</span>
                                                                 <div class="dash__link dash__link--brand">
 
-                                                                    <a href="${pageContext.request.contextPath}/dashboard/manage_order">MANAGE</a></div>
+                                                                    <a href="${pageContext.request.contextPath}/dashboard/manage_order?idOrder=${orderTradingShipping.idOrder}">MANAGE</a></div>
                                                             </div>
                                                         </td>
                                                     </tr>
-
+                                                </c:forEach>
                                                 </tbody>
                                             </table>
                                         </div>

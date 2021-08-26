@@ -3,6 +3,7 @@ package com.doan2.spring.dao.cart;
 import java.util.List;
 
 import com.doan2.spring.entity.Cart;
+import com.doan2.spring.entity.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -97,6 +98,53 @@ public class CartDAOImpl implements CartDAO {
 		// execute query and get result list
 		List<Cart> carts = theQuery.getResultList();
 		return carts;
+	}
+
+	@Override
+	public void deleteAll(List<Cart> cartList) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		for (Cart listCarts:
+			 cartList) {
+			currentSession.delete(listCarts);
+		}
+	}
+
+	@Override
+	public void updateListCart(List<Cart> cartList) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		for (int i = 0; i < cartList.size(); i++) {
+			currentSession.update(cartList.get(i));
+		}
+	}
+
+	@Override
+	public Cart getListCartByIdProduct(int idProduct) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<Cart> theQuery =
+				currentSession.createQuery("from Cart where idProduct ="+idProduct,
+						Cart.class);
+		if (theQuery.setMaxResults(1).getResultList().size() != 0){
+			return theQuery.setMaxResults(1).getResultList().get(0);
+		}
+		return new Cart();
+	}
+
+	@Override
+	public List<Integer> getLatestIdCart() {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query theQuery = currentSession.createSQLQuery("select max(idCart) from Cart");
+
+		return theQuery.setMaxResults(1).getResultList();
+	}
+
+	@Override
+	public List<Cart> getLastTwoCarts() {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<Cart> theQuery =
+				currentSession.createQuery("from Cart order by idCart DESC",
+						Cart.class);
+		List<Cart> cartList = theQuery.setMaxResults(2).getResultList();
+		return cartList;
 	}
 
 }

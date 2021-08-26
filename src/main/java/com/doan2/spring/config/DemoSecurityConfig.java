@@ -46,17 +46,15 @@ public class DemoSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-//                .antMatchers("/api/**").hasRole("ADMIN")
-                .antMatchers("/dashboard/**").hasAnyRole("USER","MANAGER","ADMIN")
-                .antMatchers("/").hasAnyRole("USER","MANAGER","ADMIN")
-                .antMatchers("/leaders/**").hasRole("MANAGER")
+                .antMatchers("/dashboard/**").hasAnyRole("USER","SHOP","ADMIN")
+                .antMatchers("/").hasAnyRole("ANONYMOUS", "USER","SHOP","ADMIN")
+                .antMatchers("/product/**").hasAnyRole("ANONYMOUS", "USER","SHOP","ADMIN")
+                .antMatchers("/leaders/**").hasRole("SHOP")
                 .antMatchers("/systems/**").hasRole("ADMIN")
+                .antMatchers("/shopkeeper/**").hasRole("SHOP")
                 .antMatchers("/admin/**").hasRole("ADMIN")
-//                .antMatchers(HttpMethod.POST, "/api/products/**").hasAnyRole("ADMIN", "MANAGER")
-//                .antMatchers(HttpMethod.GET, "/api/product").permitAll()
-//                .antMatchers(HttpMethod.PUT, "/api/**").hasAnyRole("ADMIN", "MANAGER")
-//                .antMatchers(HttpMethod.DELETE, "/api/**").hasAnyRole("ADMIN", "MANAGER")
-
+                .antMatchers("/cart/**").hasAnyRole("USER","SHOP","ADMIN")
+                .antMatchers("/checkout/**").hasAnyRole("USER","SHOP","ADMIN")
                 .and()
 
                 .formLogin()

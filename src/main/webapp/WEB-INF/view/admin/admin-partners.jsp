@@ -46,7 +46,7 @@
 
                         <!--====== Main Logo ======-->
 
-                        <a class="main-logo" href="/">
+                        <a class="main-logo" href="${pageContext.request.contextPath}/">
 
                             <img src="${pageContext.request.contextPath}/resources/images/logo/logo-1.png" alt=""></a>
                         <!--====== End - Main Logo ======-->
@@ -78,10 +78,10 @@
                                 <ul class="breadcrumb__list">
                                     <li class="has-separator">
 
-                                        <a href="/admin/">Admin Dashboard</a></li>
+                                        <a href="${pageContext.request.contextPath}/admin/">Admin Dashboard</a></li>
                                     <li class="is-marked">
 
-                                        <a href="/admin/partners">Partners</a></li>
+                                        <a href="${pageContext.request.contextPath}/admin/partners">Partners</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -105,27 +105,24 @@
                                     <div class="dash__box dash__box--bg-white dash__box--shadow u-s-m-b-30">
                                         <div class="dash__pad-1">
 
-                                            <span class="dash__text u-s-m-b-16">Hello, - Name -</span>
+                                            <span class="dash__text u-s-m-b-16">Hello, ${user_full_name}</span>
                                             <ul class="dash__f-list">
                                                 <li>
 
-                                                    <a href="admin-dashboard.jsp">Admin Dashboard</a></li>
+                                                    <a href="${pageContext.request.contextPath}/admin/">Admin Dashboard</a></li>
                                                 <li>
 
-                                                    <a  href="admin-users.jsp">Users</a></li>
+                                                    <a  href="${pageContext.request.contextPath}/admin/users">Users</a></li>
                                                 <li>
 
-                                                    <a href="admin-suppliers.jsp" >Suppliers</a></li>
+                                                    <a href="${pageContext.request.contextPath}/admin/suppliers" >Suppliers</a></li>
                                                 <li>
 
-                                                    <a href="admin-partners.jsp" class="dash-active">Partners</a></li>
-                                                <li>
-
-                                                    <a href="admin-track-shop-order.jsp">Track Shop Order</a></li>
+                                                    <a href="${pageContext.request.contextPath}/admin/partners" class="dash-active">Partners</a></li>
                                                 
                                                 <li>
 
-                                                    <a href="admin-shipping-company.jsp">Shipping</a></li>
+                                                    <a href="${pageContext.request.contextPath}/admin/shipping_company">Shipping</a></li>
                                                 
                                             </ul>
                                         </div>
@@ -138,9 +135,9 @@
 
                                                         <span class="dash__w-icon dash__w-icon-style-1"><i class="fas fa-cart-arrow-down"></i></span>
 
-                                                        <span class="dash__w-text">10</span>
+                                                        <span class="dash__w-text">${total_partner}</span>
 
-                                                        <span class="dash__w-name">Tổng số đối tác</span></div>
+                                                        <span class="dash__w-name">Total Partners</span></div>
                                                 </li>
                                                
                                             </ul>
@@ -161,55 +158,53 @@
                                                 <table>
                                                     <thead>
                                                         <th>
-                                                          Tên đối tác
+                                                          Partner Name
                                                         </th>
                                                         <br><br>
                                                         <th>
-                                                            Tình trạng
+                                                            Status
                                                         </th>
                                                         <br><br>
                                                         <th>
-                                                            Tổng số tiền đã giao dịch
+                                                            Total Amount Traded
                                                         </th>
                                                        
                                                     
                                                     </thead>
                                                     <tbody>
+                                                    <tr>
                                                         <td>
-                                                           
+                                                            <c:if test="${param.id != null}">
+                                                           ${trading_partner_fr_id.namePartner}
+                                                            </c:if>
                                                         </td>
                                                         <td>
-                                                            
+                                                            <c:if test="${param.id != null}">
+                                                            Good
+                                                            </c:if>
                                                         </td>
                                                         <td>
-                                                           
+                                                            <c:if test="${param.id != null}">
+                                                           ${total_amount_traded} VNĐ
+                                                            </c:if>
                                                         </td>
+                                                    </tr>
                                                     </tbody>
                                                 </table>
                                                 <div class="dash__table">
                                                     <table>
                                                         <thead>
                                                             <th>
-                                                              Lựa chọn thao tác hàng loạt
-                                                            </th>
-                                                            <br><br>
-                                                            <br><br>
-                                                            <th>
-                                                                Tìm kiếm đối tác:
+                                                                Find Partner:
                                                             </th>
                                                         </thead>
                                                         <tbody>
                                                             <td>
-                                                                <select name="" id="">
-                                                                    <option value="delete">Xóa</option>
-                                                                    <option value="update">Sửa</option>
-                                                                </select>
-                                                                <input type="submit" value="Thay dôi">
-                                                            </td>
-                                                        
-                                                            <td>
-                                                                <input type="text">
-                                                                <input type="submit" value="Tìm kiếm">
+                                                                <form action="${pageContext.request.contextPath}/admin/partners">
+                                                                    <input type="text" name="name" value="">
+                                                                    <input type="submit" value="Search">
+                                                                </form>
+
                                                             </td>
                                                         </tbody>
                                                     </table>
@@ -221,59 +216,60 @@
                                     <div class="dash__box dash__box--shadow dash__box--bg-white dash__box--radius" 
                                     style="width: 1200px;"
                                     >
-                                        <h2 class="dash__h2 u-s-p-xy-20">DANH SÁCH ĐỐI TÁC</h2>
+
+                                        <div class="row">
+                                            <div class="col-lg-4 u-s-m-b-30">
+                                                <h2 class="dash__h2 u-s-p-xy-20">PARTNERS</h2>
+                                            </div>
+                                            <div class="col-lg-4 u-s-m-b-30">
+
+                                            </div>
+                                            <div class="col-lg-4 u-s-m-b-30">
+                                                <h2 class="dash__h2 u-s-p-xy-20">PAGE</h2>
+                                                <span class="tablenav-pages" style="align-self: center;">
+                                                    <c:forEach var="pageVal" items="${pageValList}">
+                                                        <c:choose>
+                                                            <c:when test="${param.page == pageVal}">
+                                                                <a href="${pageContext.request.contextPath}/admin/partners?page=${pageVal}" class="dash-active">${pageVal + 1}</a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <a href="${pageContext.request.contextPath}/admin/partners?page=${pageVal}" >${pageVal + 1}</a>
+                                                            </c:otherwise>
+                                                        </c:choose>
+
+                                                    </c:forEach>
+
+
+                                                </span>
+                                            </div>
+
+
+                                        </div>
+
                                         <div class="dash__table-wrap gl-scroll">
                                             <table class="dash__table">
                                                 <thead>
                                                     <tr>
-                                                        <th><input type="checkbox" id="checkbox_all"></th>
-                                                        <th>Tên đối tác</th>
-                                                        <th>Ngày hợp tác</th>
-                                                        <th>Phương thức giao dịch</th>
-                                                        <th>Số tài khoản</th>
-                                                       
-                                                       
+                                                        <th></th>
+                                                        <th>Partner Name</th>
+                                                        <th>Cooperation Date</th>
+                                                        <th>Account Number</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                <c:forEach var="partner" items="${partnerList}">
                                                     <tr>
-                                                        <td><input type="checkbox" class="checkbox_single"></td>
-                                                        <td>Momo</td>
-                                                        <td>1/7/2021</td>
-                                                        <td>Thanh toán momo</td>
-                                                        <td>123456789</td>
-                                                        
-                                                        
+                                                        <td><input type="checkbox" class="checkbox_single" onclick="function2()"></td>
+                                                        <td>${partner.namePartner}</td>
+                                                        <td>${partner.cooperationDate}</td>
+                                                        <td>${partner.tradingAccount}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" class="checkbox_single"></td>
-                                                        <td>BIDV</td>
-                                                        <td>1/1/2020</td>
-                                                        <td>Thanh toán thẻ tín dụng</td>
-                                                        <td>1234567022</td>
-                                                        
-                                                        
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" class="checkbox_single"></td>
-                                                        <td>BIDV</td>
-                                                        <td>1/1/2020</td>
-                                                        <td>Thanh toán thẻ tín dụng</td>
-                                                        <td>1234567022</td>
-                                                        
-                                                        
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" class="checkbox_single"></td>
-                                                        <td>BIDV</td>
-                                                        <td>1/1/2020</td>
-                                                        <td>Thanh toán thẻ tín dụng</td>
-                                                        <td>1234567022</td>
-                                                        
-                                                        
-                                                    </tr>
+                                                </c:forEach>
                                                 </tbody>
                                             </table>
+                                            <form action="${pageContext.request.contextPath}/admin/processId" id="form-123456">
+                                                <input type="hidden" value="" id="123456" name="id"/>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -340,13 +336,13 @@
                                                     <a href="cart.html">Cart</a></li>
                                                 <li>
 
-                                                    <a href="dashboard.html">Account</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/">Account</a></li>
                                                 <li>
 
                                                     <a href="shop-side-version-2.html">Manufacturer</a></li>
                                                 <li>
 
-                                                    <a href="dash-payment-option.html">Finance</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/payment_option">Finance</a></li>
                                                 <li>
 
                                                     <a href="shop-side-version-2.html">Shop</a></li>
@@ -368,10 +364,10 @@
                                                     <a href="contact.html">Contact Us</a></li>
                                                 <li>
 
-                                                    <a href="index.html">Sitemap</a></li>
+                                                    <a href="${pageContext.request.contextPath}/">Sitemap</a></li>
                                                 <li>
 
-                                                    <a href="dash-my-order.html">Delivery</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/my_order">Delivery</a></li>
                                                 <li>
 
                                                     <a href="shop-side-version-2.html">Store</a></li>
@@ -477,7 +473,30 @@
         <!--====== End - Modal Section ======-->
     </div>
     <!--====== End - Main App ======-->
+    <script>
+        function function2(){
+            var itemCheckBox = document.getElementsByClassName("checkbox_single");
+            for (let i = 0; i < itemCheckBox.length; i++) {
+                if (itemCheckBox[i].checked === true){
 
+                    var tempC = i + 1;
+                    document.getElementById("123456").value = tempC
+                    document.forms["form-123456"].submit()
+                    <%--var form = document.forms["form-123456"]["id"].value--%>
+                    <%--var http = new XMLHttpRequest();--%>
+                    <%--console.log(form)--%>
+                    <%--console.log("${pageContext.request.contextPath}/admin/processId")--%>
+                    <%--http.open("POST", "http://localhost:8080/doan2_new_war/admin/processId", true);--%>
+                    <%--http.setRequestHeader("Content-type","application/x-www-form-urlencoded");--%>
+                    <%--var params = "id=" + form; // probably use document.getElementById(...).value--%>
+                    <%--http.send(params);--%>
+                }
+
+            }
+        }
+
+
+    </script>
 
     <!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
     <script>

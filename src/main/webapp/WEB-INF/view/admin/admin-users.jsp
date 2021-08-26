@@ -46,7 +46,7 @@
 
                         <!--====== Main Logo ======-->
 
-                        <a class="main-logo" href="index.html">
+                        <a class="main-logo" href="${pageContext.request.contextPath}/">
 
                             <img src="${pageContext.request.contextPath}/resources/images/logo/logo-1.png" alt=""></a>
                         <!--====== End - Main Logo ======-->
@@ -78,10 +78,10 @@
                                 <ul class="breadcrumb__list">
                                     <li class="has-separator">
 
-                                        <a href="admin-dashboard.jsp">Admin Dashboard</a></li>
+                                        <a href="${pageContext.request.contextPath}/admin/">Admin Dashboard</a></li>
                                     <li class="is-marked">
 
-                                        <a href="admin-users.jsp">Users</a></li>
+                                        <a href="${pageContext.request.contextPath}/admin/users">Users</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -105,27 +105,25 @@
                                     <div class="dash__box dash__box--bg-white dash__box--shadow u-s-m-b-30">
                                         <div class="dash__pad-1">
 
-                                            <span class="dash__text u-s-m-b-16">Hello, - Name -</span>
+                                            <span class="dash__text u-s-m-b-16">Hello, ${user_full_name}</span>
                                             <ul class="dash__f-list">
                                                 <li>
 
-                                                    <a href="admin-dashboard.jsp">Admin Dashboard</a></li>
+                                                    <a href="${pageContext.request.contextPath}/admin/">Admin Dashboard</a></li>
                                                 <li>
 
-                                                    <a class="dash-active" href="admin-users.jsp">Users</a></li>
+                                                    <a class="dash-active" href="${pageContext.request.contextPath}/admin/users">Users</a></li>
                                                     <li>
 
-                                                        <a href="admin-suppliers.jsp">Suppliers</a></li>
+                                                        <a href="${pageContext.request.contextPath}/admin/suppliers">Suppliers</a></li>
                                                     <li>
     
-                                                        <a href="admin-partners.jsp" >Partners</a></li>
-                                                    <li>
-    
-                                                        <a href="admin-track-shop-order.jsp">Track Shop Order</a></li>
+                                                        <a href="${pageContext.request.contextPath}/admin/partners" >Partners</a></li>
+
                                                 
                                                 <li>
 
-                                                    <a href="admin-shipping-company.jsp">Shipping</a></li>
+                                                    <a href="${pageContext.request.contextPath}/admin/shipping_company">Shipping</a></li>
                                                 
                                             </ul>
                                         </div>
@@ -138,28 +136,11 @@
 
                                                         <span class="dash__w-icon dash__w-icon-style-1"><i class="fas fa-cart-arrow-down"></i></span>
 
-                                                        <span class="dash__w-text">10</span>
+                                                        <span class="dash__w-text">${customerList.size()}</span>
 
-                                                        <span class="dash__w-name">Số người dùng</span></div>
+                                                        <span class="dash__w-name">Total Users</span></div>
                                                 </li>
-                                                <li>
-                                                    <div class="dash__w-wrap">
 
-                                                        <span class="dash__w-icon dash__w-icon-style-2"><i class="fas fa-times"></i></span>
-
-                                                        <span class="dash__w-text">20</span>
-
-                                                        <span class="dash__w-name">Số chủ shop</span></div>
-                                                </li>
-                                                <li>
-                                                    <div class="dash__w-wrap">
-
-                                                        <span class="dash__w-icon dash__w-icon-style-3"><i class="far fa-heart"></i></span>
-
-                                                        <span class="dash__w-text">5</span>
-
-                                                        <span class="dash__w-name">Số Admin</span></div>
-                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -174,39 +155,48 @@
                                           
                                             <br><br>
                                             <div class="dash__table">
+                                                <c:if test="${check_update_success != null}">
+                                                    <div>
+                                                        <p style="color: green">${check_update_success}</p>
+                                                    </div>
+                                                </c:if>
+                                                <c:if test="${check_update_error != null}">
+                                                    <div>
+                                                        <p style="color: red">${check_update_error}</p>
+                                                    </div>
+                                                </c:if>
+
                                                 <table>
                                                     <thead>
+                                                        <br><br>
                                                         <th>
-                                                          Lựa chọn thao tác hàng loạt
+                                                            Change role(s) to
                                                         </th>
                                                         <br><br>
                                                         <th>
-                                                            Đổi thành
-                                                        </th>
-                                                        <br><br>
-                                                        <th>
-                                                            Tìm Kiếm Người Dùng:
+                                                            Find user(s):
                                                         </th>
                                                     </thead>
                                                     <tbody>
+
                                                         <td>
-                                                            <select name="" id="">
-                                                                <option value="delete">Xóa</option>
-                                                                <option value="update">Sửa</option>
-                                                            </select>
-                                                            <input type="submit" value="Thay dôi">
+                                                            <form:form action="${pageContext.request.contextPath}/admin/users" method="post" id="form-role">
+                                                                <select name="role" id="role_setting">
+                                                                    <option value="ADMIN">Admin</option>
+                                                                    <option value="USER">User</option>
+                                                                    <option value="SHOP">Shop</option>
+                                                                </select>
+                                                                <input type="hidden" value="" name="phone" id="phone_val">
+                                                                <input type="submit" value="Change">
+                                                            </form:form>
+
                                                         </td>
                                                         <td>
-                                                            <select name="" id="">
-                                                                <option value="admin">Admin</option>
-                                                                <option value="user">Người dùng</option>
-                                                                <option value="show_owner">Chủ shop</option>
-                                                            </select>
-                                                            <input type="submit" value="Thay đổi">
-                                                        </td>
-                                                        <td>
-                                                           <input type="text">
-                                                            <input type="submit" value="Tìm kiếm">
+                                                            <form action="${pageContext.request.contextPath}/admin/users">
+                                                                <input type="text" name="name">
+                                                                <input type="submit" value="Search">
+                                                            </form>
+
                                                         </td>
                                                     </tbody>
                                                 </table>
@@ -221,20 +211,25 @@
                                         
                                         <div class="row">
                                             <div class="col-lg-4 u-s-m-b-30">
-                                                <h2 class="dash__h2 u-s-p-xy-20">NGƯỜI DÙNG</h2>
+                                                <h2 class="dash__h2 u-s-p-xy-20">USERS</h2>
                                             </div>
                                             <div class="col-lg-4 u-s-m-b-30">
                                                 
                                             </div>
                                             <div class="col-lg-4 u-s-m-b-30">
-                                                <h2 class="dash__h2 u-s-p-xy-20">TRANG</h2>
+                                                <h2 class="dash__h2 u-s-p-xy-20">PAGE</h2>
                                                 <span class="tablenav-pages" style="align-self: center;">
-                                                    <span class="dash-active">1</span>
-                                                   <span>2</span>
-                                                   <span>3</span>
-                                                   <span>4</span>
-                                                    
-                                                
+                                                    <c:forEach var="pageVal" items="${pageValList}">
+                                                        <c:choose>
+                                                            <c:when test="${param.page == pageVal}">
+                                                                <a href="${pageContext.request.contextPath}/admin/users?page=${pageVal}" class="dash-active">${pageVal + 1}</a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <a href="${pageContext.request.contextPath}/admin/users?page=${pageVal}" >${pageVal + 1}</a>
+                                                            </c:otherwise>
+                                                        </c:choose>
+
+                                                    </c:forEach>
                                                 </span>
                                             </div>
                                                 
@@ -247,54 +242,29 @@
                                             <table class="dash__table">
                                                 <thead>
                                                     <tr>
-                                                        <th><input type="checkbox" id="checkbox_all"></th>
-                                                        <th>Tên người dùng</th>
-                                                        <th>Họ và tên</th>
+                                                        <th></th>
+                                                        <th>Username</th>
+                                                        <th>Full name</th>
                                                         <th>Email</th>
-                                                        <th>Vai trò</th>
-                                                        <th>Số bài đánh giá</th>
-                                                        <th>Lần cuối đăng nhập</th>
+                                                        <th>Role</th>
+
+                                                        <th>Last login</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                <c:forEach var="customer" items="${customerList}">
                                                     <tr>
-                                                        <td><input type="checkbox" class="checkbox_single"></td>
-                                                        <td>nguyenvana2021</td>
-                                                        <td>Nguyễn Văn A</td>
-                                                        <td>nguyenvana@gmail.com</td>
-                                                        <td>Người dùng</td>
-                                                        <td>0</td>
-                                                        <td>25/7/2021</td>
+                                                        <td><input type="checkbox" class="checkbox_single" onclick="checkVal()"></td>
+                                                        <td class="customer_phone_val">${customer.phone}</td>
+                                                        <td>${customer.fullName}</td>
+                                                        <td>${customer.email}</td>
+                                                        <td class="customer_role_val">${customer.roles}</td>
+                                                        <td>${customer.lastLogin}</td>
                                                     </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" class="checkbox_single"></td>
-                                                        <td>nguyenvana2021</td>
-                                                        <td>Nguyễn Văn A</td>
-                                                        <td>nguyenvana@gmail.com</td>
-                                                        <td>Người dùng</td>
-                                                        <td>0</td>
-                                                        <td>25/7/2021</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" class="checkbox_single"></td>
-                                                        <td>nguyenvana2021</td>
-                                                        <td>Nguyễn Văn A</td>
-                                                        <td>nguyenvana@gmail.com</td>
-                                                        <td>Người dùng</td>
-                                                        <td>0</td>
-                                                        <td>25/7/2021</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" class="checkbox_single"></td>
-                                                        <td>nguyenvana2021</td>
-                                                        <td>Nguyễn Văn A</td>
-                                                        <td>nguyenvana@gmail.com</td>
-                                                        <td>Người dùng</td>
-                                                        <td>0</td>
-                                                        <td>25/7/2021</td>
-                                                    </tr>
+                                                </c:forEach>
                                                 </tbody>
                                             </table>
+
                                         </div>
                                     </div>
                                 </div>
@@ -389,7 +359,7 @@
                                                     <a href="contact.html">Contact Us</a></li>
                                                 <li>
 
-                                                    <a href="index.html">Sitemap</a></li>
+                                                    <a href="${pageContext.request.contextPath}/">Sitemap</a></li>
                                                 <li>
 
                                                     <a href="dash-my-order.html">Delivery</a></li>
@@ -447,7 +417,7 @@
 
                                     <span>Copyright © 2018</span>
 
-                                    <a href="index.html">Reshop</a>
+                                    <a href="${pageContext.request.contextPath}/">Reshop</a>
 
                                     <span>All Right Reserved</span></div>
                                 <div class="lower-footer__payment">
@@ -501,6 +471,51 @@
 
 
     <!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
+    <script>
+        function checkVal(){
+            var temp = document.getElementsByClassName("checkbox_single");
+            var form = document.forms["form-role"]
+            var temp2 = document.getElementsByClassName("customer_phone_val")
+            for (let i = 0; i < temp.length; i++) {
+                if (temp[i].checked === true){
+                    form["phone_val"].value = temp2[i].innerHTML
+                    i = temp.length
+                }
+            }
+            //form["phone_val"].value = temp2[this.in]
+        }
+        <%--function checkUpdateRole(){--%>
+        <%--    var temp = document.getElementsByClassName("checkbox_single");--%>
+        <%--    var temp1 = document.getElementsByClassName("customer_role_val");--%>
+        <%--    var temp2 = document.getElementsByClassName("customer_phone_val");--%>
+        <%--    let selectTag = document.getElementById("role_setting")--%>
+        <%--    var form = document.forms["form-role"]--%>
+        <%--    for (let i = 0; i < temp.length; i++) {--%>
+        <%--        if (temp[i].checked = true){--%>
+        <%--            let nameRole = temp1[i].innerHTML;--%>
+        <%--            let phone = temp2[i].innerHTML;--%>
+        <%--            form["phone_val"].value = phone;--%>
+
+        <%--            let valueSelect = selectTag.options[selectTag.selectedIndex].value--%>
+        <%--            var txt;--%>
+        <%--            var r = confirm("Do you want to change user's role of "+ phone +" from "+ nameRole +" to "+valueSelect);--%>
+        <%--            if (r == true) {--%>
+        <%--                let phone_val = form["phone_val"].value--%>
+        <%--                let role_val = valueSelect--%>
+        <%--                var http = new XMLHttpRequest();--%>
+        <%--                http.open("POST", "${pageContext.request.contextPath}/admin/processChangeRole", true);--%>
+        <%--                http.setRequestHeader("Content-type","application/x-www-form-urlencoded");--%>
+        <%--                var params = "phone=" + phone_val+"&role="+role_val; // probably use document.getElementById(...).value--%>
+        <%--                http.send(params);--%>
+
+        <%--            } else {--%>
+        <%--                txt = "Cancel";--%>
+        <%--            }--%>
+        <%--        }--%>
+        <%--    }--%>
+
+        <%--}--%>
+    </script>
     <script>
         window.ga = function() {
             ga.q.push(arguments)

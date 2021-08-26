@@ -44,5 +44,21 @@ public class CungCapDAOImpl implements CungCapDAO{
         currentSession.saveOrUpdate(cungCap);
     }
 
+    @Override
+    public int getInventoryByIdSup(int id) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        Query<CungCap> theQuery =
+                currentSession.createSQLQuery("select inventory from CungCap where idSup="+id);
+        return theQuery.getFirstResult();
+    }
+
+    @Override
+    public List<Integer> getAllIdProductByIdSup(int idSup) {
+        Session currentSession = sessionFactory.getCurrentSession();
+        Query<Integer> theQuery =
+                currentSession.createSQLQuery("select idProduct from CungCap where idSup="+idSup);
+        return theQuery.getResultList();
+    }
+
 
 }

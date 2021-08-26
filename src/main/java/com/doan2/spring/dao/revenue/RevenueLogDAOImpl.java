@@ -75,7 +75,7 @@ public class RevenueLogDAOImpl implements RevenueLogDAO{
     public List<RevenueLog> getRevenueLogByMonth(int month) {
         Session currentSession = sessionFactory.getCurrentSession();
         Query<RevenueLog> theQuery =
-                currentSession.createQuery("from RevenueLog where month(date) = "+month,
+                currentSession.createQuery("from RevenueLog where MONTH(date) = "+month,
                         RevenueLog.class);
         //Query<Order> query = currentSession.createSQLQuery("select * from ORDER where idCus ="+cusId);
         List<RevenueLog> orders = theQuery.getResultList();

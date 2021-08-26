@@ -90,12 +90,17 @@
                                                 <a href="${pageContext.request.contextPath}/dashboard/"><i class="fas fa-user-circle u-s-m-r-6"></i>
 
                                                     <span>Account</span></a></li>
-                                            <security:authorize access="isAuthenticated()">
+                                            <form:form action="${pageContext.request.contextPath}/logout"
+                                                       method="post" id="sign-out-form">
                                                 <li>
 
-                                                    <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i><span>Signout</span></a>
+                                                    <a id="sign-out-btt" href="#"><i class="fas fa-lock-open u-s-m-r-6 sign-out-btt-1"></i>
+                                                        <span>Signout</span></a>
+                                                        <%--                                                    <input type="submit" value="Logout" /><i class="fas fa-lock-open u-s-m-r-6"></i>--%>
+                                                        <%--                                                    <span>Signout</span></a></li>--%>
+
                                                 </li>
-                                            </security:authorize>
+                                            </form:form>
                                         </ul>
                                         <!--====== End - Dropdown ======-->
                                     </li>
@@ -1125,13 +1130,13 @@
                                             </li>
                                             <li>
 
-                                                <a href="cart.html">Cart</a></li>
+                                                <a href="${pageContext.request.contextPath}/cart/">Cart</a></li>
                                             <li>
 
                                                 <a href="wishlist.html">Wishlist</a></li>
                                             <li>
 
-                                                <a href="checkout.html">Checkout</a></li>
+                                                <a href="${pageContext.request.contextPath}/checkout/">Checkout</a></li>
                                             <li>
 
                                                 <a href="faq.html">FAQ</a></li>
@@ -1192,7 +1197,7 @@
 
                             <button class="btn btn--icon toggle-button fas fa-shopping-bag toggle-button-shop" type="button"></button>
 
-                            <span class="total-item-round">2</span>
+                            <span class="total-item-round">${total_amount}</span>
 
                             <!--====== Menu ======-->
                             <div class="ah-lg-mode">
@@ -1211,7 +1216,7 @@
 
                                         <a class="mini-cart-shop-link"><i class="fas fa-shopping-bag"></i>
 
-                                            <span class="total-item-round">2</span></a>
+                                            <span class="total-item-round">${total_amount}</span></a>
 
                                         <!--====== Dropdown ======-->
 
@@ -1226,22 +1231,22 @@
                                                         <div class="mini-product">
                                                             <div class="mini-product__image-wrapper">
 
-                                                                <a class="mini-product__link" href="product-detail.html">
+                                                                <a class="mini-product__link" href="${pageContext.request.contextPath}/product/product_detail?id=${cart_product.idProduct}">
 
                                                                     <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/electronic/product3.jpg" alt=""></a></div>
                                                             <div class="mini-product__info-wrapper">
 
                                                             <span class="mini-product__category">
 
-                                                                <a href="shop-side-version-2.html">Electronics</a></span>
+                                                                <a href="shop-side-version-2.html">${cart_product.type}</a></span>
 
                                                                 <span class="mini-product__name">
 
-                                                                <a href="product-detail.html">${cart_product.name}</a></span>
+                                                                <a href="${pageContext.request.contextPath}/product/product_detail?id=${cart_product.idProduct}">${cart_product.name}</a></span>
 
                                                                 <span class="mini-product__quantity">${cart_product.amount} x</span>
 
-                                                                <span class="mini-product__price">${cart_product.total_money} VNĐ</span></div>
+                                                                <span class="mini-product__price">${cart_product.vnTotalMoney}</span></div>
                                                         </div>
 
                                                         <a class="mini-product__delete-link far fa-trash-alt"></a>
@@ -1258,12 +1263,12 @@
 
                                                     <span class="subtotal-text">SUBTOTAL</span>
 
-                                                    <span class="subtotal-value">${cart_product_total} VNĐ</span></div>
+                                                    <span class="subtotal-value">${cart_product_total}</span></div>
                                                 <div class="mini-action">
 
-                                                    <a class="mini-link btn--e-brand-b-2" href="checkout.html">PROCEED TO CHECKOUT</a>
+                                                    <a class="mini-link btn--e-brand-b-2" href="${pageContext.request.contextPath}/checkout/">PROCEED TO CHECKOUT</a>
 
-                                                    <a class="mini-link btn--e-transparent-secondary-b-2" href="cart.html">VIEW CART</a></div>
+                                                    <a class="mini-link btn--e-transparent-secondary-b-2" href="${pageContext.request.contextPath}/cart/">VIEW CART</a></div>
                                             </div>
                                             <!--====== End - Mini Product Statistics ======-->
                                         </div>
@@ -1501,7 +1506,7 @@
                                             <ul>
                                                 <li>
 
-                                                    <a href="cart.html">Cart</a></li>
+                                                    <a href="${pageContext.request.contextPath}/cart/">Cart</a></li>
                                                 <li>
 
                                                     <a href="${pageContext.request.contextPath}/dashboard/">Account</a></li>
@@ -1641,7 +1646,16 @@
         <!--====== End - Modal Section ======-->
     </div>
     <!--====== End - Main App ======-->
+    <script>
+        document.getElementById("sign-out-btt").onclick = function() {
+            <%HttpSession session1 = request.getSession();
+            session1.removeAttribute("url_prior_login");
+            %>
 
+
+            document.getElementById("sign-out-form").submit();
+        }
+    </script>
 
     <!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
     <script>

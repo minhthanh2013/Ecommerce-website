@@ -3,6 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
 <html class="no-js" lang="en">
@@ -31,6 +32,7 @@
 <body class="config">
 <%
     Product product = (Product) request.getAttribute("product");
+    System.out.println(product);
     CungCap cungCap = (CungCap) request.getAttribute("cungcap");
 %>
 
@@ -1114,7 +1116,7 @@
                                                 <ul style="width:200px">
                                                     <li>
 
-                                                        <a href="shop-grid-left.html">Shop Grid Left Sidebar</a></li>
+                                                        <a href="product.jsp">Shop Grid Left Sidebar</a></li>
                                                     <li>
 
                                                         <a href="shop-grid-right.html">Shop Grid Right Sidebar</a></li>
@@ -1149,13 +1151,13 @@
                                             </li>
                                             <li>
 
-                                                <a href="cart.html">Cart</a></li>
+                                                <a href="${pageContext.request.contextPath}/cart/">Cart</a></li>
                                             <li>
 
                                                 <a href="wishlist.html">Wishlist</a></li>
                                             <li>
 
-                                                <a href="checkout.html">Checkout</a></li>
+                                                <a href="${pageContext.request.contextPath}/checkout/">Checkout</a></li>
                                             <li>
 
                                                 <a href="faq.html">FAQ</a></li>
@@ -1216,7 +1218,7 @@
 
                             <button class="btn btn--icon toggle-button fas fa-shopping-bag toggle-button-shop" type="button"></button>
 
-                            <span class="total-item-round">2</span>
+                            <span class="total-item-round">${total_amount}</span>
 
                             <!--====== Menu ======-->
                             <div class="ah-lg-mode">
@@ -1235,7 +1237,7 @@
 
                                         <a class="mini-cart-shop-link"><i class="fas fa-shopping-bag"></i>
 
-                                            <span class="total-item-round">2</span></a>
+                                            <span class="total-item-round">${total_amount}</span></a>
 
                                         <!--====== Dropdown ======-->
 
@@ -1268,7 +1270,7 @@
 
                                                                 <span class="mini-product__quantity">${cart_product.amount} x</span>
 
-                                                                <span class="mini-product__price">${cart_product.total_money} VNĐ</span></div>
+                                                                <span class="mini-product__price">${cart_product.vnTotalMoney} </span></div>
                                                         </div>
 
                                                         <a class="mini-product__delete-link far fa-trash-alt"></a>
@@ -1285,12 +1287,12 @@
 
                                                     <span class="subtotal-text">SUBTOTAL</span>
 
-                                                    <span class="subtotal-value">${cart_product_total} VNĐ</span></div>
+                                                    <span class="subtotal-value">${cart_product_total}</span></div>
                                                 <div class="mini-action">
 
-                                                    <a class="mini-link btn--e-brand-b-2" href="checkout.html">PROCEED TO CHECKOUT</a>
+                                                    <a class="mini-link btn--e-brand-b-2" href="${pageContext.request.contextPath}/checkout/">PROCEED TO CHECKOUT</a>
 
-                                                    <a class="mini-link btn--e-transparent-secondary-b-2" href="cart.html">VIEW CART</a></div>
+                                                    <a class="mini-link btn--e-transparent-secondary-b-2" href="${pageContext.request.contextPath}/cart/">VIEW CART</a></div>
                                             </div>
                                             <!--====== End - Mini Product Statistics ======-->
                                         </div>
@@ -1538,8 +1540,12 @@
                                                 <!--====== End - Input Counter ======-->
                                             </div>
                                             <div class="u-s-m-b-15">
-
-                                                <button class="btn btn--e-brand-b-2" type="submit">Add to Cart</button></div>
+                                                <security:authorize access="isAnonymous()">
+                                                    <button class="btn btn--e-brand-b-2" type="button" onclick="clickBttRedirect();">Add to Cart</button></div>
+                                                </security:authorize>
+                                            <security:authorize access="isAuthenticated()">
+                                                <button class="btn btn--e-brand-b-2" type="button" onclick="clickBtt();">Add to Cart</button></div>
+                                        </security:authorize>
                                         </div>
                                     </form>
                                 </div>
@@ -2278,7 +2284,7 @@
                                             <ul>
                                                 <li>
 
-                                                    <a href="cart.html">Cart</a></li>
+                                                    <a href="${pageContext.request.contextPath}/cart/">Cart</a></li>
                                                 <li>
 
                                                     <a href="dashboard.html">Account</a></li>
@@ -2532,7 +2538,7 @@
                                         </ul>
                                     </div>
                                     <div class="u-s-m-b-15">
-                                        <form class="pd-detail__form">
+                                        <form:form class="pd-detail__form" action="${pageContext.request.contextPath}/product/post"  modelAttribute="cartAttribute" id="addCartForm" method="post">
                                             <div class="pd-detail-inline-2">
                                                 <div class="u-s-m-b-15">
 
@@ -2541,16 +2547,16 @@
 
                                                         <span class="input-counter__minus fas fa-minus"></span>
 
-                                                        <input class="input-counter__text input-counter--text-primary-style" type="text" value="1" data-min="1" data-max="1000">
-
+                                                        <form:input class="input-counter__text input-counter--text-primary-style" type="text" value="1" data-min="1" data-max="1000" path="amount"/>
+                                                        <form:hidden path="idProduct" value="<%=product.getIdProduct()%>"/>
                                                         <span class="input-counter__plus fas fa-plus"></span></div>
                                                     <!--====== End - Input Counter ======-->
                                                 </div>
                                                 <div class="u-s-m-b-15">
 
-                                                    <button class="btn btn--e-brand-b-2" type="submit">Add to Cart</button></div>
+                                                    <button class="btn btn--e-brand-b-2" id="addToCartBtt" type="button" onclick="clickBtt();">Add to Cart</button></div>
                                             </div>
-                                        </form>
+                                        </form:form>
                                     </div>
                                     <div class="u-s-m-b-15">
 
@@ -2611,9 +2617,9 @@
 
                                         <a class="s-option__link btn--e-white-brand-shadow" data-dismiss="modal">CONTINUE SHOPPING</a>
 
-                                        <a class="s-option__link btn--e-white-brand-shadow" href="cart.html">VIEW CART</a>
+                                        <a class="s-option__link btn--e-white-brand-shadow" href="${pageContext.request.contextPath}/cart/">VIEW CART</a>
 
-                                        <a class="s-option__link btn--e-brand-shadow" href="checkout.html">PROCEED TO CHECKOUT</a></div>
+                                        <a class="s-option__link btn--e-brand-shadow" href="${pageContext.request.contextPath}/checkout/">PROCEED TO CHECKOUT</a></div>
                                 </div>
                             </div>
                         </div>
@@ -2625,7 +2631,14 @@
         <!--====== End - Modal Section ======-->
     </div>
     <!--====== End - Main App ======-->
-
+<script>
+    function clickBtt(){
+        document.getElementById("addCartForm").submit()
+    }
+    function clickBttRedirect(){
+        location.href = "${pageContext.request.contextPath}/login"
+    }
+</script>
 
     <!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
     <script>

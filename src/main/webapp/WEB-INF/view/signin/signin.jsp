@@ -46,7 +46,7 @@
 
                         <!--====== Main Logo ======-->
 
-                        <a class="main-logo" href="index.html">
+                        <a class="main-logo" href="${pageContext.request.contextPath}/">
 
                             <img src="${pageContext.request.contextPath}/resources/images/logo/logo-1.png" alt=""></a>
                         <!--====== End - Main Logo ======-->
@@ -95,12 +95,12 @@
                                                     <span>Signup</span></a></li>
                                             <li>
 
-                                                <a href="${pageContext.request.contextPath}/signin"><i class="fas fa-lock u-s-m-r-6"></i>
+                                                <a href="${pageContext.request.contextPath}/login"><i class="fas fa-lock u-s-m-r-6"></i>
 
                                                     <span>Signin</span></a></li>
                                             <li>
 
-                                                <a href="${pageContext.request.contextPath}/signup"><i class="fas fa-lock-open u-s-m-r-6"></i>
+                                                <a href="${pageContext.request.contextPath}/register/"><i class="fas fa-lock-open u-s-m-r-6"></i>
 
                                                     <span>Signout</span></a></li>
                                         </ul>
@@ -975,10 +975,10 @@
                                                 <ul style="width:200px">
                                                     <li>
 
-                                                        <a href="signin.jsp">Signin / Already Registered</a></li>
+                                                        <a href="${pageContext.request.contextPath}/login">Signin / Already Registered</a></li>
                                                     <li>
 
-                                                        <a href="signup.jsp">Signup / Register</a></li>
+                                                        <a href="${pageContext.request.contextPath}/register/">Signup / Register</a></li>
                                                     <li>
 
                                                         <a href="lost-password.html">Lost Password</a></li>
@@ -987,7 +987,7 @@
                                             </li>
                                             <li class="has-dropdown has-dropdown--ul-left-100">
 
-                                                <a href="dashboard.html">Dashboard<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
+                                                <a href="${pageContext.request.contextPath}/dashboard/">Dashboard<i class="fas fa-angle-down i-state-right u-s-m-l-6"></i></a>
 
                                                 <!--====== Dropdown ======-->
 
@@ -1038,16 +1038,16 @@
                                                     </li>
                                                     <li>
 
-                                                        <a href="dash-track-order.html">Track Order</a></li>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/track_order">Track Order</a></li>
                                                     <li>
 
-                                                        <a href="dash-my-order.html">My Orders</a></li>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/my_order">My Orders</a></li>
                                                     <li>
 
-                                                        <a href="dash-payment-option.html">My Payment Options</a></li>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/payment_option">My Payment Options</a></li>
                                                     <li>
 
-                                                        <a href="dash-cancellation.html">My Returns & Cancellations</a></li>
+                                                        <a href="${pageContext.request.contextPath}/dashboard/cancellation">My Returns & Cancellations</a></li>
                                                 </ul>
                                                 <!--====== End - Dropdown ======-->
                                             </li>
@@ -1214,7 +1214,7 @@
                                 <ul class="ah-list ah-list--design1 ah-list--link-color-secondary">
                                     <li>
 
-                                        <a href="index.html"><i class="fas fa-home"></i></a></li>
+                                        <a href="${pageContext.request.contextPath}/"><i class="fas fa-home"></i></a></li>
                                     <li>
 
                                         <a href="wishlist.html"><i class="far fa-heart"></i></a></li>
@@ -1392,10 +1392,10 @@
                                 <ul class="breadcrumb__list">
                                     <li class="has-separator">
 
-                                        <a href="index.html">Home</a></li>
+                                        <a href="${pageContext.request.contextPath}/">Home</a></li>
                                     <li class="is-marked">
 
-                                        <a href="signin.jsp">Signin</a></li>
+                                        <a href="${pageContext.request.contextPath}/login">Signin</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -1482,7 +1482,7 @@
 
                                                     <label class="gl-label" for="login-password">PASSWORD *</label>
 
-                                                    <input class="input-text input-text--primary-style" type="text" id="login-password" placeholder="Enter Password" name="password"></div>
+                                                    <input class="input-text input-text--primary-style" type="password" id="login-password" placeholder="Enter Password" name="password"></div>
                                                 <div class="gl-inline">
                                                     <div class="u-s-m-b-30">
 

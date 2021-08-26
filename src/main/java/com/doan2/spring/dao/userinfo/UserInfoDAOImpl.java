@@ -51,7 +51,7 @@ public class UserInfoDAOImpl extends JdbcDaoSupport implements UserInfoDAO {
     public int getLatestUserId(){
         Session currentSession = sessionFactory.getCurrentSession();
         Query query = currentSession.createSQLQuery("select max(id) from users");
-       return (int) query.getSingleResult();
+       return (int) query.setMaxResults(1).getResultList().get(0);
     }
     @Override
     public void addUserInfo(UserInfo userInfo){

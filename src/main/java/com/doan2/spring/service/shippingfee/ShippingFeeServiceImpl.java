@@ -2,7 +2,11 @@ package com.doan2.spring.service.shippingfee;
 
 import com.doan2.spring.dao.shippingfee.ShippingFeeDAO;
 import com.doan2.spring.entity.ShippingFee;
+import com.doan2.spring.entity.TradingPartner;
+import com.doan2.spring.repository.PartnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +15,7 @@ import java.util.List;
 public class ShippingFeeServiceImpl implements ShippingFeeService{
     @Autowired
     ShippingFeeDAO shippingFeeDAO;
+
     @Transactional
     @Override
     public List<ShippingFee> getShippingFee() {
@@ -31,4 +36,6 @@ public class ShippingFeeServiceImpl implements ShippingFeeService{
     public void deleteShippingFee(int theId) {
         shippingFeeDAO.deleteShippingFee(theId);
     }
+
+
 }

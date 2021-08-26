@@ -1,3 +1,8 @@
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -43,7 +48,7 @@
 
                         <!--====== Main Logo ======-->
 
-                        <a class="main-logo" href="index.html">
+                        <a class="main-logo" href="${pageContext.request.contextPath}/">
 
                             <img src="${pageContext.request.contextPath}/resources/images/logo/logo-1.png" alt=""></a>
                         <!--====== End - Main Logo ======-->
@@ -85,21 +90,18 @@
                                                 <a href="${pageContext.request.contextPath}/dashboard/"><i class="fas fa-user-circle u-s-m-r-6"></i>
 
                                                     <span>Account</span></a></li>
-                                            <li>
 
-                                                <a href="${pageContext.request.contextPath}/register/"><i class="fas fa-user-plus u-s-m-r-6"></i>
+                                            <form:form action="${pageContext.request.contextPath}/logout"
+                                                       method="post" id="sign-out-form">
+                                                <li>
 
-                                                    <span>Signup</span></a></li>
-                                            <li>
+                                                    <a id="sign-out-btt" href="#"><i class="fas fa-lock-open u-s-m-r-6"></i>
+                                                        <span>Signout</span></a>
+                                                        <%--                                                    <input type="submit" value="Logout" /><i class="fas fa-lock-open u-s-m-r-6"></i>--%>
+                                                        <%--                                                    <span>Signout</span></a></li>--%>
 
-                                                <a href="${pageContext.request.contextPath}/login"><i class="fas fa-lock u-s-m-r-6"></i>
-
-                                                    <span>Signin</span></a></li>
-                                            <li>
-
-                                                <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i>
-
-                                                    <span>Signout</span></a></li>
+                                                </li>
+                                            </form:form>
                                         </ul>
                                         <!--====== End - Dropdown ======-->
                                     </li>
@@ -229,7 +231,7 @@
                                                             <span class="js-menu-toggle"></span></li>
                                                         <li>
 
-                                                            <a href="index.html"><i class="fas fa-utensils u-s-m-r-6"></i>
+                                                            <a href="${pageContext.request.contextPath}/"><i class="fas fa-utensils u-s-m-r-6"></i>
 
                                                                 <span>Food & Supplies</span></a>
 
@@ -952,7 +954,7 @@
                                                 <ul style="width:118px">
                                                     <li>
 
-                                                        <a href="index.html">Home 1</a></li>
+                                                        <a href="${pageContext.request.contextPath}/">Home 1</a></li>
                                                     <li>
 
                                                         <a href="index-2.html">Home 2</a></li>
@@ -1139,7 +1141,7 @@
                                                 <a href="wishlist.html">Wishlist</a></li>
                                             <li>
 
-                                                <a href="checkout.html">Checkout</a></li>
+                                                <a href="${pageContext.request.contextPath}/checkout/">Checkout</a></li>
                                             <li>
 
                                                 <a href="faq.html">FAQ</a></li>
@@ -1200,7 +1202,7 @@
 
                             <button class="btn btn--icon toggle-button fas fa-shopping-bag toggle-button-shop" type="button"></button>
 
-                            <span class="total-item-round">2</span>
+                            <span class="total-item-round">${total_amount}</span>
 
                             <!--====== Menu ======-->
                             <div class="ah-lg-mode">
@@ -1219,7 +1221,7 @@
 
                                         <a class="mini-cart-shop-link"><i class="fas fa-shopping-bag"></i>
 
-                                            <span class="total-item-round">2</span></a>
+                                            <span class="total-item-round">${total_amount}</span></a>
 
                                         <!--====== Dropdown ======-->
 
@@ -1230,115 +1232,32 @@
                                             <div class="mini-product-container gl-scroll u-s-m-b-15">
 
                                                 <!--====== Card for mini cart ======-->
-                                                <div class="card-mini-product">
-                                                    <div class="mini-product">
-                                                        <div class="mini-product__image-wrapper">
+                                                <c:forEach var="cart_product" items="${cart_product_list}">
+                                                    <div class="card-mini-product">
+                                                        <div class="mini-product">
+                                                            <div class="mini-product__image-wrapper">
 
-                                                            <a class="mini-product__link" href="product-detail.html">
+                                                                <a class="mini-product__link" href="${pageContext.request.contextPath}/product/product_detail?id=${cart_product.idProduct}">
 
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/electronic/product3.jpg" alt=""></a></div>
-                                                        <div class="mini-product__info-wrapper">
-
-                                                            <span class="mini-product__category">
-
-                                                                <a href="shop-side-version-2.html">Electronics</a></span>
-
-                                                            <span class="mini-product__name">
-
-                                                                <a href="product-detail.html">Yellow Wireless Headphone</a></span>
-
-                                                            <span class="mini-product__quantity">1 x</span>
-
-                                                            <span class="mini-product__price">$8</span></div>
-                                                    </div>
-
-                                                    <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                                </div>
-                                                <!--====== End - Card for mini cart ======-->
-
-
-                                                <!--====== Card for mini cart ======-->
-                                                <div class="card-mini-product">
-                                                    <div class="mini-product">
-                                                        <div class="mini-product__image-wrapper">
-
-                                                            <a class="mini-product__link" href="product-detail.html">
-
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/electronic/product18.jpg" alt=""></a></div>
-                                                        <div class="mini-product__info-wrapper">
+                                                                    <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/electronic/product3.jpg" alt=""></a></div>
+                                                            <div class="mini-product__info-wrapper">
 
                                                             <span class="mini-product__category">
 
-                                                                <a href="shop-side-version-2.html">Electronics</a></span>
+                                                                <a href="shop-side-version-2.html">${cart_product.type}</a></span>
 
-                                                            <span class="mini-product__name">
+                                                                <span class="mini-product__name">
 
-                                                                <a href="product-detail.html">Nikon DSLR Camera 4k</a></span>
+                                                                <a href="product-detail.html">${cart_product.name}</a></span>
 
-                                                            <span class="mini-product__quantity">1 x</span>
+                                                                <span class="mini-product__quantity">${cart_product.amount} x</span>
 
-                                                            <span class="mini-product__price">$8</span></div>
+                                                                <span class="mini-product__price">${cart_product.vnTotalMoney} </span></div>
+                                                        </div>
+
+                                                        <a class="mini-product__delete-link far fa-trash-alt"></a>
                                                     </div>
-
-                                                    <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                                </div>
-                                                <!--====== End - Card for mini cart ======-->
-
-
-                                                <!--====== Card for mini cart ======-->
-                                                <div class="card-mini-product">
-                                                    <div class="mini-product">
-                                                        <div class="mini-product__image-wrapper">
-
-                                                            <a class="mini-product__link" href="product-detail.html">
-
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/women/product8.jpg" alt=""></a></div>
-                                                        <div class="mini-product__info-wrapper">
-
-                                                            <span class="mini-product__category">
-
-                                                                <a href="shop-side-version-2.html">Women Clothing</a></span>
-
-                                                            <span class="mini-product__name">
-
-                                                                <a href="product-detail.html">New Dress D Nice Elegant</a></span>
-
-                                                            <span class="mini-product__quantity">1 x</span>
-
-                                                            <span class="mini-product__price">$8</span></div>
-                                                    </div>
-
-                                                    <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                                </div>
-                                                <!--====== End - Card for mini cart ======-->
-
-
-                                                <!--====== Card for mini cart ======-->
-                                                <div class="card-mini-product">
-                                                    <div class="mini-product">
-                                                        <div class="mini-product__image-wrapper">
-
-                                                            <a class="mini-product__link" href="product-detail.html">
-
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/men/product8.jpg" alt=""></a></div>
-                                                        <div class="mini-product__info-wrapper">
-
-                                                            <span class="mini-product__category">
-
-                                                                <a href="shop-side-version-2.html">Men Clothing</a></span>
-
-                                                            <span class="mini-product__name">
-
-                                                                <a href="product-detail.html">New Fashion D Nice Elegant</a></span>
-
-                                                            <span class="mini-product__quantity">1 x</span>
-
-                                                            <span class="mini-product__price">$8</span></div>
-                                                    </div>
-
-                                                    <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                                </div>
-                                                <!--====== End - Card for mini cart ======-->
+                                                </c:forEach>
                                             </div>
                                             <!--====== End - Mini Product Container ======-->
 
@@ -1349,10 +1268,10 @@
 
                                                     <span class="subtotal-text">SUBTOTAL</span>
 
-                                                    <span class="subtotal-value">$16</span></div>
+                                                    <span class="subtotal-value">${cart_product_total}</span></div>
                                                 <div class="mini-action">
 
-                                                    <a class="mini-link btn--e-brand-b-2" href="checkout.html">PROCEED TO CHECKOUT</a>
+                                                    <a class="mini-link btn--e-brand-b-2" href="${pageContext.request.contextPath}/checkout/">PROCEED TO CHECKOUT</a>
 
                                                     <a class="mini-link btn--e-transparent-secondary-b-2" href="${pageContext.request.contextPath}/cart">VIEW CART</a></div>
                                             </div>
@@ -1428,9 +1347,12 @@
                                 <div class="table-responsive">
                                     <table class="table-p">
                                         <tbody>
+                                       <c:forEach var="cart" items="${cartProductList}">
+
 
                                             <!--====== Row ======-->
                                             <tr>
+
                                                 <td>
                                                     <div class="table-p__box">
                                                         <div class="table-p__img-wrap">
@@ -1440,25 +1362,18 @@
 
                                                             <span class="table-p__name">
 
-                                                                <a href="product-detail.html">Yellow Wireless Headphone</a></span>
+                                                                <a href="product-detail.html">${cart.name}</a></span>
 
                                                             <span class="table-p__category">
 
-                                                                <a href="shop-side-version-2.html">Electronics</a></span>
-                                                            <ul class="table-p__variant-list">
-                                                                <li>
+                                                                <a href="shop-side-version-2.html">${cart.type}</a></span>
 
-                                                                    <span>Size: 22</span></li>
-                                                                <li>
-
-                                                                    <span>Color: Red</span></li>
-                                                            </ul>
                                                         </div>
                                                     </div>
                                                 </td>
                                                 <td>
 
-                                                    <span class="table-p__price">$125.00</span></td>
+                                                    <span class="table-p__price">${cart.vnTotalMoney}</span></td>
                                                 <td>
                                                     <div class="table-p__input-counter-wrap">
 
@@ -1467,7 +1382,7 @@
 
                                                             <span class="input-counter__minus fas fa-minus"></span>
 
-                                                            <input class="input-counter__text input-counter--text-primary-style" type="text" value="1" data-min="1" data-max="1000">
+                                                            <input class="input-counter__text input-counter--text-primary-style" type="text" value="${cart.amount}" data-min="1" data-max="1000">
 
                                                             <span class="input-counter__plus fas fa-plus"></span></div>
                                                         <!--====== End - Input Counter ======-->
@@ -1475,117 +1390,13 @@
                                                 </td>
                                                 <td>
                                                     <div class="table-p__del-wrap">
-
-                                                        <a class="far fa-trash-alt table-p__delete-link" href="#"></a></div>
+                                                        <button class="far fa-trash-alt table-p__delete-link" href="#" type="button" onclick="delete_item(this);" value="${cart.idCart}"></button></div>
                                                 </td>
                                             </tr>
+                                        </c:forEach>
                                             <!--====== End - Row ======-->
 
 
-                                            <!--====== Row ======-->
-                                            <tr>
-                                                <td>
-                                                    <div class="table-p__box">
-                                                        <div class="table-p__img-wrap">
-
-                                                            <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/women/product8.jpg" alt=""></div>
-                                                        <div class="table-p__info">
-
-                                                            <span class="table-p__name">
-
-                                                                <a href="product-detail.html">New Dress D Nice Elegant</a></span>
-
-                                                            <span class="table-p__category">
-
-                                                                <a href="shop-side-version-2.html">Women Clothing</a></span>
-                                                            <ul class="table-p__variant-list">
-                                                                <li>
-
-                                                                    <span>Size: 22</span></li>
-                                                                <li>
-
-                                                                    <span>Color: Red</span></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-
-                                                    <span class="table-p__price">$125.00</span></td>
-                                                <td>
-                                                    <div class="table-p__input-counter-wrap">
-
-                                                        <!--====== Input Counter ======-->
-                                                        <div class="input-counter">
-
-                                                            <span class="input-counter__minus fas fa-minus"></span>
-
-                                                            <input class="input-counter__text input-counter--text-primary-style" type="text" value="1" data-min="1" data-max="1000">
-
-                                                            <span class="input-counter__plus fas fa-plus"></span></div>
-                                                        <!--====== End - Input Counter ======-->
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="table-p__del-wrap">
-
-                                                        <a class="far fa-trash-alt table-p__delete-link" href="#"></a></div>
-                                                </td>
-                                            </tr>
-                                            <!--====== End - Row ======-->
-
-
-                                            <!--====== Row ======-->
-                                            <tr>
-                                                <td>
-                                                    <div class="table-p__box">
-                                                        <div class="table-p__img-wrap">
-
-                                                            <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/men/product8.jpg" alt=""></div>
-                                                        <div class="table-p__info">
-
-                                                            <span class="table-p__name">
-
-                                                                <a href="product-detail.html">New Fashion D Nice Elegant</a></span>
-
-                                                            <span class="table-p__category">
-
-                                                                <a href="shop-side-version-2.html">Men Clothing</a></span>
-                                                            <ul class="table-p__variant-list">
-                                                                <li>
-
-                                                                    <span>Size: 22</span></li>
-                                                                <li>
-
-                                                                    <span>Color: Red</span></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>
-
-                                                    <span class="table-p__price">$125.00</span></td>
-                                                <td>
-                                                    <div class="table-p__input-counter-wrap">
-
-                                                        <!--====== Input Counter ======-->
-                                                        <div class="input-counter">
-
-                                                            <span class="input-counter__minus fas fa-minus"></span>
-
-                                                            <input class="input-counter__text input-counter--text-primary-style" type="text" value="1" data-min="1" data-max="1000">
-
-                                                            <span class="input-counter__plus fas fa-plus"></span></div>
-                                                        <!--====== End - Input Counter ======-->
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <div class="table-p__del-wrap">
-
-                                                        <a class="far fa-trash-alt table-p__delete-link" href="#"></a></div>
-                                                </td>
-                                            </tr>
-                                            <!--====== End - Row ======-->
                                         </tbody>
                                     </table>
                                 </div>
@@ -1594,18 +1405,19 @@
                                 <div class="route-box">
                                     <div class="route-box__g1">
 
-                                        <a class="route-box__link" href="shop-side-version-2.html"><i class="fas fa-long-arrow-alt-left"></i>
+                                        <a class="route-box__link" href="${pageContext.request.contextPath}/"><i class="fas fa-long-arrow-alt-left"></i>
 
                                             <span>CONTINUE SHOPPING</span></a></div>
                                     <div class="route-box__g2">
 
-                                        <a class="route-box__link" href="cart.html"><i class="fas fa-trash"></i>
 
-                                            <span>CLEAR CART</span></a>
+                                        <button class="route-box__link" href="#" onclick="clearCart();" type="button"><i class="fas fa-trash"></i>
 
-                                        <a class="route-box__link" href="cart.html"><i class="fas fa-sync"></i>
+                                            <span>CLEAR CART</span></button>
 
-                                            <span>UPDATE CART</span></a></div>
+                                        <button class="route-box__link" href="#" onclick="updateCart();" type="button"><i class="fas fa-sync" ></i>
+
+                                            <span>UPDATE CART</span></button></div>
                                 </div>
                             </div>
                         </div>
@@ -1636,10 +1448,7 @@
                                                     <!--====== Select Box ======-->
 
                                                     <label class="gl-label" for="shipping-country">COUNTRY *</label><select class="select-box select-box--primary-style" id="shipping-country">
-                                                        <option selected value="">Choose Country</option>
-                                                        <option value="uae">United Arab Emirate (UAE)</option>
-                                                        <option value="uk">United Kingdom (UK)</option>
-                                                        <option value="us">United States (US)</option>
+                                                        <option value="vn">Viet Nam</option>
                                                     </select>
                                                     <!--====== End - Select Box ======-->
                                                 </div>
@@ -1648,21 +1457,19 @@
                                                     <!--====== Select Box ======-->
 
                                                     <label class="gl-label" for="shipping-state">STATE/PROVINCE *</label><select class="select-box select-box--primary-style" id="shipping-state">
-                                                        <option selected value="">Choose State/Province</option>
-                                                        <option value="al">Alabama</option>
-                                                        <option value="al">Alaska</option>
-                                                        <option value="ny">New York</option>
+                                                    <option selected value="">Choose State/Province</option>
+                                                    <option value="hcm">Ho Chi Minh</option>
+                                                    <option value="dn">Da Nang</option>
+                                                    <option value="hn">Ha Noi</option>
+                                                    <option value="bd">Binh Dinh</option>
                                                     </select>
                                                     <!--====== End - Select Box ======-->
                                                 </div>
+
+
                                                 <div class="u-s-m-b-30">
 
-                                                    <label class="gl-label" for="shipping-zip">ZIP/POSTAL CODE *</label>
-
-                                                    <input class="input-text input-text--primary-style" type="text" id="shipping-zip" placeholder="Zip/Postal Code"></div>
-                                                <div class="u-s-m-b-30">
-
-                                                    <a class="f-cart__ship-link btn--e-transparent-brand-b-2" href="cart.html">CALCULATE SHIPPING</a></div>
+                                                    <button class="f-cart__ship-link btn--e-transparent-brand-b-2" href="#" type="button" onclick="checkFee();">CALCULATE SHIPPING</button></div>
 
                                                 <span class="gl-text">Note: There are some countries where free shipping is available otherwise our flat rate charges or country delivery charges will be apply.</span>
                                             </div>
@@ -1684,26 +1491,22 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td>SHIPPING</td>
-                                                                <td>$4.00</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>TAX</td>
-                                                                <td>$0.00</td>
+                                                                <td id="shipping-fee-value">0 VND</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>SUBTOTAL</td>
-                                                                <td>$379.00</td>
+                                                                <td id="total-money">${total_money}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td>GRAND TOTAL</td>
-                                                                <td>$379.00</td>
+                                                                <td id="grand-total"> VND</td>
                                                             </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
                                                 <div>
 
-                                                    <button class="btn btn--e-brand-b-2" type="submit"> PROCEED TO CHECKOUT</button></div>
+                                                    <a class="btn btn--e-brand-b-2"  href="${pageContext.request.contextPath}/checkout/"> PROCEED TO CHECKOUT</a></div>
                                             </div>
                                         </div>
                                     </div>
@@ -1877,8 +1680,86 @@
             </div>
         </footer>
     </div>
-    <!--====== End - Main App ======-->
+    <script>
+        document.getElementById("sign-out-btt").onclick = function() {
+            <%HttpSession session1 = request.getSession();
+            session1.removeAttribute("url_prior_login");
+            %>
 
+
+            document.getElementById("sign-out-form").submit();
+        }
+    </script>
+    <!--====== End - Main App ======-->
+    <script>
+            function checkFee(){
+                let selectBtt1 = document.getElementById("shipping-country").value
+                let selectBtt2 = document.getElementById("shipping-state").value
+                let shippingFee = 0
+                if (selectBtt1 != "" && selectBtt2 != ""){
+                    if (selectBtt2==="hcm" || selectBtt2==="hn" || selectBtt2==="dn"){
+                        shippingFee = 30000
+                    }else {
+                        shippingFee = 50000
+                    }
+                } else if (selectBtt1 == ""){
+                    alert("Please choose country!")
+                } else if (selectBtt2 == ""){
+                    alert("Please choose state!")
+                }
+                document.getElementById("shipping-fee-value").innerHTML = shippingFee +" VND"
+                let temp1 = parseInt(document.getElementById("total-money").innerHTML)
+                let temp2 = parseInt(shippingFee) + temp1
+                document.getElementById("grand-total").innerHTML = temp2+" VND"
+
+            }
+
+
+            function clearCart(){
+
+                // e.preventDefault()
+                fetch("http://localhost:8080/doan2_new_war/api/cart/carts/delete/${idCus}", {
+                    method :'GET',
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8' // Indicates the content
+                    }
+                }).then(()=> location.reload())
+
+
+            }
+            function updateCart(){
+                let listTempSelect = document.getElementsByClassName("input-counter__text input-counter--text-primary-style")
+
+                let tempString = "";
+                for (let i = 0; i < listTempSelect.length; i++) {
+                    if (i === listTempSelect.length - 1){
+                        tempString+= listTempSelect[i].value;
+                    }else{
+                        tempString +=  listTempSelect[i].value+","
+                    }
+
+
+                }
+                let url = "http://localhost:8080/doan2_new_war/api/cart/carts/update/${idCus}?amount="+tempString;
+                fetch(url, {
+                    method :'GET'
+                }).then(res =>{
+                    console.log(res.json())
+
+                }).then(()=> location.reload())
+
+            }
+            function delete_item(e){
+                let idCart = e.value
+                let url = "http://localhost:8080/doan2_new_war/api/cart/carts/delete-item/"+idCart
+                fetch(url, {
+                    method :'GET'
+                }).then(res =>{
+                    console.log(res.json())
+
+                }).then(()=> location.reload())
+            }
+    </script>
 
     <!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
     <script>

@@ -46,7 +46,7 @@
 
                         <!--====== Main Logo ======-->
 
-                        <a class="main-logo" href="index.html">
+                        <a class="main-logo" href="${pageContext.request.contextPath}/">
 
                             <img src="${pageContext.request.contextPath}/resources/images/logo/logo-1.png" alt=""></a>
                         <!--====== End - Main Logo ======-->
@@ -78,10 +78,10 @@
                                 <ul class="breadcrumb__list">
                                     <li class="has-separator">
 
-                                        <a href="/admin/">Admin Dashboard</a></li>
+                                        <a href="${pageContext.request.contextPath}//admin/">Admin Dashboard</a></li>
                                     <li class="is-marked">
 
-                                        <a href="/admin/shipping-company">Shipping</a></li>
+                                        <a href="${pageContext.request.contextPath}/admin/shipping_company">Shipping</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -105,27 +105,25 @@
                                     <div class="dash__box dash__box--bg-white dash__box--shadow u-s-m-b-30">
                                         <div class="dash__pad-1">
 
-                                            <span class="dash__text u-s-m-b-16">Hello, - Name -</span>
+                                            <span class="dash__text u-s-m-b-16">Hello, ${user_full_name}</span>
                                             <ul class="dash__f-list">
                                                 <li>
 
-                                                    <a href="/admin/dashboard">Admin Dashboard</a></li>
+                                                    <a href="${pageContext.request.contextPath}/admin/">Admin Dashboard</a></li>
                                                 <li>
 
-                                                    <a href="/admin/users">Users</a></li>
+                                                    <a href="${pageContext.request.contextPath}/admin/users">Users</a></li>
                                                     <li>
 
-                                                        <a href="/admin/suppliers">Suppliers</a></li>
+                                                        <a href="${pageContext.request.contextPath}/admin/suppliers">Suppliers</a></li>
                                                     <li>
     
-                                                        <a href="/admin/partners" >Partners</a></li>
-                                                    <li>
-    
-                                                        <a href="/admin/track-shop-order">Track Shop Order</a></li>
+                                                        <a href="${pageContext.request.contextPath}/admin/partners" >Partners</a></li>
+
                                                 
                                                 <li>
 
-                                                    <a href="/admin/shipping-company"  class="dash-active">Shipping</a></li>
+                                                    <a href="${pageContext.request.contextPath}/admin/shipping_company"  class="dash-active">Shipping</a></li>
                                                 
                                             </ul>
                                         </div>
@@ -138,9 +136,9 @@
 
                                                         <span class="dash__w-icon dash__w-icon-style-1"><i class="fas fa-cart-arrow-down"></i></span>
 
-                                                        <span class="dash__w-text">10</span>
+                                                        <span class="dash__w-text">${shipping_company_list.size()}</span>
 
-                                                        <span class="dash__w-name">Số đơn vị vận chuyển</span></div>
+                                                        <span class="dash__w-name">Total Shipping Company</span></div>
                                                 </li>
                                                 
                                             </ul>
@@ -160,28 +158,16 @@
                                             <div class="dash__table">
                                                 <table>
                                                     <thead>
-                                                        <th>
-                                                          Lựa chọn thao tác hàng loạt
-                                                        </th>
-                                                        <br><br>
 
-                                                        <br><br>
                                                         <th>
-                                                            Tìm kiếm đơn vị vận chuyển:
+                                                            Find Shipping Company:
                                                         </th>
                                                     </thead>
                                                     <tbody>
-                                                        <td>
-                                                            <select name="" id="">
-                                                                <option value="delete">Xóa</option>
-                                                                <option value="update">Sửa</option>
-                                                            </select>
-                                                            <input type="submit" value="Thay dôi">
-                                                        </td>
-                                                        <td>
-                                                           <input type="text">
-                                                            <input type="submit" value="Tìm kiếm">
-                                                        </td>
+                                                    <form action="${pageContext.request.contextPath}/admin/shipping_company">
+                                                        <input type="text" name="name">
+                                                        <input type="submit" value="Search">
+                                                    </form>
                                                     </tbody>
                                                 </table>
                                         
@@ -195,20 +181,25 @@
                                         
                                         <div class="row">
                                             <div class="col-lg-4 u-s-m-b-30">
-                                                <h2 class="dash__h2 u-s-p-xy-20">ĐƠN VỊ VẬN CHUYỂN</h2>
+                                                <h2 class="dash__h2 u-s-p-xy-20">SHIPPING COMPANY</h2>
                                             </div>
                                             <div class="col-lg-4 u-s-m-b-30">
                                                 
                                             </div>
                                             <div class="col-lg-4 u-s-m-b-30">
-                                                <h2 class="dash__h2 u-s-p-xy-20">TRANG</h2>
+                                                <h2 class="dash__h2 u-s-p-xy-20">PAGE</h2>
                                                 <span class="tablenav-pages" style="align-self: center;">
-                                                    <span class="dash-active">1</span>
-                                                   <span>2</span>
-                                                   <span>3</span>
-                                                   <span>4</span>
-                                                    
-                                                
+                                                    <c:forEach var="pageVal" items="${pageValList}">
+                                                        <c:choose>
+                                                            <c:when test="${param.page == pageVal}">
+                                                                <a href="${pageContext.request.contextPath}/admin/shipping_company?page=${pageVal}" class="dash-active">${pageVal + 1}</a>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <a href="${pageContext.request.contextPath}/admin/shipping_company?page=${pageVal}" >${pageVal + 1}</a>
+                                                            </c:otherwise>
+                                                        </c:choose>
+
+                                                    </c:forEach>
                                                 </span>
                                             </div>
                                                 
@@ -221,52 +212,25 @@
                                             <table class="dash__table">
                                                 <thead>
                                                     <tr>
-                                                        <th><input type="checkbox" id="checkbox_all"></th>
-                                                        <th>Tên đơn vị vận chuyển</th>
-                                                        <th>Số điện thoại</th>
-                                                        <th>Địa chỉ</th>
-                                                        <th>Phương thức vận chuyển</th>
-                                                        <th>Số tài khoản</th>
-                                                        <th>Đơn hàng đang giao</th>
+                                                        <th>Shipping Company Name</th>
+                                                        <th>Phone</th>
+                                                        <th>Address</th>
+                                                        <th>Payment method</th>
+                                                        <th>Account Number</th>
+                                                        <th>On Delivery</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                <c:forEach var="shipping_company" items="${shipping_company_list}">
                                                     <tr>
-                                                        <td><input type="checkbox" class="checkbox_single"></td>
-                                                        <td>Giao hàng nhanh</td>
-                                                        <td>012345679</td>
-                                                        <td>123 Nguyễn Văn Cừ</td>
-                                                        <td>Vận chuyển qua shipper</td>
-                                                        <td>0123567</td>
-                                                        <td><a href="#">Xem thêm</a></td>
+                                                        <td>${shipping_company.nameSCompany}</td>
+                                                        <td>${shipping_company.phone}</td>
+                                                        <td>${shipping_company.address}</td>
+                                                        <td>${shipping_company.idMethod}</td>
+                                                        <td>${shipping_company.tradingAccount}</td>
+                                                        <td><a href="${pageContext.request.contextPath}/admin/shipping_company?idSCompany=${shipping_company.idSCompany}">Details</a></td>
                                                     </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" class="checkbox_single"></td>
-                                                        <td>Giao hàng nhanh</td>
-                                                        <td>012345679</td>
-                                                        <td>123 Nguyễn Văn Cừ</td>
-                                                        <td>Vận chuyển qua shipper</td>
-                                                        <td>0123567</td>
-                                                        <td><a href="#">Xem thêm</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" class="checkbox_single"></td>
-                                                        <td>Giao hàng nhanh</td>
-                                                        <td>012345679</td>
-                                                        <td>123 Nguyễn Văn Cừ</td>
-                                                        <td>Vận chuyển qua shipper</td>
-                                                        <td>0123567</td>
-                                                        <td><a href="#">Xem thêm</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><input type="checkbox" class="checkbox_single"></td>
-                                                        <td>Giao hàng nhanh</td>
-                                                        <td>012345679</td>
-                                                        <td>123 Nguyễn Văn Cừ</td>
-                                                        <td>Vận chuyển qua shipper</td>
-                                                        <td>0123567</td>
-                                                        <td><a href="#">Xem thêm</a></td>
-                                                    </tr>
+                                                </c:forEach>
                                                 </tbody>
                                             </table>
                                             
@@ -276,28 +240,29 @@
                                         <table class="dash__table">
                                             <thead>
                                                 <th>
-                                                  Tên đơn vị vận chuyển
+                                                    Order Id
                                                 </th>
                                                 <br><br>
                                                 <th>
-                                                    Id đơn hàng    
+                                                    Delivery Address
                                                 </th>
-                                                <br><br>
-                                                <th>
-                                                    Địa chỉ giao hàng
-                                                </th>
-                                                <th>Ngày bắt đầu giao</th>
-                                                <th>Ngày giao</th>
-                                                <th>Tình trạng đơn hàng</th>
+                                                <th>Start Date</th>
+                                                <th>Expected delivery date</th>
+                                                <th>Status</th>
                                             
                                             </thead>
                                             <tbody>
-                                                <td>1</td>
-                                                <td>1</td>
-                                                <td>1</td>
-                                                <td>1</td>
-                                                <td>1</td>
-                                                <td>1</td>
+                                            <c:if test="${order_list!= null}">
+                                                <c:forEach var="order" items="${order_list}">
+                                            <tr>
+                                                <td>${order.idOrder}</td>
+                                                <td>${order.deliveryAddress}</td>
+                                                <td>${order.date}</td>
+                                                <td>5 days</td>
+                                                <td>${order.status}</td>
+                                            </tr>
+                                                </c:forEach>
+                                            </c:if>
                                             </tbody>
                                             
                                         </table>
@@ -368,13 +333,13 @@
                                                     <a href="cart.html">Cart</a></li>
                                                 <li>
 
-                                                    <a href="dashboard.html">Account</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/">Account</a></li>
                                                 <li>
 
                                                     <a href="shop-side-version-2.html">Manufacturer</a></li>
                                                 <li>
 
-                                                    <a href="dash-payment-option.html">Finance</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/payment_option">Finance</a></li>
                                                 <li>
 
                                                     <a href="shop-side-version-2.html">Shop</a></li>
@@ -396,10 +361,10 @@
                                                     <a href="contact.html">Contact Us</a></li>
                                                 <li>
 
-                                                    <a href="index.html">Sitemap</a></li>
+                                                    <a href="${pageContext.request.contextPath}/">Sitemap</a></li>
                                                 <li>
 
-                                                    <a href="dash-my-order.html">Delivery</a></li>
+                                                    <a href="${pageContext.request.contextPath}/dashboard/my_order">Delivery</a></li>
                                                 <li>
 
                                                     <a href="shop-side-version-2.html">Store</a></li>
@@ -454,7 +419,7 @@
 
                                     <span>Copyright © 2018</span>
 
-                                    <a href="index.html">Reshop</a>
+                                    <a href="${pageContext.request.contextPath}/">Reshop</a>
 
                                     <span>All Right Reserved</span></div>
                                 <div class="lower-footer__payment">
@@ -488,7 +453,7 @@
 
                                 <span class="gl-modal-text">I have read and understood</span>
 
-                                <a class="d_modal__link" href="dashboard.html">Ludus Privacy Policy</a>
+                                <a class="d_modal__link" href="${pageContext.request.contextPath}/dashboard/">Ludus Privacy Policy</a>
                             </div>
                             <div class="gl-modal-btn-group">
 

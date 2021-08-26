@@ -9,4 +9,8 @@ public interface CungCapDAO {
     List<CungCap> getAll();
     CungCap getByIdProduct(int idProduct);
     void save(CungCap cungCap);
+
+    int getInventoryByIdSup(int id);
+
+    List<Integer> getAllIdProductByIdSup(int idSup);
 }

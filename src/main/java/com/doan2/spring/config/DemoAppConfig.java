@@ -3,13 +3,20 @@ package com.doan2.spring.config;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -17,6 +24,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.util.Properties;
@@ -24,6 +32,7 @@ import java.util.logging.Logger;
 
 @Configuration
 @EnableWebMvc
+@EnableJpaRepositories(basePackages = "com.doan2.spring.repository")
 @EnableTransactionManagement
 @ComponentScan(basePackages = "com.doan2.spring")
 @PropertySource("classpath:persistence-mysql.properties")
@@ -117,6 +126,26 @@ public class DemoAppConfig extends WebMvcConfigurerAdapter {
 
         return sessionFactory;
     }
+
+    // 10.8.2021
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        final LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        entityManagerFactoryBean.setDataSource(securityDataSource());
+        entityManagerFactoryBean.setPackagesToScan(env.getProperty("hibernate.packagesToScan"));
+
+        final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        entityManagerFactoryBean.setJpaVendorAdapter(vendorAdapter);
+        entityManagerFactoryBean.setJpaProperties(getHibernateProperties());
+
+        return entityManagerFactoryBean;
+    }
+
+
+
+//
+
+
     @Bean
     @Autowired
     public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {

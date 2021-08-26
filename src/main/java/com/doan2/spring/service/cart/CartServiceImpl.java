@@ -45,6 +45,12 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	@Transactional
+	public void deleteAll(List<Cart> cartList) {
+		cartDAO.deleteAll(cartList);
+	}
+
+	@Override
+	@Transactional
 	public List<Cart> getCartsByCustomerOrderId(int cusId, int orderId) {
 		return cartDAO.getCartsByCustomerOrderId(cusId, orderId);
 	}
@@ -54,6 +60,32 @@ public class CartServiceImpl implements CartService {
 	public List<Cart> getListCartNotCheckOut(int idCus) {
 		return cartDAO.getListCartNotCheckOut(idCus);
 	}
+
+	@Override
+	@Transactional
+	public void updateListCart(List<Cart> cartList) {
+		cartDAO.updateListCart(cartList);
+	}
+
+	@Override
+	@Transactional
+	public Cart getListCartByIdProduct(int idProduct) {
+		return cartDAO.getListCartByIdProduct(idProduct);
+	}
+
+	@Override
+	@Transactional
+	public List<Integer> getLatestIdCart() {
+		return cartDAO.getLatestIdCart();
+	}
+
+	@Override
+	@Transactional
+	public List<Cart> getLastTwoCarts() {
+		return cartDAO.getLastTwoCarts();
+	}
+
+
 }
 
 

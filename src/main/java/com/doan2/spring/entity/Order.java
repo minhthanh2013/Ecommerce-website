@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Objects;
+
 @Entity
 @Table(name="Order_Table")
 public class Order {
@@ -12,9 +15,7 @@ public class Order {
     private int idCus;
     @Id
     @Column(name="idOrder")
-    private int idOrder;
-    @Column(name="idSup")
-    private int idSup;
+    private Integer idOrder;
     @Column(name="date")
     private Date date;
     @Column(name="status")
@@ -29,10 +30,9 @@ public class Order {
     public Order() {
     }
 
-    public Order(int idCus, int idOrder, int idSup, Date date, int status, String tranMethod, String deliveryAddress, int totalMoney) {
+    public Order(int idCus, int idOrder, Date date, int status, String tranMethod, String deliveryAddress, int totalMoney) {
         this.idCus = idCus;
         this.idOrder = idOrder;
-        this.idSup = idSup;
         this.date = date;
         this.status = status;
         this.tranMethod = tranMethod;
@@ -54,14 +54,6 @@ public class Order {
 
     public void setIdOrder(int idOrder) {
         this.idOrder = idOrder;
-    }
-
-    public int getIdSup() {
-        return idSup;
-    }
-
-    public void setIdSup(int idSup) {
-        this.idSup = idSup;
     }
 
     public Date getDate() {
@@ -105,11 +97,23 @@ public class Order {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return idCus == order.idCus && status == order.status && totalMoney == order.totalMoney && Objects.equals(idOrder, order.idOrder) && Objects.equals(date, order.date) && Objects.equals(tranMethod, order.tranMethod) && Objects.equals(deliveryAddress, order.deliveryAddress);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(idCus, idOrder, date, status, tranMethod, deliveryAddress, totalMoney);
+    }
+
+    @Override
     public String toString() {
         return "Order{" +
-                "idCus='" + idCus + '\'' +
-                ", idOrder='" + idOrder + '\'' +
-                ", idSup='" + idSup + '\'' +
+                "idCus=" + idCus +
+                ", idOrder=" + idOrder +
                 ", date=" + date +
                 ", status=" + status +
                 ", tranMethod='" + tranMethod + '\'' +

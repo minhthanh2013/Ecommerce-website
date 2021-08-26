@@ -14,19 +14,19 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
 
     <!--====== Vendor Css ======-->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/vendor.css">
+    <link rel="stylesheet" href="css/vendor.css">
 
     <!--====== Utility-Spacing ======-->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/utility.css">
+    <link rel="stylesheet" href="css/utility.css">
 
     <!--====== App ======-->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/app.css">
+    <link rel="stylesheet" href="css/app.css">
 </head>
 <body class="config">
     <div class="preloader is-active">
         <div class="preloader__wrap">
 
-            <img class="preloader__img" src="${pageContext.request.contextPath}/resources/images/preloader.png" alt=""></div>
+            <img class="preloader__img" src="images/preloader.png" alt=""></div>
     </div>
 
     <!--====== Main App ======-->
@@ -44,9 +44,9 @@
 
                         <!--====== Main Logo ======-->
 
-                        <a class="main-logo" href="${pageContext.request.contextPath}/">
+                        <a class="main-logo" href="index.html">
 
-                            <img src="${pageContext.request.contextPath}/resources/images/logo/logo-1.png" alt=""></a>
+                            <img src="images/logo/logo-1.png" alt=""></a>
                         <!--====== End - Main Logo ======-->
 
 
@@ -83,17 +83,17 @@
                                         <ul style="width:120px">
                                             <li>
 
-                                                <a href="${pageContext.request.contextPath}/dashboard/"><i class="fas fa-user-circle u-s-m-r-6"></i>
+                                                <a href="dashboard.html"><i class="fas fa-user-circle u-s-m-r-6"></i>
 
                                                     <span>Account</span></a></li>
                                             <li>
 
-                                                <a href="${pageContext.request.contextPath}/register/"><i class="fas fa-user-plus u-s-m-r-6"></i>
+                                                <a href="signup.html"><i class="fas fa-user-plus u-s-m-r-6"></i>
 
                                                     <span>Signup</span></a></li>
                                             <li>
 
-                                                <a href="${pageContext.request.contextPath}/login"><i class="fas fa-lock u-s-m-r-6"></i>
+                                                <a href="signin.html"><i class="fas fa-lock u-s-m-r-6"></i>
 
                                                     <span>Signin</span></a></li>
                                             <li>
@@ -208,12 +208,12 @@
 
                                 <!--====== List ======-->
                                 <ul class="ah-list ah-list--design2 ah-list--link-color-secondary">
-                                    <li><a href="${pageContext.request.contextPath}/shopkeeper/edit_profile">DASHBOARD</a></li>
+                                    <li><a href="shopkeeper-edit-profile.html">DASHBOARD</a></li>
                                     <li><a href="#">PRODUCT</a></li>
                                     <li><a href="#">CATEGORY</a></li>
                                     <li><a href="#">PROMOTION</a></li>
-                                    <li><a href="${pageContext.request.contextPath}/shopkeeper/order">ORDERS</a></li>
-                                    <li><a href="${pageContext.request.contextPath}/shopkeeper/sales_statistics">SALES</a></li>
+                                    <li><a href="shopkeeper-order.html">ORDERS</a></li>
+                                    <li><a href="shopkeeper-sales-statistics.html">SALES</a></li>
                                 </ul>
                                 <!--====== End - List ======-->
                             </div>
@@ -248,13 +248,10 @@
                                 <ul class="breadcrumb__list">
                                     <li class="has-separator">
 
-                                        <a href="${pageContext.request.contextPath}/">Home</a></li>
-                                    <li class="has-separator">
-
-                                        <a href="${pageContext.request.contextPath}/shopkeeper/edit_profile">My Store</a></li>
+                                        <a href="shopkeeper.html">Home</a></li>
                                     <li class="is-marked">
-                                        
-                                        <a href="${pageContext.request.contextPath}/shopkeeper/add_promotion">Add promotion</a></li>
+
+                                        <a href="checkout-bank-account.html">BANK ACCOUNT</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -272,182 +269,73 @@
                     <div class="dash">
                         <div class="container">
                             <div class="row">
-                                <div class="col-lg-3 col-md-12">
-
-                                    <!--====== Dashboard Features ======-->
-                                    <div class="dash__box dash__box--bg-white dash__box--shadow u-s-m-b-30">
-                                        <div class="dash__pad-1">
-
-                                            <span class="dash__text u-s-m-b-16">ABC STORE</span>
-                                            <ul class="dash__f-list">
-                                                <li>
-
-                                                    <a href="${pageContext.request.contextPath}/shopkeeper/edit_profile">My Store Profile</a></li>
-                                                <li>
-
-                                                    <a href="${pageContext.request.contextPath}/shopkeeper/add_product">Add product</a></li>
-                                                <li>
-
-                                                    <a class="dash-active" href="${pageContext.request.contextPath}/shopkeeper/add_promotion">Add promotion</a></li>
-                                                <li>
-
-                                                    <a href="${pageContext.request.contextPath}/shopkeeper/update_price">Update price</a></li>
-                                                <li>
-
-                                                    <a href="${pageContext.request.contextPath}/shopkeeper/order">Orders</a></li>
-                                                <li>
-
-                                                    <a href="${pageContext.request.contextPath}/shopkeeper/sales_diary">Sales diary</a></li>
-                                                <li>
-
-                                                    <a  href="${pageContext.request.contextPath}/shopkeeper/sales_statistics">Sales statistics</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    
-                                    <!--====== End - Dashboard Features ======-->
-                                </div>
-                                <div class="col-lg-9 col-md-12">
+                                
+                                <div class="col-lg-12 col-md-12">
                                     <div class="dash__box dash__box--shadow dash__box--radius dash__box--bg-white">
                                         <div class="dash__pad-2">
-                                            <h1 class="dash__h1 u-s-m-b-14">Add promotion</h1>
-                                            <span class="dash__text u-s-m-b-30">Please complete your promotion!</span>
-                                           
-                                            <form class="dash-edit-p">
-                                                
-                                                <div class="gl-inline">
-                                                    <div class="u-s-m-b-30">
+                                            <h1 class="dash__h1 u-s-m-b-14">ADD YOUR BANK ACCOUNT</h1>
 
-                                                        <label class="gl-label" for="reg-promotion">Promotion *</label>
-                                                        <select class="select-box select-box--primary-style u-w-100" id="reg-promotion">
-                                                            <option selected>Select</option>
-                                                            <option value="flash-sale">Flash sale</option>
-                                                            <option value="wholesale-price">Wholesale price</option>
-                                                        </select>
-                                                    </div>
-                                                    <div class="u-s-m-b-30">
-                                                    </div>
-                                                </div>
+                                            <span class="dash__text u-s-m-b-30">Please complete infomation to pay faster!!!</span>
 
-                                                <div class="gl-inline">
-                                                    <div class="u-s-m-b-30">
-                                                        <span class="gl-label">From</span>
-                                                        <div class="gl-dob">
-                                                            <select class="select-box select-box--primary-style">
-                                                                <option selected>Hour</option>
-                                                                <option value="pro-hour-01">01</option>
-                                                                <option value="pro-hour-02">02</option>
-                                                                <option value="pro-hour-03">03</option>
-                                                                <option value="pro-hour-04">04</option>
-                                                            </select>
-                                                            <select class="select-box select-box--primary-style">
-                                                                <option selected>Minutes</option>
-                                                                <option value="pro-min-00">00</option>
-                                                                <option value="pro-min-15">15</option>
-                                                                <option value="pro-min-30">30</option>
-                                                                <option value="pro-min-45">45</option>
-                                                            </select>
-                                                            <select class="select-box select-box--primary-style">
-                                                                <option selected>Day</option>
-                                                                <option value="pro-day-01">01</option>
-                                                                <option value="pro-day-02">02</option>
-                                                                <option value="pro-day-03">03</option>
-                                                                <option value="pro-day-04">04</option>
-                                                            </select>
-                                                            <select class="select-box select-box--primary-style">
-                                                                <option selected>Month</option>
-                                                                <option value="pro-month-01">01</option>
-                                                                <option value="pro-month-02">02</option>
-                                                                <option value="pro-month-03">03</option>
-                                                                <option value="pro-month-04">04</option>
-                                                            </select>
-                                                            <select class="select-box select-box--primary-style">
-                                                                <option selected>Year</option>
-                                                                <option value="pro-year-01">01</option>
-                                                                <option value="pro-year-02">02</option>
-                                                                <option value="pro-year-03">03</option>
-                                                                <option value="pro-year-04">04</option>
-                                                            </select>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <form class="dash-edit-p">
+                                                        <div class="gl-inline">
+                                                            <div class="u-s-m-b-30">
+
+                                                                <label class="gl-label" for="reg-bank-account">BANK ACCOUNT *</label>
+
+                                                                <input class="input-text input-text--primary-style" type="text" id="reg-bank-account"></div>
+                                                            <div class="u-s-m-b-30">
+
+                                                                <label class="gl-label" for="reg-card-number">CARD NUMBER *</label>
+
+                                                                <input class="input-text input-text--primary-style" type="text" id="reg-card-number"></div>
                                                         </div>
-                                                    </div>
-                                                  
-                                                </div>
 
-                                                <div class="gl-inline">
-                                                    <div class="u-s-m-b-30">
-                                                        <span class="gl-label">To</span>
-                                                        <div class="gl-dob">
-                                                            <select class="select-box select-box--primary-style">
-                                                                <option selected>Hour</option>
-                                                                <option value="pro-hour-01">01</option>
-                                                                <option value="pro-hour-02">02</option>
-                                                                <option value="pro-hour-03">03</option>
-                                                                <option value="pro-hour-04">04</option>
-                                                            </select>
-                                                            <select class="select-box select-box--primary-style">
-                                                                <option selected>Minutes</option>
-                                                                <option value="pro-min-00">00</option>
-                                                                <option value="pro-min-15">15</option>
-                                                                <option value="pro-min-30">30</option>
-                                                                <option value="pro-min-45">45</option>
-                                                            </select>
-                                                            <select class="select-box select-box--primary-style">
-                                                                <option selected>Day</option>
-                                                                <option value="pro-day-01">01</option>
-                                                                <option value="pro-day-02">02</option>
-                                                                <option value="pro-day-03">03</option>
-                                                                <option value="pro-day-04">04</option>
-                                                            </select>
-                                                            <select class="select-box select-box--primary-style">
-                                                                <option selected>Month</option>
-                                                                <option value="pro-month-01">01</option>
-                                                                <option value="pro-month-02">02</option>
-                                                                <option value="pro-month-03">03</option>
-                                                                <option value="pro-month-04">04</option>
-                                                            </select>
-                                                            <select class="select-box select-box--primary-style">
-                                                                <option selected>Year</option>
-                                                                <option value="pro-year-01">01</option>
-                                                                <option value="pro-year-02">02</option>
-                                                                <option value="pro-year-03">03</option>
-                                                                <option value="pro-year-04">04</option>
-                                                            </select>
+                                                        <div class="gl-inline">
+                                                            <div class="u-s-m-b-30">
+
+                                                                <label class="gl-label" for="reg-bank">BANK *</label>
+
+                                                                <input class="input-text input-text--primary-style" type="text" id="reg-bank"></div>
+                                                            <div class="u-s-m-b-30">
+
+                                                                <label class="gl-label" for="reg-bank-branch">BANK BRANCH</label>
+
+                                                                <input class="input-text input-text--primary-style" type="text" id="reg-bank-branch"></div>
                                                         </div>
-                                                    </div>
-                                            
-                                                </div>
 
-                                                
-                                                   
-                                                <div class="gl-inline">
-                                                    <table align="center" id="add-promotion-table" style="border-collapse:collapse; border: 2px double gainsboro;">
-                                                        <tr align="center" class="menu-add-promotion">
-                                                            <th style="padding:10px">Product's name</th>
-                                                            <th style="padding:10px">Price</th>
-                                                            <th style="padding:10px">Discount</th>
-                                                            <th style="padding:10px">Promotion price</th>
-                                                            <th style="padding:10px">Amount</th>
-                                                        </tr>
-                                                        <tr align="center" class="content-add-promotion">
-                                                            <td style="padding:10px"><input class="input-text input-text--primary-style" type="text" placeholder="Aquafina"></td>
-                                                            <td style="padding:10px"><input class="input-text input-text--primary-style" type="text" placeholder="10000"></td>
-                                                            <td style="padding:10px"><input class="input-text input-text--primary-style" type="text" placeholder="50%"></td>
-                                                            <td style="padding:10px"><input class="input-text input-text--primary-style" type="text" placeholder="5000"></td>
-                                                            <td style="padding:10px"><input class="input-text input-text--primary-style" type="text" placeholder="20"></td>
-                                                        </tr>
-                                                        <tr align="center" class="content-add-promotion">
-                                                            <td style="padding:10px"><input class="input-text input-text--primary-style" type="text"></td>
-                                                            <td style="padding:10px"><input class="input-text input-text--primary-style" type="text"></td>
-                                                            <td style="padding:10px"><input class="input-text input-text--primary-style" type="text"></td>
-                                                            <td style="padding:10px"><input class="input-text input-text--primary-style" type="text"></td>
-                                                            <td style="padding:10px"><input class="input-text input-text--primary-style" type="text"></td>
-                                                        </tr>
-                                                    </table>
-                                                </div>
+                                                        <div class="gl-inline">
+                                                            <div class="u-s-m-b-30">
 
-                                                
-                                                <br><button class="btn btn--e-brand-b-2" type="submit">SAVE</button>
-                                            </form>              
+                                                                <label class="gl-label" for="reg-account-name">ACCOUNT NAME *</label>
+
+                                                                <input class="input-text input-text--primary-style" type="text" id="reg-account-name"></div>
+                                                            <div class="u-s-m-b-30">
+                                                                <label class="gl-label" for="reg-id-card">IDENTITY CARD *</label>
+                                                                <input class="input-text input-text--primary-style" type="text" id="reg-id-card"></div>
+                                                                
+                                                        </div>
+
+                                                        <div class="gl-inline">
+                                                            <div class="u-s-m-b-30">
+
+                                                                <label class="gl-label" for="reg-phone">PHONE *</label>
+
+                                                                <input class="input-text input-text--primary-style" type="text" id="reg-phone"></div>
+                                                            <div class="u-s-m-b-30">
+                                                                <label class="gl-label" for="reg-email">EMAIL</label>
+                                                                <input class="input-text input-text--primary-style" type="text" id="reg-email"></div>
+                                                                
+                                                        </div>
+
+                                                        
+
+                                                        <button class="btn btn--e-brand-b-2" type="submit">SAVE</button>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -512,7 +400,7 @@
                                                     <a href="cart.html">Cart</a></li>
                                                 <li>
 
-                                                    <a href="${pageContext.request.contextPath}/dashboard">Account</a></li>
+                                                    <a href="dashboard.html">Account</a></li>
                                                 <li>
 
                                                     <a href="shop-side-version-2.html">Manufacturer</a></li>
@@ -540,7 +428,7 @@
                                                     <a href="contact.html">Contact Us</a></li>
                                                 <li>
 
-                                                    <a href="${pageContext.request.contextPath}/">Sitemap</a></li>
+                                                    <a href="index.html">Sitemap</a></li>
                                                 <li>
 
                                                     <a href="dash-my-order.html">Delivery</a></li>
@@ -598,7 +486,7 @@
 
                                     <span>Copyright © 2018</span>
 
-                                    <a href="${pageContext.request.contextPath}/resources/">Reshop</a>
+                                    <a href="index.html">Reshop</a>
 
                                     <span>All Right Reserved</span></div>
                                 <div class="lower-footer__payment">
@@ -632,7 +520,7 @@
 
                                 <span class="gl-modal-text">I have read and understood</span>
 
-                                <a class="d_modal__link" href="${pageContext.request.contextPath}/dashboard/edit_profile">Ludus Privacy Policy</a>
+                                <a class="d_modal__link" href="dash-edit-profile.html">Ludus Privacy Policy</a>
                             </div>
                             <div class="gl-modal-btn-group">
 
@@ -664,13 +552,13 @@
     <script src="https://www.google-analytics.com/analytics.js" async defer></script>
 
     <!--====== Vendor Js ======-->
-    <script src="${pageContext.request.contextPath}/resources/js/vendor.js"></script>
+    <script src="js/vendor.js"></script>
 
     <!--====== jQuery Shopnav plugin ======-->
-    <script src="${pageContext.request.contextPath}/resources/js/jquery.shopnav.js"></script>
+    <script src="js/jquery.shopnav.js"></script>
 
     <!--====== App ======-->
-    <script src="${pageContext.request.contextPath}/resources/js/app.js"></script>
+    <script src="js/app.js"></script>
 
     <!--====== Noscript ======-->
     <noscript>

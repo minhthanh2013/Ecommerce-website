@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -86,21 +89,18 @@
                                                 <a href="${pageContext.request.contextPath}/dashboard/"><i class="fas fa-user-circle u-s-m-r-6"></i>
 
                                                     <span>Account</span></a></li>
-                                            <li>
 
-                                                <a href="${pageContext.request.contextPath}/register/"><i class="fas fa-user-plus u-s-m-r-6"></i>
+                                            <form:form action="${pageContext.request.contextPath}/logout"
+                                                       method="post" id="sign-out-form">
+                                                <li>
 
-                                                    <span>Signup</span></a></li>
-                                            <li>
+                                                    <a id="sign-out-btt" href="#"><i class="fas fa-lock-open u-s-m-r-6 sign-out-btt-1"></i>
+                                                        <span>Signout</span></a>
+                                                        <%--                                                    <input type="submit" value="Logout" /><i class="fas fa-lock-open u-s-m-r-6"></i>--%>
+                                                        <%--                                                    <span>Signout</span></a></li>--%>
 
-                                                <a href="${pageContext.request.contextPath}/login"><i class="fas fa-lock u-s-m-r-6"></i>
-
-                                                    <span>Signin</span></a></li>
-                                            <li>
-
-                                                <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i>
-
-                                                    <span>Signout</span></a></li>
+                                                </li>
+                                            </form:form>
                                         </ul>
                                         <!--====== End - Dropdown ======-->
                                     </li>
@@ -208,10 +208,9 @@
 
                                 <!--====== List ======-->
                                 <ul class="ah-list ah-list--design2 ah-list--link-color-secondary">
-                                    <li><a href="${pageContext.request.contextPath}/shopkeeper/edit_profile">DASHBOARD</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/shopkeeper/">DASHBOARD</a></li>
                                     <li><a href="#">PRODUCT</a></li>
                                     <li><a href="#">CATEGORY</a></li>
-                                    <li><a href="#">PROMOTION</a></li>
                                     <li><a href="${pageContext.request.contextPath}/shopkeeper/order">ORDERS</a></li>
                                     <li><a href="${pageContext.request.contextPath}/shopkeeper/sales_statistics">SALES</a></li>
                                 </ul>
@@ -251,7 +250,7 @@
                                         <a href="${pageContext.request.contextPath}/">Home</a></li>
                                     <li class="has-separator">
 
-                                        <a href="${pageContext.request.contextPath}/shopkeeper/edit_profile">My Store</a></li>
+                                        <a href="${pageContext.request.contextPath}/shopkeeper/">My Store</a></li>
                                     <li class="is-marked">
                                         
                                         <a href="${pageContext.request.contextPath}/shopkeeper/add_product">Add product</a></li>
@@ -278,26 +277,22 @@
                                     <div class="dash__box dash__box--bg-white dash__box--shadow u-s-m-b-30">
                                         <div class="dash__pad-1">
 
-                                            <span class="dash__text u-s-m-b-16">ABC STORE</span>
+                                            <span class="dash__text u-s-m-b-16">${supplier_name}</span>
                                             <ul class="dash__f-list">
                                                 <li>
 
-                                                    <a  href="${pageContext.request.contextPath}/shopkeeper/edit_profile">My Store Profile</a></li>
+                                                    <a  href="${pageContext.request.contextPath}/shopkeeper/">My Store Profile</a></li>
                                                 <li>
 
                                                     <a  class="dash-active" href="${pageContext.request.contextPath}/shopkeeper/add_product">Add product</a></li>
-                                                <li>
 
-                                                    <a href="${pageContext.request.contextPath}/shopkeeper/add_promotion">Add promotion</a></li>
                                                 <li>
 
                                                     <a href="${pageContext.request.contextPath}/shopkeeper/update_price">Update price</a></li>
                                                 <li>
 
                                                     <a href="${pageContext.request.contextPath}/shopkeeper/order">Orders</a></li>
-                                                <li>
 
-                                                    <a href="${pageContext.request.contextPath}/shopkeeper/sales_diary">Sales diary</a></li>
                                                 <li>
 
                                                     <a  href="${pageContext.request.contextPath}/shopkeeper/sales_statistics">Sales statistics</a></li>
@@ -312,26 +307,28 @@
                                         <div class="dash__pad-2">
                                             <h1 class="dash__h1 u-s-m-b-14">Add Product</h1>
                                             <span class="dash__text u-s-m-b-30">Please complete product information!</span>
-                                           
-                                            <form class="dash-edit-p">
+
+                                            <c:if test="${param.error != null}">
+                                                <div><p style="color:red;">${error}</p></div>
+                                            </c:if>
+                                            <c:if test="${param.success != null}">
+                                                <div><p style="color:green;">${success}</p></div>
+                                            </c:if>
+                                            <form:form class="dash-edit-p" action="${pageContext.request.contextPath}/shopkeeper/add_product" method="post" modelAttribute="productAttribute">
                                                 <div class="gl-inline">
                                                     <div class="u-s-m-b-30">
 
                                                         <label class="gl-label" for="reg-pname">PRODUCT'S NAME *</label>
 
-                                                        <input class="input-text input-text--primary-style" type="text" id="reg-pname" placeholder="AQUAFINA"></div>
+                                                        <form:input class="input-text input-text--primary-style" type="text" id="reg-pname" placeholder="AQUAFINA" path="name"/></div>
                                                     <div class="u-s-m-b-30">
 
-                                                        <label class="gl-label" for="category">CATEGORY *</label><select class="select-box select-box--primary-style u-w-100" id="category">
-                                                            <option selected>Select</option>
-                                                            <option value="electronics">Electronics</option>
-                                                            <option value="women-clothing">Women's clothing</option>
-                                                            <option value="men-clothing">Men's clothing</option>
-                                                            <option value="food-and-supplies">Food and Supplies</option>
-                                                            <option value="furniture-and-decor">Furniture and Decor</option>
-                                                            <option value="port-and-game">Sport and Game</option>
-                                                            <option value="beauty-and-health">Beauty and Health</option>
-                                                        </select></div>
+                                                        <label class="gl-label" for="category">CATEGORY *</label>
+                                                        <form:select class="select-box select-box--primary-style u-w-100" id="category" path="idType">
+                                                            <c:forEach var="productType" items="${productTypeList}">
+                                                                <form:option value="${productType.idType}">${productType.nameType}</form:option>
+                                                            </c:forEach>
+                                                        </form:select></div>
                                                 </div>
 
                                                 <div class="gl-inline">
@@ -339,7 +336,7 @@
 
                                                         <label class="gl-label" for="reg-pdescription">DESCRIPTION *</label>
 
-                                                        <input class="input-text input-text--primary-style" type="text" id="reg-pdescription" placeholder="Write product description here"></div>
+                                                        <form:input class="input-text input-text--primary-style" type="text" id="reg-pdescription" placeholder="Write product description here" path="description"/></div>
                                                     
                                                 </div>
                                                 <div class="gl-inline">
@@ -347,29 +344,11 @@
 
                                                         <label class="gl-label" for="reg-pprice">PRICE *</label>
 
-                                                        <input class="input-text input-text--primary-style" type="text" id="reg-pprice" placeholder="6000"></div>
+                                                        <form:input class="input-text input-text--primary-style" type="text" id="reg-pprice" placeholder="6000" path="price"/></div>
                                                     <div class="u-s-m-b-30">
 
                                                         <label class="gl-label" for="reg-pavailable">AVAILABLE *</label>
-                                                        <input class="input-text input-text--primary-style" type="text" id="reg-pavailable" placeholder="100"></div>
-                                                </div>
-                                                <div class="gl-inline">
-                                                    <div class="u-s-m-b-30">
-
-                                                        <label class="gl-label" for="reg-pprice">CLASSIFY</label>
-
-                                                        <select class="select-box select-box--primary-style u-w-100" id="reg-pclassify">
-                                                            <option selected>0</option>
-                                                            <option value="1-type">1</option>
-                                                            <option value="2-type">2</option>
-                                                            <option value="3-type">3</option>
-                                                            <option value="4-type">4</option>
-                                                        </select>
-                                                    </div>
-                                                        <input class="input-text input-text--primary-style" type="text" placeholder="size S">
-                                                        <input class="input-text input-text--primary-style" type="text" placeholder="size M">
-                                                        <input class="input-text input-text--primary-style" type="text" placeholder="size L">
-                                                        <input class="input-text input-text--primary-style" type="text" placeholder="size XL">
+                                                        <input class="input-text input-text--primary-style" type="text" id="reg-pavailable" placeholder="100" name="inventory"></div>
                                                 </div>
                                                 <div class="gl-inline">
                                                     
@@ -390,7 +369,7 @@
                                                     </div>
                                                 </div>
                                                 <br><button class="btn btn--e-brand-b-2" type="submit">SAVE</button>
-                                            </form>              
+                                            </form:form>
                                         </div>
                                     </div>
                                 </div>
@@ -452,7 +431,7 @@
                                             <ul>
                                                 <li>
 
-                                                    <a href="cart.html">Cart</a></li>
+                                                    <a href="${pageContext.request.contextPath}/cart/">Cart</a></li>
                                                 <li>
 
                                                     <a href="${pageContext.request.contextPath}/dashboard/">Account</a></li>
@@ -594,7 +573,16 @@
     <!--====== End - Main App ======-->
 
 
-    <!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
+    <script>
+        document.getElementById("sign-out-btt").onclick = function() {
+            <%HttpSession session1 = request.getSession();
+            session1.removeAttribute("url_prior_login");
+            %>
+
+
+            document.getElementById("sign-out-form").submit();
+        }
+    </script>
     <script>
         window.ga = function() {
             ga.q.push(arguments)

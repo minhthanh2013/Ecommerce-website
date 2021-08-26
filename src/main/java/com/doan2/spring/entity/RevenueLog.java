@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.sql.Date;
 
 @Entity
 @Table(name = "revenue_log")
@@ -17,7 +18,7 @@ public class RevenueLog {
     @Column(name = "idLog")
     private int idLog;
     @Column(name = "date")
-    private int date;
+    private Date date;
     @Column(name = "idMethod")
     private int idMethod;
     @Column(name = "total_money")
@@ -28,7 +29,7 @@ public class RevenueLog {
     public RevenueLog() {
     }
 
-    public RevenueLog(int idCus, int idOrder, int idLog, int date, int idMethod, int total_money, String trading_account) {
+    public RevenueLog(int idCus, int idOrder, int idLog, Date date, int idMethod, int total_money, String trading_account) {
         this.idCus = idCus;
         this.idOrder = idOrder;
         this.idLog = idLog;
@@ -62,11 +63,11 @@ public class RevenueLog {
         this.idLog = idLog;
     }
 
-    public int getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(int date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

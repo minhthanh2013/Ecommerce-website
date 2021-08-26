@@ -1,3 +1,8 @@
+<%@ page import="java.security.Security" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -43,7 +48,7 @@
 
                         <!--====== Main Logo ======-->
 
-                        <a class="main-logo" href="index.html">
+                        <a class="main-logo" href="${pageContext.request.contextPath}/">
 
                             <img src="${pageContext.request.contextPath}/resources/images/logo/logo-1.png" alt=""></a>
                         <!--====== End - Main Logo ======-->
@@ -85,12 +90,17 @@
                                                 <a href="${pageContext.request.contextPath}/dashboard/"><i class="fas fa-user-circle u-s-m-r-6"></i>
 
                                                     <span>Account</span></a></li>
-                                            <security:authorize access="isAuthenticated()">
+                                            <form:form action="${pageContext.request.contextPath}/logout"
+                                                       method="post" id="sign-out-form">
                                                 <li>
 
-                                                    <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i><span>Signout</span></a>
+                                                    <a id="sign-out-btt" href="#"><i class="fas fa-lock-open u-s-m-r-6 sign-out-btt-1"></i>
+                                                        <span>Signout</span></a>
+                                                        <%--                                                    <input type="submit" value="Logout" /><i class="fas fa-lock-open u-s-m-r-6"></i>--%>
+                                                        <%--                                                    <span>Signout</span></a></li>--%>
+
                                                 </li>
-                                            </security:authorize>
+                                            </form:form>
                                         </ul>
                                         <!--====== End - Dropdown ======-->
                                     </li>
@@ -1120,13 +1130,13 @@
                                             </li>
                                             <li>
 
-                                                <a href="cart.html">Cart</a></li>
+                                                <a href="${pageContext.request.contextPath}/cart/">Cart</a></li>
                                             <li>
 
                                                 <a href="wishlist.html">Wishlist</a></li>
                                             <li>
 
-                                                <a href="checkout.html">Checkout</a></li>
+                                                <a href="${pageContext.request.contextPath}/checkout/">Checkout</a></li>
                                             <li>
 
                                                 <a href="faq.html">FAQ</a></li>
@@ -1187,7 +1197,7 @@
 
                             <button class="btn btn--icon toggle-button fas fa-shopping-bag toggle-button-shop" type="button"></button>
 
-                            <span class="total-item-round">2</span>
+                            <span class="total-item-round">${total_amount}</span>
 
                             <!--====== Menu ======-->
                             <div class="ah-lg-mode">
@@ -1206,7 +1216,7 @@
 
                                         <a class="mini-cart-shop-link"><i class="fas fa-shopping-bag"></i>
 
-                                            <span class="total-item-round">2</span></a>
+                                            <span class="total-item-round">${total_amount}</span></a>
 
                                         <!--====== Dropdown ======-->
 
@@ -1215,117 +1225,32 @@
 
                                             <!--====== Mini Product Container ======-->
                                             <div class="mini-product-container gl-scroll u-s-m-b-15">
+                                                <c:forEach var="cart_product" items="${cart_product_list}">
+                                                    <div class="card-mini-product">
+                                                        <div class="mini-product">
+                                                            <div class="mini-product__image-wrapper">
 
-                                                <!--====== Card for mini cart ======-->
-                                                <div class="card-mini-product">
-                                                    <div class="mini-product">
-                                                        <div class="mini-product__image-wrapper">
+                                                                <a class="mini-product__link" href="product-detail.html">
 
-                                                            <a class="mini-product__link" href="product-detail.html">
-
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/electronic/product3.jpg" alt=""></a></div>
-                                                        <div class="mini-product__info-wrapper">
-
-                                                            <span class="mini-product__category">
-
-                                                                <a href="shop-side-version-2.html">Electronics</a></span>
-
-                                                            <span class="mini-product__name">
-
-                                                                <a href="product-detail.html">Yellow Wireless Headphone</a></span>
-
-                                                            <span class="mini-product__quantity">1 x</span>
-
-                                                            <span class="mini-product__price">$8</span></div>
-                                                    </div>
-
-                                                    <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                                </div>
-                                                <!--====== End - Card for mini cart ======-->
-
-
-                                                <!--====== Card for mini cart ======-->
-                                                <div class="card-mini-product">
-                                                    <div class="mini-product">
-                                                        <div class="mini-product__image-wrapper">
-
-                                                            <a class="mini-product__link" href="product-detail.html">
-
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/electronic/product18.jpg" alt=""></a></div>
-                                                        <div class="mini-product__info-wrapper">
+                                                                    <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/electronic/product3.jpg" alt=""></a></div>
+                                                            <div class="mini-product__info-wrapper">
 
                                                             <span class="mini-product__category">
 
                                                                 <a href="shop-side-version-2.html">Electronics</a></span>
 
-                                                            <span class="mini-product__name">
+                                                                <span class="mini-product__name">
 
-                                                                <a href="product-detail.html">Nikon DSLR Camera 4k</a></span>
+                                                                <a href="product-detail.html">${cart_product.name}</a></span>
 
-                                                            <span class="mini-product__quantity">1 x</span>
+                                                                <span class="mini-product__quantity">${cart_product.amount} x</span>
 
-                                                            <span class="mini-product__price">$8</span></div>
+                                                                <span class="mini-product__price">${cart_product.vnTotalMoney}</span></div>
+                                                        </div>
+
+                                                        <a class="mini-product__delete-link far fa-trash-alt"></a>
                                                     </div>
-
-                                                    <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                                </div>
-                                                <!--====== End - Card for mini cart ======-->
-
-
-                                                <!--====== Card for mini cart ======-->
-                                                <div class="card-mini-product">
-                                                    <div class="mini-product">
-                                                        <div class="mini-product__image-wrapper">
-
-                                                            <a class="mini-product__link" href="product-detail.html">
-
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/women/product8.jpg" alt=""></a></div>
-                                                        <div class="mini-product__info-wrapper">
-
-                                                            <span class="mini-product__category">
-
-                                                                <a href="shop-side-version-2.html">Women Clothing</a></span>
-
-                                                            <span class="mini-product__name">
-
-                                                                <a href="product-detail.html">New Dress D Nice Elegant</a></span>
-
-                                                            <span class="mini-product__quantity">1 x</span>
-
-                                                            <span class="mini-product__price">$8</span></div>
-                                                    </div>
-
-                                                    <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                                </div>
-                                                <!--====== End - Card for mini cart ======-->
-
-
-                                                <!--====== Card for mini cart ======-->
-                                                <div class="card-mini-product">
-                                                    <div class="mini-product">
-                                                        <div class="mini-product__image-wrapper">
-
-                                                            <a class="mini-product__link" href="product-detail.html">
-
-                                                                <img class="u-img-fluid" src="${pageContext.request.contextPath}/resources/images/product/men/product8.jpg" alt=""></a></div>
-                                                        <div class="mini-product__info-wrapper">
-
-                                                            <span class="mini-product__category">
-
-                                                                <a href="shop-side-version-2.html">Men Clothing</a></span>
-
-                                                            <span class="mini-product__name">
-
-                                                                <a href="product-detail.html">New Fashion D Nice Elegant</a></span>
-
-                                                            <span class="mini-product__quantity">1 x</span>
-
-                                                            <span class="mini-product__price">$8</span></div>
-                                                    </div>
-
-                                                    <a class="mini-product__delete-link far fa-trash-alt"></a>
-                                                </div>
-                                                <!--====== End - Card for mini cart ======-->
+                                                </c:forEach>
                                             </div>
                                             <!--====== End - Mini Product Container ======-->
 
@@ -1336,12 +1261,12 @@
 
                                                     <span class="subtotal-text">SUBTOTAL</span>
 
-                                                    <span class="subtotal-value">$16</span></div>
+                                                    <span class="subtotal-value">${cart_product_total}</span></div>
                                                 <div class="mini-action">
 
-                                                    <a class="mini-link btn--e-brand-b-2" href="checkout.html">PROCEED TO CHECKOUT</a>
+                                                    <a class="mini-link btn--e-brand-b-2" href="${pageContext.request.contextPath}/checkout/">PROCEED TO CHECKOUT</a>
 
-                                                    <a class="mini-link btn--e-transparent-secondary-b-2" href="cart.html">VIEW CART</a></div>
+                                                    <a class="mini-link btn--e-transparent-secondary-b-2" href="${pageContext.request.contextPath}/cart/">VIEW CART</a></div>
                                             </div>
                                             <!--====== End - Mini Product Statistics ======-->
                                         </div>
@@ -1376,7 +1301,7 @@
                                 <ul class="breadcrumb__list">
                                     <li class="has-separator">
 
-                                        <a href="index.html">Home</a></li>
+                                        <a href="${pageContext.request.contextPath}/">Home</a></li>
                                     <li class="is-marked">
 
                                         <a href="${pageContext.request.contextPath}/dashboard/cancellation">My Account</a></li>
@@ -1533,7 +1458,7 @@
                                             <ul>
                                                 <li>
 
-                                                    <a href="cart.html">Cart</a></li>
+                                                    <a href="${pageContext.request.contextPath}/cart/">Cart</a></li>
                                                 <li>
 
                                                     <a href="${pageContext.request.contextPath}/dashboard/">Account</a></li>
@@ -1644,7 +1569,16 @@
     </div>
     <!--====== End - Main App ======-->
 
+    <script>
+        document.getElementById("sign-out-btt").onclick = function() {
+            <%HttpSession session1 = request.getSession();
+            session1.removeAttribute("url_prior_login");
+            %>
 
+
+            document.getElementById("sign-out-form").submit();
+        }
+    </script>
     <!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
     <script>
         window.ga = function() {
